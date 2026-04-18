@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
+
+:root {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-light text-dark overflow-x-hidden;
+}
+
+h1, h2, h3, .font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Custom Utilities */
+.glass-nav {
+  @apply bg-white/70 backdrop-blur-md border-b border-white/20;
+}
+
+.stone-texture {
+  background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
+}
+
+.paper-texture {
+  background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+}
+
+.btn-glow {
+  box-shadow: 0 0 15px rgba(201, 120, 59, 0.4);
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Responsive fixes */
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
