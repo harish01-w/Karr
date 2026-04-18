@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import { Link } from 'react-router-dom'
 import heroBg from '../../assets/pic8.png'
 
 const HeroSection = () => {
@@ -66,21 +67,26 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.8 }}
           className="flex flex-col sm:flex-row gap-5"
         >
-          <motion.button 
-            whileHover={{ scale: 1.05, backgroundColor: "#b56932" }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-secondary text-white px-8 py-3 rounded-md text-base font-bold tracking-wider transition-all shadow-lg"
-          >
-            Our Services
-          </motion.button>
+          <Link to="/services">
+            <motion.button 
+              whileHover={{ scale: 1.05, backgroundColor: "#b56932" }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-secondary text-white px-8 py-3 rounded-md text-base font-bold tracking-wider transition-all shadow-lg"
+            >
+              Our Services
+            </motion.button>
+          </Link>
+
           
-          <motion.button 
-            whileHover={{ scale: 1.05, backgroundColor: "#253f32" }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-primary text-white px-8 py-3 rounded-md text-base font-bold tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg"
-          >
-            Contact Us <span className="text-lg font-light opacity-80">&gt;</span>
-          </motion.button>
+          <Link to="/contact">
+            <motion.button 
+              whileHover={{ scale: 1.05, backgroundColor: "#253f32" }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-primary text-white px-8 py-3 rounded-md text-base font-bold tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg"
+            >
+              Contact Us <span className="text-lg font-light opacity-80">&gt;</span>
+            </motion.button>
+          </Link>
         </motion.div>
       </motion.div>
 
@@ -104,3 +110,4 @@ const HeroSection = () => {
 }
 
 export default HeroSection
+
