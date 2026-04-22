@@ -5,7 +5,6 @@ import KarrCholaiSection from '../components/KarrCholaiSection'
 import ServicesSection from '../components/ServicesSection'
 import WhyChooseUs from '../components/WhyChooseUs'
 import ProjectsSection from '../components/ProjectsSection'
-import UnifiedFooter from '../components/UnifiedFooter'
 import { motion } from 'framer-motion'
 
 const Home = () => {
@@ -41,10 +40,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Unified Footer Section with your provided background image */}
-        <section id="contact-info">
-          <UnifiedFooter />
-        </section>
+
       </main>
 
       {/* Decorative Gradient Blob */}

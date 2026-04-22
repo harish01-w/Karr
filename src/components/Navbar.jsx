@@ -53,7 +53,7 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-md py-3' : 'bg-white/95 py-4'
+        scrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-4'
       }`}
     >
       <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
@@ -61,12 +61,12 @@ const Navbar = () => {
         <Link to="/" className="flex items-center gap-3 cursor-pointer group">
           <div className="flex items-center">
              <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="20" y="20" width="25" height="60" fill="#c9783b" rx="2" />
-                <rect x="55" y="20" width="25" height="60" fill="#2f4f3e" rx="2" />
-                <path d="M10 40L50 10L90 40" stroke="#2f4f3e" strokeWidth="6" strokeLinecap="round" />
+                <rect x="20" y="20" width="25" height="60" fill={scrolled ? "#c9783b" : "#fff"} rx="2" />
+                <rect x="55" y="20" width="25" height="60" fill={scrolled ? "#2f4f3e" : "#e2e8f0"} rx="2" />
+                <path d="M10 40L50 10L90 40" stroke={scrolled ? "#2f4f3e" : "#e2e8f0"} strokeWidth="6" strokeLinecap="round" />
              </svg>
           </div>
-          <span className="text-2xl font-black tracking-tight text-dark font-sans ml-1">
+          <span className={`text-2xl font-black tracking-tight font-sans ml-1 transition-colors ${scrolled ? 'text-dark' : 'text-white'}`}>
             KARRCHOLAI
           </span>
         </Link>
@@ -76,20 +76,20 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <div key={link.name} className="relative group cursor-pointer" onClick={() => handleNavClick(link.path)}>
               <span className={`text-[15px] font-medium transition-colors ${
-                (location.pathname === link.path) ? 'text-primary border-b-2 border-primary pb-1' : 'text-dark/70 hover:text-primary'
+                (location.pathname === link.path) ? 'text-primary border-b-2 border-primary pb-1' : (scrolled ? 'text-dark/70 hover:text-primary' : 'text-white/90 hover:text-white')
               }`}>
                 {link.name}
               </span>
             </div>
           ))}
-          <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white cursor-pointer hover:bg-primary/90 transition-all ml-2">
+          <div className={`w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-all ml-2 ${scrolled ? 'bg-primary text-white hover:bg-primary/90' : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'}`}>
             <FiPhone className="text-lg" />
           </div>
         </div>
 
         {/* Mobile Menu Toggle */}
-        <div className="lg:hidden text-primary text-3xl cursor-pointer" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          {mobileMenuOpen ? <FiX /> : <FiMenu />}
+        <div className="lg:hidden text-3xl cursor-pointer" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          {mobileMenuOpen ? <FiX className="text-primary" /> : <FiMenu className={scrolled ? "text-primary" : "text-white"} />}
         </div>
       </div>
 

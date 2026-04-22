@@ -5,6 +5,7 @@ import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import Services from './pages/Services'
 import ScrollToTop from './components/ScrollToTop'
+import AIAssistant from './components/AIAssistant'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/services" element={<Services />} />
       </Routes>
+      <AIAssistant />
     </Router>
   )
 }

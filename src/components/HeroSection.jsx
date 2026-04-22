@@ -1,9 +1,24 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import heroBg from '../../assets/pic8.png'
+import pic2 from '../../assets/pic2.png'
+import pic3 from '../../assets/pic3.png'
+import pic4 from '../../assets/pic4.png'
+import pic5 from '../../assets/pic5.png'
+import pic7 from '../../assets/pic7.png'
+
+const images = [pic2, pic3, pic4, pic5, pic7]
 
 const HeroSection = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -14,20 +29,27 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   return (
-    <div ref={ref} className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-      {/* Background Image - Adjusted positioning to show more of the house */}
-      <motion.div 
-        style={{ y, backgroundImage: `url(${heroBg})` }}
-        className="absolute inset-0 w-full h-full bg-cover bg-[center_top] bg-no-repeat z-0 scale-105"
-      >
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/30" />
-      </motion.div>
+    <div ref={ref} className="relative min-h-[70vh] lg:min-h-[80vh] w-full flex items-center justify-center overflow-hidden bg-black pt-20 pb-16">
+      {/* Background Image Slideshow */}
+      <AnimatePresence initial={false}>
+        <motion.div 
+          key={currentImageIndex}
+          initial={{ x: '100%', opacity: 1 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: '-100%', opacity: 1 }}
+          transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+          style={{ backgroundImage: `url(${images[currentImageIndex]})` }}
+          className="absolute inset-0 w-full h-full bg-cover bg-[center_top] bg-no-repeat z-0"
+        />
+      </AnimatePresence>
+      
+      {/* Dark Overlay - keep outside AnimatePresence so it doesn't crossfade */}
+      <div className="absolute inset-0 bg-black/50 z-0" />
 
       {/* Content - More compact layout */}
       <motion.div 
         style={{ opacity }}
-        className="relative z-10 w-full container mx-auto px-4 md:px-8 text-center flex flex-col items-center pt-16"
+        className="relative z-10 w-full container mx-auto px-4 md:px-8 text-center flex flex-col items-center pt-8"
       >
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
