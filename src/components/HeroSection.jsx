@@ -7,124 +7,140 @@ import pic4 from '../../assets/pic4.png'
 import pic5 from '../../assets/pic5.png'
 import pic7 from '../../assets/pic7.png'
 
-const images = [pic2, pic3, pic4, pic5, pic7]
+const slides = [
+  { image: pic2, tag: 'Residential Construction' },
+  { image: pic3, tag: 'Project Management' },
+  { image: pic4, tag: 'Quality Workmanship' },
+  { image: pic5, tag: 'Sustainable Living' },
+  { image: pic7, tag: 'Dream Homes' },
+]
 
 const HeroSection = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
+  const [current, setCurrent] = useState(0)
+  const [prev, setPrev] = useState(null)
+  const [dir, setDir] = useState(1) // 1=forward, -1=backward
   const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  })
-  
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const contentY  = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
+  const opacity   = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+
+  // Auto-advance
+  useEffect(() => {
+    const t = setInterval(() => {
+      setDir(1)
+      setPrev(current)
+      setCurrent(c => (c + 1) % slides.length)
+    }, 6000)
+    return () => clearInterval(t)
+  }, [current])
+
+  const go = (idx) => {
+    setDir(idx > current ? 1 : -1)
+    setPrev(current)
+    setCurrent(idx)
+  }
+
+  const variants = {
+    enter:  (d) => ({ x: d > 0 ? '100%' : '-100%', opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit:   (d) => ({ x: d > 0 ? '-100%' : '100%', opacity: 0 }),
+  }
 
   return (
-    <div ref={ref} className="relative min-h-[70vh] lg:min-h-[80vh] w-full flex items-center justify-center overflow-hidden bg-black pt-20 pb-16">
-      {/* Background Image Slideshow */}
-      <AnimatePresence initial={false}>
-        <motion.div 
-          key={currentImageIndex}
-          initial={{ x: '100%', opacity: 1 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: '-100%', opacity: 1 }}
-          transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
-          style={{ backgroundImage: `url(${images[currentImageIndex]})` }}
-          className="absolute inset-0 w-full h-full bg-cover bg-[center_top] bg-no-repeat z-0"
+    <div ref={ref} className="relative w-full h-[92vh] flex items-center justify-center overflow-hidden bg-dark">
+
+      {/* ── Slides ── */}
+      <AnimatePresence initial={false} custom={dir}>
+        <motion.div
+          key={current}
+          custom={dir}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1] }}
+          className="absolute inset-0 w-full h-full"
+          style={{
+            backgroundImage: `url(${slides[current].image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
         />
       </AnimatePresence>
-      
-      {/* Dark Overlay - keep outside AnimatePresence so it doesn't crossfade */}
-      <div className="absolute inset-0 bg-black/50 z-0" />
 
-      {/* Content - More compact layout */}
-      <motion.div 
-        style={{ opacity }}
-        className="relative z-10 w-full container mx-auto px-4 md:px-8 text-center flex flex-col items-center pt-8"
+      {/* ── Layered overlays ── */}
+      <div className="absolute inset-0 bg-gradient-to-b from-dark/20 via-transparent to-dark/45 z-10" />
+      <div className="absolute inset-0 z-10" style={{
+        background: 'linear-gradient(135deg, rgba(65,99,74,0.08) 0%, transparent 60%, rgba(219,127,80,0.06) 100%)'
+      }} />
+
+      {/* ── Content ── */}
+      <motion.div
+        style={{ y: contentY, opacity }}
+        className="relative z-20 w-full max-w-7xl mx-auto px-4 md:px-8 flex flex-col items-center text-center pt-32"
       >
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
+        {/* Main headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-2xl font-serif max-w-4xl tracking-tight"
+          transition={{ duration: 0.9, delay: 0.1 }}
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight max-w-5xl mb-4"
         >
-          Built on Strength. Designed for Life.
+          From <span className="shimmer-text">Stone</span> to Oasis —<br />
+          <span className="text-white">We Build Better Living</span>
         </motion.h1>
-        
-        <motion.p 
+
+        {/* Stat strip */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="text-base md:text-xl text-white/95 mb-6 max-w-2xl font-light tracking-wide drop-shadow-lg"
+          transition={{ duration: 0.9, delay: 0.7 }}
+          className="flex flex-wrap justify-center gap-4 md:gap-12"
         >
-          Residential Construction & Project Management Consultancy
-        </motion.p>
-
-        {/* Tagline Bar - More compact */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="bg-black/50 backdrop-blur-sm py-3 w-full max-w-3xl mb-10 flex justify-center items-center shadow-xl border-y border-white/10"
-        >
-          <div className="text-white text-lg md:text-2xl font-medium flex items-center justify-center gap-5 px-4">
-            <span className="font-semibold tracking-wide">Karr – Strength</span>
-            <span className="h-6 w-[1px] bg-white/30"></span>
-            <span className="font-semibold tracking-wide">Cholai – Sustainability</span>
-          </div>
-        </motion.div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-5"
-        >
-          <Link to="/services">
-            <motion.button 
-              whileHover={{ scale: 1.05, backgroundColor: "#b56932" }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-secondary text-white px-8 py-3 rounded-md text-base font-bold tracking-wider transition-all shadow-lg"
-            >
-              Our Services
-            </motion.button>
-          </Link>
-
-          
-          <Link to="/contact">
-            <motion.button 
-              whileHover={{ scale: 1.05, backgroundColor: "#253f32" }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-primary text-white px-8 py-3 rounded-md text-base font-bold tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg"
-            >
-              Contact Us <span className="text-lg font-light opacity-80">&gt;</span>
-            </motion.button>
-          </Link>
+          {[
+            { value: '12+', label: 'Years Experience' },
+            { value: '150+', label: 'Projects Delivered' },
+            { value: '100%', label: 'Client Satisfaction' },
+          ].map((s, i) => (
+            <div key={i} className="text-center">
+              <p className="text-2xl md:text-4xl font-bold text-secondary">{s.value}</p>
+              <p className="text-white/60 text-[10px] md:text-[12px] tracking-[0.2em] uppercase mt-1">{s.label}</p>
+            </div>
+          ))}
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div 
+      {/* ── Slide indicators ── */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => go(i)}
+            className={`transition-all duration-500 rounded-full ${
+              i === current
+                ? 'w-6 h-1.5 bg-secondary'
+                : 'w-1.5 h-1.5 bg-white/40 hover:bg-white/70'
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* ── Scroll cue ── */}
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        transition={{ delay: 2 }}
+        className="absolute bottom-6 right-8 z-20 hidden md:flex flex-col items-center gap-1"
       >
-        <motion.div 
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          className="w-5 h-9 border-2 border-white/20 rounded-full flex justify-center p-1"
+        <span className="text-white/40 text-[9px] tracking-[0.3em] uppercase rotate-90 origin-center mb-3">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+          className="w-4 h-7 border border-white/20 rounded-full flex justify-center pt-1"
         >
-          <div className="w-1 h-2 bg-white/40 rounded-full" />
+          <div className="w-0.5 h-2 bg-white/40 rounded-full" />
         </motion.div>
       </motion.div>
     </div>
@@ -132,4 +148,3 @@ const HeroSection = () => {
 }
 
 export default HeroSection
-

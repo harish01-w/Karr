@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { FiPhoneCall, FiMail, FiMapPin } from 'react-icons/fi'
-import bgPic from '../../assets/pic.png'
+import bgPic from '../../assets/pic2.png'
 
 const UnifiedFooter = () => {
   const contacts = [

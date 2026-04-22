@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX, FiPhone } from 'react-icons/fi'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
+import logoImg from '../../assets/KARRCHOLAI LOGO.png'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
@@ -49,48 +50,65 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-4'
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
+        scrolled ? 'bg-white/95 shadow-lg backdrop-blur-md py-2' : 'bg-transparent py-4'
       }`}
     >
-      <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 cursor-pointer group">
-          <div className="flex items-center">
-             <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="20" y="20" width="25" height="60" fill={scrolled ? "#c9783b" : "#fff"} rx="2" />
-                <rect x="55" y="20" width="25" height="60" fill={scrolled ? "#2f4f3e" : "#e2e8f0"} rx="2" />
-                <path d="M10 40L50 10L90 40" stroke={scrolled ? "#2f4f3e" : "#e2e8f0"} strokeWidth="6" strokeLinecap="round" />
-             </svg>
+        <Link to="/" className="flex items-center cursor-pointer transition-transform duration-300 hover:scale-105">
+          <div className="h-14 md:h-20 transition-all duration-500 flex items-center">
+             <img 
+               src={logoImg} 
+               alt="KARRCHOLAI Logo" 
+               className="h-full w-auto object-contain"
+             />
           </div>
-          <span className={`text-2xl font-black tracking-tight font-sans ml-1 transition-colors ${scrolled ? 'text-dark' : 'text-white'}`}>
-            KARRCHOLAI
-          </span>
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center gap-7">
-          {navLinks.map((link) => (
-            <div key={link.name} className="relative group cursor-pointer" onClick={() => handleNavClick(link.path)}>
-              <span className={`text-[15px] font-medium transition-colors ${
-                (location.pathname === link.path) ? 'text-primary border-b-2 border-primary pb-1' : (scrolled ? 'text-dark/70 hover:text-primary' : 'text-white/90 hover:text-white')
-              }`}>
-                {link.name}
-              </span>
-            </div>
-          ))}
-          <div className={`w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-all ml-2 ${scrolled ? 'bg-primary text-white hover:bg-primary/90' : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'}`}>
-            <FiPhone className="text-lg" />
-          </div>
+        <div className="hidden lg:flex items-center gap-8 xl:gap-12">
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path || (link.path.startsWith('/#') && location.hash === link.path.split('/')[1])
+            
+            return (
+              <div 
+                key={link.name} 
+                className="relative cursor-pointer group px-2 py-1"
+                onClick={() => handleNavClick(link.path)}
+              >
+                <span className={`text-[11px] md:text-[12px] font-black tracking-[0.3em] uppercase transition-all duration-300 ${
+                  isActive 
+                    ? (scrolled ? 'text-primary' : 'text-secondary') 
+                    : (scrolled ? 'text-dark/80 hover:text-primary' : 'text-white hover:text-secondary')
+                }`}>
+                  {link.name}
+                </span>
+                
+                {/* Unique animated underline */}
+                <motion.div 
+                  className={`absolute bottom-0 left-2 right-2 h-[2px] bg-secondary origin-left`}
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  animate={{ scaleX: isActive ? 1 : 0 }}
+                  transition={{ duration: 0.4, ease: "circOut" }}
+                />
+              </div>
+            )
+          })}
         </div>
 
         {/* Mobile Menu Toggle */}
-        <div className="lg:hidden text-3xl cursor-pointer" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+        <motion.div 
+          whileTap={{ scale: 0.9 }}
+          className="lg:hidden text-4xl cursor-pointer" 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
           {mobileMenuOpen ? <FiX className="text-primary" /> : <FiMenu className={scrolled ? "text-primary" : "text-white"} />}
-        </div>
+        </motion.div>
       </div>
 
       {/* Mobile Menu */}

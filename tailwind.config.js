@@ -7,14 +7,31 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#2f4f3e", // Deep Green
-        secondary: "#c9783b", // Burnt Orange
-        light: "#f2f2f2", // Stone Gray
-        dark: "#2b2b2b", // Dark Charcoal
+        primary: "var(--primary)",
+        secondary: "var(--secondary)",
+        light: "#f5f0eb",
+        dark: "var(--dark)",
+        cream: "var(--cream)",
+        stone: "#8a7f72",
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-      }
+        sans: ['Inter', 'sans-serif'],
+        serif: ['Inter', 'sans-serif'],
+      },
+      keyframes: {
+        shimmer: {
+          '0%': { backgroundPosition: '-200% center' },
+          '100%': { backgroundPosition: '200% center' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        shimmer: 'shimmer 3s linear infinite',
+        marquee: 'marquee 25s linear infinite',
+      },
     },
   },
   plugins: [],

@@ -2,52 +2,157 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
+  --primary: #2D4B37;
+  --secondary: #B85C38;
+  --cream: #fdfbf7;
+  --dark: #1a1a1a;
   scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  @apply bg-light text-dark overflow-x-hidden;
+  background-color: var(--cream);
+  color: var(--dark);
+  overflow-x: hidden;
 }
 
-h1, h2, h3, .font-serif {
-  font-family: 'Playfair Display', serif;
-}
-
-/* Custom Utilities */
-.glass-nav {
-  @apply bg-white/70 backdrop-blur-md border-b border-white/20;
-}
-
-.stone-texture {
-  background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
-}
-
+/* ── Textures ── */
 .paper-texture {
   background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
 }
-
-.btn-glow {
-  box-shadow: 0 0 15px rgba(201, 120, 59, 0.4);
+.stone-texture {
+  background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
+}
+.linen-texture {
+  background-image: url("https://www.transparenttextures.com/patterns/linen.png");
 }
 
-/* Animations */
+/* ── Grain overlay ── */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Glass card ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ── Section divider ── */
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--secondary), var(--primary));
+  border-radius: 2px;
+}
+
+/* ── Shimmer text ── */
+.shimmer-text {
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--cream) 50%, var(--secondary) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Marquee ── */
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+/* ── Float ── */
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+.animate-float { animation: float 4s ease-in-out infinite; }
+
+/* ── Pulse ring ── */
+@keyframes ping-slow {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+.animate-ping-slow { animation: ping-slow 2.5s ease-out infinite; }
+
+/* ── Reveal line ── */
+@keyframes revealLine {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.reveal-line {
+  transform-origin: left;
+  animation: revealLine 0.8s ease forwards;
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+/* ── Gradient Blobs ── */
+.blob {
+  border-radius: 50%;
+  filter: blur(80px);
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Responsive fixes */
+/* ── Button styles ── */
+.btn-primary {
+  @apply bg-secondary text-white font-bold tracking-wider px-8 py-4 rounded-sm transition-all duration-300;
+  box-shadow: 0 0 0 0 rgba(219, 127, 80, 0.4);
+}
+.btn-primary:hover {
+  box-shadow: 0 0 0 10px rgba(219, 127, 80, 0);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  @apply border-2 border-white text-white font-bold tracking-wider px-8 py-4 rounded-sm transition-all duration-300;
+}
+.btn-outline:hover {
+  @apply bg-white text-dark;
+}
+
+/* ── Stat counter card ── */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: linear-gradient(180deg, var(--secondary), var(--primary));
+}
+
+/* ── Image reveal clip ── */
+.img-clip {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transition: clip-path 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
 @layer base {
-  html {
-    -webkit-tap-highlight-color: transparent;
-  }
+  html { -webkit-tap-highlight-color: transparent; }
 }
