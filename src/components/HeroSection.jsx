@@ -79,7 +79,7 @@ const HeroSection = () => {
       {/* ── Content ── */}
       <motion.div
         style={{ y: contentY, opacity }}
-        className="relative z-20 w-full max-w-7xl mx-auto px-4 md:px-8 flex flex-col items-center text-center pt-32"
+        className="relative z-20 w-full max-w-7xl mx-auto px-4 md:px-8 flex flex-col items-center text-center pt-16"
       >
         {/* Main headline */}
         <motion.h1
