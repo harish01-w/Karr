@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import Services from './pages/Services'
+import Karr from './pages/Karr'
 import ScrollToTop from './components/ScrollToTop'
 import AIAssistant from './components/AIAssistant'
 import Preloader from './components/Preloader'
@@ -26,6 +27,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/karr" element={<Karr />} />
           </Routes>
           <AIAssistant />
         </>
