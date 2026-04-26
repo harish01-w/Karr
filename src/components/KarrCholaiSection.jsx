@@ -1,6 +1,6 @@
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
-import { FiCheck } from 'react-icons/fi'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
+import { FiArrowRight, FiCheckCircle } from 'react-icons/fi'
 import karrImg from '../../assets/pic4.png'
 import cholaiImg from '../../assets/pic5.png'
 
@@ -21,131 +21,186 @@ const cholaiFeatures = [
 ]
 
 const KarrCholaiSection = () => {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
-  
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  })
-
-  const imageY1 = useTransform(scrollYProgress, [0, 1], ["0%", "20%"])
-  const imageY2 = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"])
+  const [hovered, setHovered] = useState(null) // 'karr', 'cholai', or null
 
   return (
-    <section ref={ref} className="relative overflow-hidden">
-
-      {/* ── KARR panel ── */}
-      <div className="flex flex-col lg:flex-row">
-
-        {/* Image left */}
-        <div className="w-full lg:w-1/2 relative overflow-hidden h-[500px] lg:h-auto min-h-[600px]">
-          <motion.div style={{ y: imageY1 }} className="absolute inset-0 w-full h-[120%]">
-            <img src={karrImg} className="w-full h-full object-cover" alt="Karr Construction" />
-            <div className="absolute inset-0 bg-dark/20" />
-          </motion.div>
-          
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <h2 className="text-[12vw] lg:text-[10vw] font-black text-transparent stroke-white/20 select-none tracking-tighter" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.1)' }}>
-              BUILD
-            </h2>
-          </div>
-        </div>
-
-        {/* Content right */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          className="w-full lg:w-1/2 bg-primary flex flex-col justify-center px-12 lg:px-24 py-24 relative overflow-hidden"
-        >
-          <div className="absolute inset-0 stone-texture opacity-5" />
-          
-          <div className="relative z-10">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="w-12 h-[2px] bg-secondary" />
-              <span className="text-secondary font-black text-[11px] tracking-[0.4em] uppercase">Strength Division</span>
+    <section className="relative h-[75vh] min-h-[550px] w-full bg-[#050505] overflow-hidden flex flex-col lg:flex-row font-sans">
+      
+      {/* ── CENTRAL DIVIDER / BADGE ── */}
+      <AnimatePresence>
+        {!hovered && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.3 } }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none hidden lg:flex flex-col items-center gap-3"
+          >
+            <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-white/40 to-transparent" />
+            <div className="w-14 h-14 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white text-[9px] tracking-[0.2em] uppercase font-medium shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+              Explore
             </div>
-
-            <h2 className="text-7xl lg:text-9xl font-black text-white font-serif leading-none mb-6">KARR</h2>
-            <p className="text-white/60 text-xl font-light italic mb-10 max-w-sm">The foundation of every enduring legacy starts with disciplined engineering.</p>
-
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 mb-12">
-              {karrFeatures.map((f, i) => (
-                <li key={i} className="flex items-start gap-4 text-white/80 text-sm font-medium">
-                  <FiCheck className="mt-1 text-secondary" size={18} />
-                  {f}
-                </li>
-              ))}
-            </ul>
-
-            <motion.button
-              whileHover={{ scale: 1.05, x: 5 }}
-              className="group flex items-center gap-6 text-white text-xs font-black tracking-widest uppercase border border-white/20 px-8 py-5 rounded-full hover:bg-white hover:text-primary transition-all duration-500"
-            >
-              Explore Engineering
-              <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </motion.button>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* ── CHOLAI panel (reversed) ── */}
-      <div className="flex flex-col lg:flex-row-reverse">
-
-        {/* Image right */}
-        <div className="w-full lg:w-1/2 relative overflow-hidden h-[500px] lg:h-auto min-h-[600px]">
-          <motion.div style={{ y: imageY2 }} className="absolute inset-0 w-full h-[120%] top-[-10%]">
-            <img src={cholaiImg} className="w-full h-full object-cover" alt="Cholai Sustainable" />
-            <div className="absolute inset-0 bg-dark/20" />
+            <div className="w-[1px] h-16 bg-gradient-to-t from-transparent via-white/40 to-transparent" />
           </motion.div>
-          
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <h2 className="text-[12vw] lg:text-[10vw] font-black text-transparent stroke-white/20 select-none tracking-tighter" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.1)' }}>
-              NATURE
-            </h2>
-          </div>
-        </div>
+        )}
+      </AnimatePresence>
 
-        {/* Content left */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          className="w-full lg:w-1/2 bg-secondary flex flex-col justify-center px-12 lg:px-24 py-24 relative overflow-hidden"
+      {/* ── KARR PANEL ── */}
+      <motion.div
+        onMouseEnter={() => setHovered('karr')}
+        onMouseLeave={() => setHovered(null)}
+        animate={{ 
+          width: hovered === 'karr' ? '70%' : hovered === 'cholai' ? '30%' : '50%',
+          height: '100%'
+        }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full lg:w-1/2 h-1/2 lg:h-full overflow-hidden cursor-pointer group border-b lg:border-b-0 lg:border-r border-white/10"
+      >
+        <motion.div 
+          animate={{ scale: hovered === 'karr' ? 1.05 : 1.15 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="absolute inset-0"
         >
-          <div className="absolute inset-0 stone-texture opacity-5" />
-          
-          <div className="relative z-10">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="w-12 h-[2px] bg-primary" />
-              <span className="text-primary font-black text-[11px] tracking-[0.4em] uppercase">Living Division</span>
-            </div>
-
-            <h2 className="text-7xl lg:text-9xl font-black text-white font-serif leading-none mb-6">CHOLAI</h2>
-            <p className="text-white/70 text-xl font-light italic mb-10 max-w-sm">Designing with the future in mind, where nature and structure coexist.</p>
-
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 mb-12">
-              {cholaiFeatures.map((f, i) => (
-                <li key={i} className="flex items-start gap-4 text-white/90 text-sm font-medium">
-                  <FiCheck className="mt-1 text-primary" size={18} />
-                  {f}
-                </li>
-              ))}
-            </ul>
-
-            <motion.button
-              whileHover={{ scale: 1.05, x: -5 }}
-              className="group flex items-center gap-6 text-white text-xs font-black tracking-widest uppercase border border-white/20 px-8 py-5 rounded-full hover:bg-white hover:text-secondary transition-all duration-500"
-            >
-              Explore Sustainability
-              <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </motion.button>
-          </div>
+          <img src={karrImg} className="w-full h-full object-cover transition-all duration-700" alt="Karr" />
+          {/* Overlay that darkens slightly, but gets richer on hover */}
+          <div className={`absolute inset-0 transition-all duration-700 ${hovered === 'karr' ? 'bg-gradient-to-t from-[#111111]/95 via-[#111111]/50 to-transparent' : 'bg-black/70 group-hover:bg-black/50'}`} />
         </motion.div>
-      </div>
+
+        {/* Content Container */}
+        <div className="absolute inset-0 p-8 lg:p-12 xl:p-16 flex flex-col justify-center z-10">
+          
+          <motion.div
+            animate={{ 
+              opacity: (hovered === 'cholai' && window.innerWidth >= 1024) ? 0 : 1
+            }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col gap-3 lg:gap-4"
+          >
+            <div className="flex items-center gap-4">
+              <span className="h-[1px] w-8 lg:w-12 bg-[#DB7F50] block" />
+              <p className="text-[#DB7F50] text-xs lg:text-sm uppercase tracking-[0.3em] font-medium">Division 01</p>
+            </div>
+            
+            <h2 className="text-3xl lg:text-5xl xl:text-6xl font-light text-white tracking-tight leading-[1.1]">
+              Karr <br/><span className="font-bold">Construction</span>
+            </h2>
+
+            <AnimatePresence>
+              {hovered === 'karr' && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="mt-4 lg:mt-6 overflow-hidden"
+                >
+                  <p className="text-white/80 max-w-lg text-sm lg:text-base leading-relaxed mb-4 lg:mb-6 font-light">
+                    Forging structural integrity and architectural brilliance. We deliver turnkey construction solutions built to stand the test of time.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 mb-6 lg:mb-8 max-w-2xl">
+                    {karrFeatures.map((feature, idx) => (
+                      <motion.div 
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 * idx }}
+                        key={idx} 
+                        className="flex items-center gap-3 text-white/90"
+                      >
+                        <FiCheckCircle className="text-[#DB7F50] shrink-0" />
+                        <span className="text-xs lg:text-sm font-light">{feature}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <button className="group flex items-center gap-3 bg-white text-black px-5 py-2.5 lg:px-7 lg:py-3 rounded-full text-sm font-medium hover:bg-[#DB7F50] hover:text-white transition-all duration-300">
+                    Explore Karr
+                    <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* ── CHOLAI PANEL ── */}
+      <motion.div
+        onMouseEnter={() => setHovered('cholai')}
+        onMouseLeave={() => setHovered(null)}
+        animate={{ 
+          width: hovered === 'cholai' ? '70%' : hovered === 'karr' ? '30%' : '50%',
+          height: '100%'
+        }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full lg:w-1/2 h-1/2 lg:h-full overflow-hidden cursor-pointer group"
+      >
+        <motion.div 
+          animate={{ scale: hovered === 'cholai' ? 1.05 : 1.15 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="absolute inset-0"
+        >
+          <img src={cholaiImg} className="w-full h-full object-cover transition-all duration-700" alt="Cholai" />
+          <div className={`absolute inset-0 transition-all duration-700 ${hovered === 'cholai' ? 'bg-gradient-to-t from-[#0a110d]/95 via-[#0a110d]/50 to-transparent' : 'bg-black/70 group-hover:bg-black/50'}`} />
+        </motion.div>
+
+        {/* Content Container */}
+        <div className="absolute inset-0 p-8 lg:p-12 xl:p-16 flex flex-col justify-center z-10">
+          
+          <motion.div
+            animate={{ 
+              opacity: (hovered === 'karr' && window.innerWidth >= 1024) ? 0 : 1
+            }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col gap-3 lg:gap-4"
+          >
+            <div className="flex items-center gap-4">
+              <span className="h-[1px] w-8 lg:w-12 bg-[#41634A] block" />
+              <p className="text-[#41634A] text-xs lg:text-sm uppercase tracking-[0.3em] font-medium">Division 02</p>
+            </div>
+            
+            <h2 className="text-3xl lg:text-5xl xl:text-6xl font-light text-white tracking-tight leading-[1.1]">
+              Cholai <br/><span className="font-bold">Environment</span>
+            </h2>
+
+            <AnimatePresence>
+              {hovered === 'cholai' && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="mt-4 lg:mt-6 overflow-hidden"
+                >
+                  <p className="text-white/80 max-w-lg text-sm lg:text-base leading-relaxed mb-4 lg:mb-6 font-light">
+                    Cultivating sustainable living spaces. From landscape design to renewable energy systems, we harmonize nature with modern living.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 mb-6 lg:mb-8 max-w-2xl">
+                    {cholaiFeatures.map((feature, idx) => (
+                      <motion.div 
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 * idx }}
+                        key={idx} 
+                        className="flex items-center gap-3 text-white/90"
+                      >
+                        <FiCheckCircle className="text-[#41634A] shrink-0" />
+                        <span className="text-xs lg:text-sm font-light">{feature}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <button className="group flex items-center gap-3 bg-white text-black px-5 py-2.5 lg:px-7 lg:py-3 rounded-full text-sm font-medium hover:bg-[#41634A] hover:text-white transition-all duration-300">
+                    Explore Cholai
+                    <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </motion.div>
+
     </section>
   )
 }
