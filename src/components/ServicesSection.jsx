@@ -37,7 +37,7 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="relative py-24 md:py-40 overflow-hidden min-h-screen flex items-center bg-black">
+    <section id="services" className="relative py-16 md:py-40 overflow-hidden flex items-center bg-black">
       
       {/* ── High-Visibility Background ── */}
       <div className="absolute inset-0 z-0">
@@ -61,7 +61,7 @@ const ServicesSection = () => {
             className="max-w-2xl"
           >
             <span className="text-secondary font-bold tracking-[0.6em] uppercase text-[10px] mb-4 block">Our Expertise</span>
-            <h2 className="text-5xl md:text-8xl font-bold text-white tracking-tighter leading-none">
+            <h2 className="text-4xl sm:text-5xl md:text-8xl font-bold text-white tracking-tighter leading-none">
               Our <br />
               <span className="text-white/30 italic font-serif">Services.</span>
             </h2>
@@ -86,7 +86,7 @@ const ServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.7 }}
-              className="group relative p-10 rounded-[32px] border border-white/10 hover:border-secondary/40 transition-all duration-500 cursor-pointer overflow-hidden"
+              className="group relative p-6 md:p-10 rounded-[24px] md:rounded-[32px] border border-white/10 hover:border-secondary/40 transition-all duration-500 cursor-pointer overflow-hidden"
             >
               {/* Glassmorphic Hover Fill */}
               <div className="absolute inset-0 bg-white/[0.02] backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

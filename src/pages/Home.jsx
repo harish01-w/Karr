@@ -77,7 +77,7 @@ const Home = () => {
       </section>
 
       {/* ── CTA Band ── */}
-      <section className="relative py-24 overflow-hidden" style={{ background: '#41634A' }}>
+      <section className="relative py-16 md:py-24 overflow-hidden" style={{ background: '#41634A' }}>
         <div className="absolute inset-0 stone-texture opacity-15 pointer-events-none" />
         <div className="absolute inset-0" style={{
           background: 'radial-gradient(ellipse at 70% 50%, rgba(219,127,80,0.15) 0%, transparent 60%)'

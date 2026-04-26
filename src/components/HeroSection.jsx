@@ -48,7 +48,7 @@ const HeroSection = () => {
   }
 
   return (
-    <div ref={ref} className="relative w-full h-[92vh] flex items-center justify-center overflow-hidden bg-dark">
+    <div ref={ref} className="relative w-full h-[75vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-dark">
 
       {/* ── Slides ── */}
       <AnimatePresence initial={false} custom={dir}>
@@ -79,25 +79,23 @@ const HeroSection = () => {
       {/* ── Content ── */}
       <motion.div
         style={{ y: contentY, opacity }}
-        className="relative z-20 w-full max-w-7xl mx-auto px-4 md:px-8 flex flex-col items-center text-center pt-16"
+        className="relative z-20 w-full max-w-7xl mx-auto px-4 md:px-8 flex flex-col items-center text-center pt-20 md:pt-16 gap-6 md:gap-8"
       >
-        {/* Main headline */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight max-w-5xl mb-4"
+          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight max-w-5xl"
         >
           From <span className="shimmer-text">Stone</span> to Oasis —<br />
           <span className="text-white">We Build Better Living</span>
         </motion.h1>
 
-        {/* Stat strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.7 }}
-          className="flex flex-wrap justify-center gap-4 md:gap-12"
+          className="flex flex-wrap justify-center gap-6 sm:gap-10 md:gap-12"
         >
           {[
             { value: '12+', label: 'Years Experience' },
@@ -105,8 +103,8 @@ const HeroSection = () => {
             { value: '100%', label: 'Client Satisfaction' },
           ].map((s, i) => (
             <div key={i} className="text-center">
-              <p className="text-2xl md:text-4xl font-bold text-secondary">{s.value}</p>
-              <p className="text-white/60 text-[10px] md:text-[12px] tracking-[0.2em] uppercase mt-1">{s.label}</p>
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-secondary">{s.value}</p>
+              <p className="text-white/60 text-[9px] sm:text-[10px] md:text-[12px] tracking-[0.2em] uppercase mt-1">{s.label}</p>
             </div>
           ))}
         </motion.div>

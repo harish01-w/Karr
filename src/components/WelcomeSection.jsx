@@ -35,7 +35,7 @@ const WelcomeSection = () => {
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 100])
 
   return (
-    <section ref={sectionRef} className="relative py-32 bg-[#faf6f0] overflow-hidden">
+    <section ref={sectionRef} className="relative py-16 md:py-32 bg-[#faf6f0] overflow-hidden">
       {/* Dynamic Background Elements */}
       <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-[100px] animate-pulse" />
       <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px]" />
@@ -58,12 +58,12 @@ const WelcomeSection = () => {
                 <span className="text-secondary font-black text-[11px] tracking-[0.4em] uppercase">The Karrcholai Story</span>
               </div>
               
-              <h2 className="text-5xl md:text-7xl font-black text-dark leading-[0.95] mb-8 italic">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-dark leading-[0.95] mb-6 md:mb-8 italic">
                 Crafting <span className="text-primary not-italic">Exceptional</span> <br/>
                 Living <span className="text-primary/40 not-italic">Spaces.</span>
               </h2>
 
-              <p className="text-dark/70 text-xl font-light leading-relaxed max-w-xl">
+              <p className="text-dark/70 text-base md:text-xl font-light leading-relaxed max-w-xl">
                 We don't just build structures; we orchestrate environments where memories are made. 
                 Based in <span className="text-primary font-bold">Tamil Nadu</span>, our architectural philosophy 
                 merges modern discipline with timeless aesthetics.
@@ -119,10 +119,10 @@ const WelcomeSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
               </motion.div>
 
-              {/* Floating Secondary Image */}
+              {/* Floating Secondary Image — hidden on small mobile */}
               <motion.div 
                 style={{ y: y2 }}
-                className="absolute -right-10 top-1/2 -translate-y-1/2 w-2/3 aspect-square z-20 rounded-2xl overflow-hidden shadow-2xl border-[12px] border-white"
+                className="hidden sm:block absolute -right-4 md:-right-10 top-1/2 -translate-y-1/2 w-1/2 aspect-square z-20 rounded-2xl overflow-hidden shadow-2xl border-[8px] md:border-[12px] border-white"
               >
                 <img src={pic5} className="w-full h-full object-cover" alt="Detail" />
               </motion.div>
@@ -131,7 +131,7 @@ const WelcomeSection = () => {
               <motion.div 
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -left-12 -bottom-12 z-30 w-40 h-40 flex items-center justify-center"
+                className="hidden sm:flex absolute -left-6 md:-left-12 -bottom-6 md:-bottom-12 z-30 w-28 md:w-40 h-28 md:h-40 items-center justify-center"
               >
                 <svg className="w-full h-full text-primary fill-current opacity-90" viewBox="0 0 100 100">
                   <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />

@@ -16,7 +16,7 @@ const VideoShowcase = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative h-[80vh] md:h-screen w-full overflow-hidden bg-black flex items-center justify-center"
+      className="relative h-[60vh] md:h-screen w-full overflow-hidden bg-black flex items-center justify-center"
     >
       {/* Background Video */}
       <motion.div 
@@ -50,7 +50,7 @@ const VideoShowcase = () => {
           <span className="text-secondary font-bold tracking-[0.5em] uppercase text-xs md:text-sm mb-6 block">
             The Art of Construction
           </span>
-          <h2 className="text-5xl md:text-8xl font-bold text-white tracking-tighter leading-none mb-8">
+          <h2 className="text-3xl sm:text-5xl md:text-8xl font-bold text-white tracking-tighter leading-none mb-6 md:mb-8">
             From Stone to <br />
             <span className="italic text-white/40 font-serif font-light">Oasis.</span>
           </h2>

@@ -42,7 +42,7 @@ const Services = () => {
       <main className="pt-24">
         
         {/* 1. Hero Section */}
-        <section className="relative h-[60vh] flex items-center justify-center bg-black overflow-hidden">
+        <section className="relative h-[45vh] sm:h-[60vh] flex items-center justify-center bg-black overflow-hidden">
           <motion.div 
             initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.6 }}
@@ -66,7 +66,7 @@ const Services = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="text-3xl md:text-6xl font-black font-serif text-white mb-4 leading-[1.1] tracking-tight"
+                className="text-2xl sm:text-3xl md:text-6xl font-black font-serif text-white mb-4 leading-[1.1] tracking-tight"
               >
                 Comprehensive <br /> <span className="text-secondary">Building</span> Solutions
               </motion.h1>
@@ -76,7 +76,7 @@ const Services = () => {
         </section>
 
         {/* 2. Detailed Services Grid */}
-        <section className="py-16 md:py-24 px-6 md:px-8 bg-light/30">
+        <section className="py-12 md:py-24 px-4 sm:px-6 md:px-8 bg-light/30">
           <div className="container mx-auto">
             <div className="space-y-24 md:space-y-32">
               {mainServices.map((service, idx) => (

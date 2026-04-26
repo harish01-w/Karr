@@ -1,15 +1,24 @@
-import { useState, useEffect } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import Home from './pages/Home'
-import AboutUs from './pages/AboutUs'
-import ContactUs from './pages/ContactUs'
-import Services from './pages/Services'
-import Karr from './pages/Karr'
-import Projects from './pages/Projects'
 import ScrollToTop from './components/ScrollToTop'
 import AIAssistant from './components/AIAssistant'
 import Preloader from './components/Preloader'
+
+// Lazy-load all pages — only Home loads eagerly
+import Home from './pages/Home'
+const AboutUs   = lazy(() => import('./pages/AboutUs'))
+const ContactUs = lazy(() => import('./pages/ContactUs'))
+const Services  = lazy(() => import('./pages/Services'))
+const Karr      = lazy(() => import('./pages/Karr'))
+const Projects  = lazy(() => import('./pages/Projects'))
+
+// Minimal fallback while lazy page loads
+const PageFallback = () => (
+  <div className="min-h-screen flex items-center justify-center" style={{ background: '#F5F2EC' }}>
+    <div className="w-8 h-8 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: '#C9754A', borderTopColor: 'transparent' }} />
+  </div>
+)
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -19,19 +28,20 @@ function App() {
       <AnimatePresence mode="wait">
         {loading && <Preloader onComplete={() => setLoading(false)} />}
       </AnimatePresence>
-      
+
       {!loading && (
         <>
           <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/karr" element={<Karr />} />
-            
-            <Route path="/projects" element={<Projects />} />
-          </Routes>
+          <Suspense fallback={<PageFallback />}>
+            <Routes>
+              <Route path="/"        element={<Home />} />
+              <Route path="/about"   element={<AboutUs />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/services"element={<Services />} />
+              <Route path="/karr"    element={<Karr />} />
+              <Route path="/projects"element={<Projects />} />
+            </Routes>
+          </Suspense>
           <AIAssistant />
         </>
       )}
@@ -39,7 +49,4 @@ function App() {
   )
 }
 
-
-
 export default App
-

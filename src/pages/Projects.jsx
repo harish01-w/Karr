@@ -110,7 +110,7 @@ function ParallaxWord({ children, delay = 0 }) {
 // ─── Cinematic project card ───────────────────────────────────────────────────
 function ProjectCard({ project, category, index }) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, amount: 0.1 })
   const [hovered, setHovered] = useState(false)
   const cat = CATEGORIES.find(c => c.key === category)
 
@@ -118,8 +118,8 @@ function ProjectCard({ project, category, index }) {
     <motion.article
       ref={ref}
       variants={{
-        hidden: { opacity: 0, y: 60, clipPath: 'inset(100% 0% 0% 0%)' },
-        visible: { opacity: 1, y: 0, clipPath: 'inset(0% 0% 0% 0%)', transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] } }
+        hidden: { opacity: 0, y: 40 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
       }}
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
@@ -128,13 +128,13 @@ function ProjectCard({ project, category, index }) {
       className="group relative cursor-pointer"
     >
       {/* Image */}
-      <div className="relative overflow-hidden rounded-none" style={{ aspectRatio: '3/4' }}>
-        <motion.img
+      <div className="relative overflow-hidden rounded-xl" style={{ aspectRatio: '4/5', minHeight: '260px' }}>
+        <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover"
-          animate={{ scale: hovered ? 1.08 : 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
+          style={{ transform: hovered ? 'scale(1.07)' : 'scale(1)' }}
+          loading="lazy"
         />
 
         {/* Warm cream vignette */}
@@ -215,47 +215,52 @@ function ProjectCard({ project, category, index }) {
         )}
 
         {/* Bottom content */}
-        <div className="absolute bottom-0 left-0 right-0 p-6">
-          <motion.div animate={{ y: hovered ? 0 : 8 }} transition={{ duration: 0.45 }}>
-            <p className="text-[10px] font-bold tracking-[0.3em] uppercase mb-1" style={{ color: `${STONE}60` }}>
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+          <div style={{ transform: hovered ? 'translateY(0)' : 'translateY(6px)', transition: 'transform 0.4s ease' }}>
+            <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase mb-1" style={{ color: `${STONE}60` }}>
               {project.sub}
             </p>
-            <h3 className="text-2xl font-black font-serif leading-tight mb-2 transition-colors duration-300"
+            <h3 className="text-lg sm:text-xl font-black font-serif leading-tight mb-2 transition-colors duration-300"
               style={{ color: hovered ? TERRA : STONE }}>
               {project.title}
             </h3>
-            <div className="flex items-center gap-2 mb-4">
-              <FiMapPin size={10} style={{ color: `${STONE}50` }} />
-              <span className="text-[11px] font-bold" style={{ color: `${STONE}50` }}>{project.location}</span>
+            <div className="flex flex-wrap items-center gap-1.5 mb-3">
+              <FiMapPin size={9} style={{ color: `${STONE}50` }} />
+              <span className="text-[10px] font-bold" style={{ color: `${STONE}50` }}>{project.location}</span>
               <span style={{ color: `${STONE}25` }}>·</span>
-              <span className="text-[11px] font-bold" style={{ color: `${STONE}50` }}>{project.size}</span>
+              <span className="text-[10px] font-bold" style={{ color: `${STONE}50` }}>{project.size}</span>
             </div>
 
-            {/* Desc reveal */}
+            {/* Desc — always visible on mobile, hover-only on desktop */}
+            <p className="text-xs font-light leading-relaxed mb-3 sm:hidden"
+              style={{ color: `${STONE}65` }}>
+              {project.desc}
+            </p>
             <motion.p
               animate={{ opacity: hovered ? 1 : 0, height: hovered ? 'auto' : 0 }}
               transition={{ duration: 0.4 }}
-              className="text-sm font-light leading-relaxed overflow-hidden mb-4"
+              className="text-sm font-light leading-relaxed overflow-hidden mb-4 hidden sm:block"
               style={{ color: `${STONE}70` }}
             >
               {project.desc}
             </motion.p>
 
             {/* View arrow */}
-            <motion.div className="flex items-center gap-2"
-              animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : -10 }}
-              transition={{ duration: 0.35 }}>
-              <span className="text-[11px] font-black tracking-[0.25em] uppercase" style={{ color: TERRA }}>View Project</span>
-              <FiArrowUpRight size={13} style={{ color: TERRA }} />
-            </motion.div>
+            <div className="flex items-center gap-2"
+              style={{ opacity: hovered ? 1 : 0, transition: 'opacity 0.3s' }}>
+              <span className="text-[10px] font-black tracking-[0.25em] uppercase" style={{ color: TERRA }}>View Project</span>
+              <FiArrowUpRight size={12} style={{ color: TERRA }} />
+            </div>
 
             {/* Accent line */}
-            <motion.div className="mt-4 h-[1px] origin-left"
-              style={{ background: `linear-gradient(90deg, ${cat.accent}, transparent)` }}
-              animate={{ scaleX: hovered ? 1 : 0.12 }}
-              transition={{ duration: 0.6 }}
+            <div className="mt-3 h-[1px] origin-left rounded-full"
+              style={{
+                background: `linear-gradient(90deg, ${cat.accent}, transparent)`,
+                transform: `scaleX(${hovered ? 1 : 0.12})`,
+                transition: 'transform 0.5s ease'
+              }}
             />
-          </motion.div>
+          </div>
         </div>
       </div>
     </motion.article>
@@ -360,7 +365,7 @@ function CategorySection({ category }) {
       {/* Cards — staggered entrance */}
       <div className="max-w-7xl mx-auto px-6 md:px-16">
         <motion.div
-          className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
           variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
@@ -401,9 +406,9 @@ export default function Projects() {
       <section
         ref={heroRef}
         className="relative flex items-center justify-center overflow-hidden"
-        style={{ height: '72vh', minHeight: '500px' }}
+        style={{ minHeight: 'clamp(480px, 80vw, 620px)' }}
       >
-        {/* Parallax BG — full bleed from top including behind navbar */}
+        {/* Parallax BG */}
         <motion.div className="absolute inset-0" style={{ y: springY, scale: 1.08 }}>
           <img
             src={heroImg}
@@ -415,29 +420,30 @@ export default function Projects() {
           }} />
         </motion.div>
 
-        {/* Centered content — pushed down by navbar height */}
+        {/* Centered content — pt accounts for fixed navbar */}
         <motion.div
-          className="relative z-10 flex flex-col items-center text-center px-6 w-full"
-          style={{ opacity: heroOpacity, paddingTop: '80px' }}
+          className="relative z-10 flex flex-col items-center text-center w-full px-4 sm:px-6"
+          style={{ opacity: heroOpacity, paddingTop: '90px', paddingBottom: '40px' }}
         >
           {/* Label */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 mb-6"
+            className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6"
           >
-            <span className="w-8 h-px" style={{ background: TERRA }} />
-            <span className="text-[11px] font-black tracking-[0.5em] uppercase"
+            <span className="w-6 sm:w-8 h-px" style={{ background: TERRA }} />
+            <span className="text-[9px] sm:text-[11px] font-black tracking-[0.4em] sm:tracking-[0.5em] uppercase"
               style={{ color: TERRA, textShadow: `0 0 16px ${TERRA}99` }}>
               Karrcholai · Stone Grove
             </span>
-            <span className="w-8 h-px" style={{ background: TERRA }} />
+            <span className="w-6 sm:w-8 h-px" style={{ background: TERRA }} />
           </motion.div>
 
           {/* Heading */}
           <div style={{ paddingBottom: '0.2em' }}>
-            <h1 className="font-black font-serif leading-none" style={{ fontSize: 'clamp(3.2rem,10vw,8rem)' }}>
+            <h1 className="font-black font-serif leading-none"
+              style={{ fontSize: 'clamp(2.4rem, 12vw, 8rem)' }}>
               <ParallaxWord delay={0.1}>
                 <span style={{ color: '#fff', textShadow: '0 2px 24px rgba(0,0,0,0.85)' }}>
                   OUR&nbsp;
@@ -460,10 +466,10 @@ export default function Projects() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-[11px] font-bold tracking-[0.35em] uppercase mt-6"
+            className="text-[9px] sm:text-[11px] font-bold tracking-[0.2em] sm:tracking-[0.35em] uppercase mt-4 sm:mt-6 px-2 leading-relaxed"
             style={{ color: 'rgba(232,229,223,0.7)', textShadow: '0 1px 10px rgba(0,0,0,0.9)' }}
           >
-            Quality Construction &nbsp;·&nbsp; Professional Management &nbsp;·&nbsp; Responsible Development
+            Quality Construction · Professional Management · Responsible Development
           </motion.p>
 
           {/* Stats row */}
@@ -471,7 +477,7 @@ export default function Projects() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.6 }}
-            className="flex items-center gap-10 mt-10"
+            className="flex items-center gap-6 sm:gap-10 mt-6 sm:mt-10"
           >
             {[
               { n: '120+', l: 'Projects' },
@@ -479,11 +485,11 @@ export default function Projects() {
               { n: '98%',  l: 'Satisfaction' },
             ].map((s, i) => (
               <div key={i} className="text-center">
-                <div className="text-3xl font-black" style={{
+                <div className="text-2xl sm:text-3xl font-black" style={{
                   color: TERRA,
                   textShadow: `0 0 18px ${TERRA}BB, 0 2px 8px rgba(0,0,0,0.9)`
                 }}>{s.n}</div>
-                <div className="text-[10px] font-bold tracking-[0.3em] uppercase mt-1"
+                <div className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase mt-1"
                   style={{ color: 'rgba(255,255,255,0.65)', textShadow: '0 1px 6px rgba(0,0,0,1)' }}>
                   {s.l}
                 </div>
@@ -493,7 +499,7 @@ export default function Projects() {
         </motion.div>
 
         {/* Smooth bottom fade into cream */}
-        <div className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
+        <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
           style={{ background: `linear-gradient(to bottom, transparent, ${CREAM})` }}
         />
       </section>

@@ -18,7 +18,7 @@ const ContactUs = () => {
       <main className="pt-24">
         
         {/* 1. Hero Section */}
-        <section className="relative h-[50vh] flex items-center justify-center bg-black overflow-hidden">
+        <section className="relative h-[40vh] sm:h-[50vh] flex items-center justify-center bg-black overflow-hidden">
           <motion.div 
             initial={{ scale: 1.2, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.7 }}
@@ -33,7 +33,7 @@ const ContactUs = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="text-4xl md:text-8xl font-black font-serif mb-6 uppercase tracking-tight"
+              className="text-3xl sm:text-5xl md:text-8xl font-black font-serif mb-4 md:mb-6 uppercase tracking-tight"
             >
               Get In Touch
             </motion.h1>
@@ -95,7 +95,7 @@ const ContactUs = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="lg:col-span-2 bg-white p-6 md:p-16 rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-light"
+                className="lg:col-span-2 bg-white p-5 sm:p-8 md:p-16 rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-light"
               >
                 <h3 className="text-3xl md:text-4xl font-bold font-serif mb-4">Send Us a Message</h3>
                 <p className="text-dark/60 mb-10 text-sm md:text-base">Have a question or a project in mind? Reach out to us and we'll get back to you within 24 hours.</p>
@@ -149,7 +149,7 @@ const ContactUs = () => {
 
 
         {/* 3. Map / Visual Section */}
-        <section className="h-[400px] w-full transition-all duration-1000 opacity-80 hover:opacity-100">
+        <section className="h-[280px] sm:h-[350px] md:h-[400px] w-full transition-all duration-1000 opacity-80 hover:opacity-100">
 
            <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124440.3207011961!2d80.12588102213768!3d12.923149830537025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267da565d8a95%3A0x669145657803732!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 

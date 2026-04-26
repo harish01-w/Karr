@@ -14,7 +14,7 @@ const WhyChooseUs = () => {
   const inView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section ref={ref} className="relative py-32 bg-[#faf6f0] overflow-hidden">
+    <section ref={ref} className="relative py-16 md:py-32 bg-[#faf6f0] overflow-hidden">
       {/* Decorative Overlays */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-white/50 -skew-x-12 translate-x-32" />
       
@@ -36,7 +36,7 @@ const WhyChooseUs = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
-              className="text-6xl md:text-8xl font-black text-dark font-serif leading-none mb-10"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-dark font-serif leading-none mb-6 md:mb-10"
             >
               Why <br/>
               <span className="text-secondary italic">Trust</span> Us?
@@ -67,7 +67,7 @@ const WhyChooseUs = () => {
                   initial={{ opacity: 0, y: 40 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: i * 0.15, duration: 0.7 }}
-                  className={`group relative bg-white p-10 rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] hover:shadow-2xl transition-all duration-500 ${i % 2 === 1 ? 'md:translate-y-12' : ''}`}
+                  className={`group relative bg-white p-6 md:p-10 rounded-2xl md:rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] hover:shadow-2xl transition-all duration-500 ${i % 2 === 1 ? 'md:translate-y-12' : ''}`}
                 >
                   <div className="relative z-10">
                     <div className="w-16 h-16 rounded-2xl bg-[#faf6f0] flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">

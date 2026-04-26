@@ -19,7 +19,7 @@ const AboutUs = () => {
       <main className="pt-24 overflow-hidden">
         
         {/* 1. Hero Section */}
-        <section className="relative h-[60vh] flex items-center justify-center bg-black">
+        <section className="relative h-[45vh] sm:h-[55vh] flex items-center justify-center bg-black">
           <motion.div 
             initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.8 }}
@@ -34,7 +34,7 @@ const AboutUs = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="text-4xl md:text-7xl font-bold font-serif mb-4 uppercase tracking-normal drop-shadow-xl"
+              className="text-3xl sm:text-4xl md:text-7xl font-bold font-serif mb-4 uppercase tracking-normal drop-shadow-xl"
             >
               Who We Are
             </motion.h1>
