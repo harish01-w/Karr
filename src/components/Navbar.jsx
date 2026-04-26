@@ -55,7 +55,9 @@ const Navbar = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
-        scrolled ? 'bg-white/95 shadow-lg backdrop-blur-md py-2' : 'bg-transparent py-4'
+        scrolled || location.pathname === '/projects' || location.pathname === '/about' || location.pathname === '/contact' || location.pathname === '/services'
+          ? 'bg-white/95 shadow-lg backdrop-blur-md py-2'
+          : 'bg-transparent py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
@@ -83,8 +85,8 @@ const Navbar = () => {
               >
                 <span className={`text-[11px] md:text-[12px] font-black tracking-[0.3em] uppercase transition-all duration-300 ${
                   isActive 
-                    ? (scrolled ? 'text-primary' : 'text-secondary') 
-                    : (scrolled ? 'text-dark/80 hover:text-primary' : 'text-white hover:text-secondary')
+                    ? (scrolled || location.pathname !== '/' ? 'text-primary' : 'text-secondary') 
+                    : (scrolled || location.pathname !== '/' ? 'text-dark/80 hover:text-primary' : 'text-white hover:text-secondary')
                 }`}>
                   {link.name}
                 </span>
