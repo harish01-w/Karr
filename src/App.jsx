@@ -29,6 +29,7 @@ function App() {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/services" element={<Services />} />
             <Route path="/karr" element={<Karr />} />
+            
             <Route path="/projects" element={<Projects />} />
           </Routes>
           <AIAssistant />
