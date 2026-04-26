@@ -1,7 +1,7 @@
-import { useState, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence, useInView, useScroll, useTransform, useSpring } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FiMapPin, FiCalendar, FiMaximize, FiArrowRight, FiCheckCircle, FiClock, FiZap } from 'react-icons/fi'
+import { FiMapPin, FiArrowRight, FiArrowUpRight, FiCheckCircle, FiClock, FiZap } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
 import prj1 from '../../assets/pic2.png'
 import prj2 from '../../assets/pic3.png'
@@ -10,365 +10,474 @@ import prj4 from '../../assets/pic4.png'
 import prj5 from '../../assets/pic5.png'
 import prj6 from '../../assets/pic9.jpg'
 
-// ── Data ──────────────────────────────────────────────────────────────────────
+// ─── Brand palette from theme image ───────────────────────────────────────────
+const FOREST  = '#3F5F4A'
+const TERRA   = '#C9754A'
+const STONE   = '#E8E5DF'
+const CREAM   = '#F5F2EC'
+const DARK    = '#1C1C1A'
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
 const PROJECTS = {
   completed: [
-    { id: 1, title: 'Modern Villa', location: 'Chennai, TN', type: 'Residential', image: prj1, year: '2023', size: '4,500 Sq.Ft', desc: 'A sleek contemporary villa blending open-plan living with lush landscaping and smart home systems.' },
-    { id: 2, title: 'Heritage Duplex', location: 'Coimbatore, TN', type: 'Construction', image: prj2, year: '2022', size: '3,200 Sq.Ft', desc: 'Timeless duplex design honoring traditional Tamil architecture with modern comforts.' },
-    { id: 3, title: 'Luxury Bungalow', location: 'Trichy, TN', type: 'Residential', image: prj4, year: '2023', size: '6,200 Sq.Ft', desc: 'Premium bungalow with infinity pool, home theatre, and full smart home automation.' },
-    { id: 4, title: 'Urban Townhouse', location: 'Chennai, TN', type: 'Construction', image: prj6, year: '2022', size: '3,900 Sq.Ft', desc: 'Compact urban townhouse maximizing vertical space with a stunning rooftop terrace.' },
+    { id:1, title:'Modern Villa',     sub:'Stone Grove Residence',  location:'Chennai, TN',    type:'Residential',  image:prj1, year:'2023', size:'4,500 Sq.Ft', beds:4, desc:'A sleek contemporary villa blending open-plan living with lush landscaping and smart home systems.' },
+    { id:2, title:'Heritage Duplex',  sub:'Timeless Twin Home',     location:'Coimbatore, TN', type:'Construction', image:prj2, year:'2022', size:'3,200 Sq.Ft', beds:3, desc:'Timeless duplex design honoring traditional Tamil architecture with modern comforts.' },
+    { id:3, title:'Luxury Bungalow',  sub:'Signature Estate',       location:'Trichy, TN',     type:'Residential',  image:prj4, year:'2023', size:'6,200 Sq.Ft', beds:5, desc:'Premium bungalow with infinity pool, home theatre, and full smart home automation.' },
+    { id:4, title:'Urban Townhouse',  sub:'Vertical Living',        location:'Chennai, TN',    type:'Construction', image:prj6, year:'2022', size:'3,900 Sq.Ft', beds:3, desc:'Compact urban townhouse maximizing vertical space with a stunning rooftop terrace.' },
   ],
   ongoing: [
-    { id: 5, title: 'Eco-Living Hub', location: 'Madurai, TN', type: 'Sustainable', image: prj3, year: '2024', size: '5,100 Sq.Ft', progress: 68, desc: 'Net-zero energy home with solar integration and rainwater harvesting systems.' },
-    { id: 6, title: 'Garden Retreat', location: 'Salem, TN', type: 'Sustainable', image: prj5, year: '2024', size: '2,800 Sq.Ft', progress: 42, desc: 'Biophilic design retreat surrounded by curated gardens and natural stone finishes.' },
+    { id:5, title:'Eco-Living Hub',   sub:'Net-Zero Home',          location:'Madurai, TN',    type:'Sustainable',  image:prj3, year:'2024', size:'5,100 Sq.Ft', beds:4, progress:68, desc:'Net-zero energy home with solar integration and rainwater harvesting systems.' },
+    { id:6, title:'Garden Retreat',   sub:'Biophilic Sanctuary',    location:'Salem, TN',      type:'Sustainable',  image:prj5, year:'2024', size:'2,800 Sq.Ft', beds:3, progress:42, desc:'Biophilic design retreat surrounded by curated gardens and natural stone finishes.' },
   ],
   upcoming: [
-    { id: 7, title: 'Hilltop Residence', location: 'Ooty, TN', type: 'Residential', image: prj1, year: '2025', size: '7,000 Sq.Ft', desc: 'A panoramic hilltop home designed to frame breathtaking valley views year-round.' },
-    { id: 8, title: 'Riverside Villas', location: 'Thanjavur, TN', type: 'Construction', image: prj2, year: '2025', size: '12,000 Sq.Ft', desc: 'A gated riverside villa community with shared amenities and sustainable infrastructure.' },
+    { id:7, title:'Hilltop Residence',sub:'Valley View Estate',     location:'Ooty, TN',       type:'Residential',  image:prj1, year:'2025', size:'7,000 Sq.Ft', beds:5, desc:'A panoramic hilltop home designed to frame breathtaking valley views year-round.' },
+    { id:8, title:'Riverside Villas', sub:'Gated Community',        location:'Thanjavur, TN',  type:'Construction', image:prj2, year:'2025', size:'12,000 Sq.Ft',beds:6, desc:'A gated riverside villa community with shared amenities and sustainable infrastructure.' },
   ],
 }
 
-const TABS = [
-  { key: 'completed', label: 'Completed', icon: FiCheckCircle, color: '#41634A', count: PROJECTS.completed.length },
-  { key: 'ongoing',   label: 'Ongoing',   icon: FiClock,       color: '#B85C38', count: PROJECTS.ongoing.length },
-  { key: 'upcoming',  label: 'Upcoming',  icon: FiZap,         color: '#2D4B37', count: PROJECTS.upcoming.length },
+const CATEGORIES = [
+  { key:'completed', label:'Completed', icon:FiCheckCircle, accent:FOREST,  tagline:'Delivered with Excellence' },
+  { key:'ongoing',   label:'Ongoing',   icon:FiClock,       accent:TERRA,   tagline:'Currently Under Construction' },
+  { key:'upcoming',  label:'Upcoming',  icon:FiZap,         accent:'#8B7355',tagline:'On the Horizon' },
 ]
 
-// ── Card ──────────────────────────────────────────────────────────────────────
-function ProjectCard({ project, category, index, inView }) {
-  const [hovered, setHovered] = useState(false)
-
+// ─── Cursor follower ──────────────────────────────────────────────────────────
+function CursorDot() {
+  const [pos, setPos] = useState({ x: -100, y: -100 })
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const move = e => { setPos({ x: e.clientX, y: e.clientY }); setVisible(true) }
+    const leave = () => setVisible(false)
+    window.addEventListener('mousemove', move)
+    window.addEventListener('mouseleave', leave)
+    return () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseleave', leave) }
+  }, [])
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[999] mix-blend-multiply"
+      style={{ background: TERRA, x: pos.x - 16, y: pos.y - 16 }}
+      animate={{ scale: visible ? 1 : 0, opacity: visible ? 0.6 : 0 }}
+      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+    />
+  )
+}
+
+// ─── Hero parallax word ───────────────────────────────────────────────────────
+function ParallaxWord({ children, delay = 0 }) {
+  return (
+    <motion.span
+      initial={{ y: 120, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 1.1, delay, ease: [0.16, 1, 0.3, 1] }}
+      className="inline-block"
+      style={{ paddingBottom: '0.15em', marginBottom: '-0.15em' }}
+    >
+      {children}
+    </motion.span>
+  )
+}
+
+// ─── Cinematic project card ───────────────────────────────────────────────────
+function ProjectCard({ project, category, index }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const [hovered, setHovered] = useState(false)
+  const cat = CATEGORIES.find(c => c.key === category)
+
+  return (
+    <motion.article
+      ref={ref}
+      initial={{ opacity: 0, y: 70, clipPath: 'inset(100% 0% 0% 0%)' }}
+      animate={inView ? { opacity: 1, y: 0, clipPath: 'inset(0% 0% 0% 0%)' } : {}}
+      transition={{ duration: 0.9, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       className="group relative cursor-pointer"
     >
-      {/* Image container */}
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+      {/* Image */}
+      <div className="relative overflow-hidden rounded-none" style={{ aspectRatio: '3/4' }}>
         <motion.img
           src={project.image}
           alt={project.title}
           className="w-full h-full object-cover"
-          animate={{ scale: hovered ? 1.07 : 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          animate={{ scale: hovered ? 1.08 : 1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         />
 
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10" />
+        {/* Warm cream vignette */}
+        <div className="absolute inset-0" style={{
+          background: `linear-gradient(to top, ${DARK}EE 0%, ${DARK}55 45%, transparent 75%)`
+        }} />
 
-        {/* Hover color wash */}
-        <motion.div
-          className="absolute inset-0"
-          style={{ background: category === 'completed' ? 'rgba(65,99,74,0.25)' : category === 'ongoing' ? 'rgba(184,92,56,0.25)' : 'rgba(45,75,55,0.25)' }}
+        {/* Hover tint */}
+        <motion.div className="absolute inset-0"
+          style={{ background: `${cat.accent}33` }}
           animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5 }}
         />
 
-        {/* Top badges */}
-        <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
-          <span className="text-[10px] font-black tracking-[0.25em] uppercase px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-white/80">
+        {/* Top row */}
+        <div className="absolute top-5 left-5 right-5 flex justify-between items-center">
+          <span className="text-[10px] font-black tracking-[0.3em] uppercase px-3 py-1.5 rounded-sm"
+            style={{ background: `${STONE}22`, backdropFilter: 'blur(8px)', border: `1px solid ${STONE}33`, color: STONE }}>
             {project.type}
           </span>
-
           {category === 'ongoing' && (
-            <span className="flex items-center gap-1.5 text-[10px] font-black tracking-widest uppercase px-3 py-1.5 rounded-full bg-[#B85C38]/20 border border-[#B85C38]/40 text-[#B85C38]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#B85C38] animate-pulse" />
+            <span className="flex items-center gap-1.5 text-[10px] font-black tracking-widest uppercase px-3 py-1.5 rounded-sm"
+              style={{ background: `${TERRA}25`, border: `1px solid ${TERRA}50`, color: TERRA }}>
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: TERRA }} />
               Live
             </span>
           )}
           {category === 'upcoming' && (
-            <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/40">
-              Coming Soon
+            <span className="text-[10px] font-black tracking-widest uppercase px-3 py-1.5 rounded-sm"
+              style={{ background: 'rgba(232,229,223,0.08)', border: '1px solid rgba(232,229,223,0.15)', color: `${STONE}88` }}>
+              2025
             </span>
           )}
           {category === 'completed' && (
-            <span className="flex items-center gap-1.5 text-[10px] font-black tracking-widest uppercase px-3 py-1.5 rounded-full bg-[#41634A]/30 border border-[#41634A]/50 text-green-400">
-              <FiCheckCircle size={10} />
-              Done
+            <span className="flex items-center gap-1.5 text-[10px] font-black tracking-widest uppercase px-3 py-1.5 rounded-sm"
+              style={{ background: `${FOREST}30`, border: `1px solid ${FOREST}60`, color: '#7EC8A0' }}>
+              <FiCheckCircle size={9} /> Done
             </span>
           )}
         </div>
 
-        {/* Progress bar for ongoing */}
+        {/* Progress bar */}
         {category === 'ongoing' && (
-          <div className="absolute top-14 left-4 right-4">
-            <div className="flex justify-between text-[9px] font-black tracking-widest uppercase text-white/40 mb-1.5">
-              <span>Progress</span>
-              <span className="text-[#B85C38]">{project.progress}%</span>
-            </div>
-            <div className="h-[3px] bg-white/10 rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-[#B85C38] rounded-full"
+          <div className="absolute left-5 right-5" style={{ top: '52px' }}>
+            <div className="h-[2px] rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.1)' }}>
+              <motion.div className="h-full rounded-full" style={{ background: TERRA }}
                 initial={{ width: 0 }}
-                animate={{ width: `${project.progress}%` }}
-                transition={{ duration: 1.2, delay: 0.5, ease: 'easeOut' }}
+                animate={inView ? { width: `${project.progress}%` } : {}}
+                transition={{ duration: 1.4, delay: 0.6, ease: 'easeOut' }}
               />
+            </div>
+            <div className="flex justify-end mt-1">
+              <span className="text-[9px] font-black tracking-widest" style={{ color: TERRA }}>{project.progress}%</span>
             </div>
           </div>
         )}
 
         {/* Bottom content */}
-        <div className="absolute inset-0 p-6 flex flex-col justify-end">
-          <motion.div
-            animate={{ y: hovered ? 0 : 6 }}
-            transition={{ duration: 0.4 }}
-          >
-            <h3 className="text-2xl font-black font-serif text-white leading-tight mb-2 group-hover:text-secondary transition-colors duration-300">
+        <div className="absolute bottom-0 left-0 right-0 p-6">
+          <motion.div animate={{ y: hovered ? 0 : 8 }} transition={{ duration: 0.45 }}>
+            <p className="text-[10px] font-bold tracking-[0.3em] uppercase mb-1" style={{ color: `${STONE}60` }}>
+              {project.sub}
+            </p>
+            <h3 className="text-2xl font-black font-serif leading-tight mb-2 transition-colors duration-300"
+              style={{ color: hovered ? TERRA : STONE }}>
               {project.title}
             </h3>
-
-            <div className="flex flex-wrap gap-3 mb-3">
-              <span className="flex items-center gap-1 text-white/40 text-[11px] font-bold">
-                <FiMapPin size={10} /> {project.location}
-              </span>
-              <span className="flex items-center gap-1 text-white/40 text-[11px] font-bold">
-                <FiCalendar size={10} /> {project.year}
-              </span>
-              <span className="flex items-center gap-1 text-white/40 text-[11px] font-bold">
-                <FiMaximize size={10} /> {project.size}
-              </span>
+            <div className="flex items-center gap-2 mb-4">
+              <FiMapPin size={10} style={{ color: `${STONE}50` }} />
+              <span className="text-[11px] font-bold" style={{ color: `${STONE}50` }}>{project.location}</span>
+              <span style={{ color: `${STONE}25` }}>·</span>
+              <span className="text-[11px] font-bold" style={{ color: `${STONE}50` }}>{project.size}</span>
             </div>
 
-            {/* Description slides in */}
+            {/* Desc reveal */}
             <motion.p
               animate={{ opacity: hovered ? 1 : 0, height: hovered ? 'auto' : 0 }}
-              transition={{ duration: 0.35 }}
-              className="text-white/55 text-sm font-light leading-relaxed overflow-hidden mb-4"
+              transition={{ duration: 0.4 }}
+              className="text-sm font-light leading-relaxed overflow-hidden mb-4"
+              style={{ color: `${STONE}70` }}
             >
               {project.desc}
             </motion.p>
 
-            {/* Animated underline */}
-            <motion.div
-              className="h-[2px] rounded-full origin-left"
-              style={{ background: category === 'completed' ? '#41634A' : category === 'ongoing' ? '#B85C38' : '#2D4B37' }}
-              animate={{ scaleX: hovered ? 1 : 0.15 }}
-              transition={{ duration: 0.5 }}
+            {/* View arrow */}
+            <motion.div className="flex items-center gap-2"
+              animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : -10 }}
+              transition={{ duration: 0.35 }}>
+              <span className="text-[11px] font-black tracking-[0.25em] uppercase" style={{ color: TERRA }}>View Project</span>
+              <FiArrowUpRight size={13} style={{ color: TERRA }} />
+            </motion.div>
+
+            {/* Accent line */}
+            <motion.div className="mt-4 h-[1px] origin-left"
+              style={{ background: `linear-gradient(90deg, ${cat.accent}, transparent)` }}
+              animate={{ scaleX: hovered ? 1 : 0.12 }}
+              transition={{ duration: 0.6 }}
             />
           </motion.div>
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   )
 }
 
-// ── Main Page ─────────────────────────────────────────────────────────────────
-export default function Projects() {
-  const [activeTab, setActiveTab] = useState('completed')
-  const heroRef  = useRef(null)
-  const bodyRef  = useRef(null)
-  const heroInView = useInView(heroRef, { once: true })
-  const bodyInView = useInView(bodyRef, { once: true, margin: '-60px' })
-
-  const currentTab = TABS.find(t => t.key === activeTab)
+// ─── Category Section ─────────────────────────────────────────────────────────
+function CategorySection({ category }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const cat = CATEGORIES.find(c => c.key === category)
+  const projects = PROJECTS[category]
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-white overflow-x-hidden">
+    <section ref={ref} className="py-24 relative">
+      {/* Section label */}
+      <div className="max-w-7xl mx-auto px-6 md:px-16 mb-14">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="flex items-end justify-between gap-6 flex-wrap"
+        >
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-6 h-6 rounded-sm flex items-center justify-center"
+                style={{ background: `${cat.accent}20`, border: `1px solid ${cat.accent}40` }}>
+                <cat.icon size={12} style={{ color: cat.accent }} />
+              </div>
+              <span className="text-[11px] font-black tracking-[0.4em] uppercase" style={{ color: cat.accent }}>
+                {cat.label} Projects
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black font-serif leading-tight" style={{ color: DARK }}>
+              {cat.tagline}
+            </h2>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-light" style={{ color: `${DARK}60` }}>
+              {projects.length} {projects.length === 1 ? 'Project' : 'Projects'}
+            </span>
+            <div className="w-px h-4" style={{ background: `${DARK}20` }} />
+            <div className="w-8 h-[1px]" style={{ background: cat.accent }} />
+          </div>
+        </motion.div>
+
+        {/* Thin rule */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : {}}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="mt-8 h-px origin-left"
+          style={{ background: `linear-gradient(90deg, ${cat.accent}60, transparent)` }}
+        />
+      </div>
+
+      {/* Cards */}
+      <div className="max-w-7xl mx-auto px-6 md:px-16">
+        <div className={`grid gap-6 ${
+          projects.length === 2
+            ? 'grid-cols-1 md:grid-cols-2 max-w-3xl'
+            : projects.length === 3
+            ? 'grid-cols-1 md:grid-cols-3'
+            : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+        }`}>
+          {projects.map((p, i) => (
+            <ProjectCard key={p.id} project={p} category={category} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─── Main Page ────────────────────────────────────────────────────────────────
+export default function Projects() {
+  const heroRef = useRef(null)
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
+  const heroY    = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+  const springY  = useSpring(heroY, { stiffness: 80, damping: 20 })
+
+  const totalProjects = Object.values(PROJECTS).flat().length
+
+  return (
+    <div className="min-h-screen overflow-x-hidden" style={{ background: CREAM, color: DARK }}>
+      <CursorDot />
       <Navbar />
 
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative pt-36 pb-20 overflow-hidden">
-        {/* BG layers */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#141414] to-[#0d0d0d]" />
-        <div className="absolute inset-0 opacity-[0.035]"
-          style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '72px 72px' }}
+      {/* ── CINEMATIC HERO ──────────────────────────────────────────────── */}
+      <section ref={heroRef} className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
+        {/* Parallax background image */}
+        <motion.div className="absolute inset-0 scale-110" style={{ y: springY }}>
+          <img src={prj4} alt="" className="w-full h-full object-cover" />
+          {/* Light left-side scrim — keeps image visible on right, text readable on left */}
+          <div className="absolute inset-0" style={{
+            background: `linear-gradient(105deg, ${DARK}D0 0%, ${DARK}90 35%, ${DARK}55 60%, ${DARK}22 100%)`
+          }} />
+          {/* Subtle bottom fade */}
+          <div className="absolute inset-0" style={{
+            background: `linear-gradient(to top, ${DARK}88 0%, transparent 40%)`
+          }} />
+        </motion.div>
+
+        {/* Floating accent shapes */}
+        <motion.div className="absolute right-16 top-1/3 w-64 h-64 rounded-full opacity-10 blur-3xl pointer-events-none"
+          style={{ background: TERRA }}
+          animate={{ scale: [1, 1.15, 1], opacity: [0.08, 0.14, 0.08] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-[0.06] blur-[120px]"
-          style={{ background: 'radial-gradient(circle, #B85C38, transparent)' }}
+        <motion.div className="absolute left-1/3 bottom-1/4 w-48 h-48 rounded-full opacity-10 blur-3xl pointer-events-none"
+          style={{ background: FOREST }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.06, 0.12, 0.06] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
-          <div className="max-w-4xl">
+        {/* Hero text */}
+        <motion.div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 w-full" style={{ opacity: heroOpacity }}>
+          <div className="overflow-hidden mb-4">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={heroInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-4 mb-8"
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.7 }}
+              className="flex items-center gap-4"
             >
-              <span className="w-10 h-[2px] bg-secondary" />
-              <span className="text-secondary font-black text-[11px] tracking-[0.45em] uppercase">Our Portfolio</span>
+              <span className="w-10 h-[1px]" style={{ background: TERRA }} />
+              <span className="text-[11px] font-black tracking-[0.5em] uppercase"
+                style={{ color: TERRA, textShadow: `0 0 20px ${TERRA}AA, 0 1px 6px rgba(0,0,0,0.9)` }}>
+                Karrcholai · Stone Grove
+              </span>
             </motion.div>
+          </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-5xl md:text-7xl lg:text-[90px] font-black font-serif leading-[0.9] mb-8"
-            >
-              Our <span className="text-primary italic">Projects</span>
-            </motion.h1>
+          {/* pb so descenders (j, g, p) never clip */}
+          <div style={{ paddingBottom: '0.25em' }}>
+            <h1 className="text-[clamp(3.5rem,10vw,9rem)] font-black font-serif leading-[0.95]">
+              <ParallaxWord delay={0.1}>
+                <span style={{
+                  color: '#FFFFFF',
+                  textShadow: '0 0 40px rgba(255,255,255,0.3), 0 2px 8px rgba(0,0,0,0.9)'
+                }}>Our</span>
+              </ParallaxWord>{' '}
+              <ParallaxWord delay={0.22}>
+                <span style={{
+                  color: TERRA,
+                  fontStyle: 'italic',
+                  textShadow: `0 0 25px ${TERRA}DD, 0 0 55px ${TERRA}88, 0 0 90px ${TERRA}44, 0 2px 8px rgba(0,0,0,0.95)`
+                }}>Projects</span>
+              </ParallaxWord>
+            </h1>
+          </div>
 
+          <div className="mt-8 max-w-xl">
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-white/45 text-lg font-light leading-relaxed max-w-2xl"
+              initial={{ y: 40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.5 }}
+              className="text-lg font-light leading-relaxed"
+              style={{
+                color: '#F0EDE8',
+                textShadow: '0 1px 16px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,0.8)'
+              }}
             >
-              Our projects demonstrate our commitment to quality construction, professional project management,
-              and responsible development — every structure a testament to engineering excellence.
+              Every structure tells a story of discipline, craftsmanship, and nature in harmony.
+              From stone foundations to grove-inspired living.
             </motion.p>
           </div>
 
-          {/* Stats row */}
+          {/* Stats inline */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.45 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-px mt-16 border border-white/5 rounded-2xl overflow-hidden"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="flex flex-wrap gap-10 mt-14"
           >
             {[
-              { num: '120+', label: 'Projects Delivered' },
-              { num: '12+',  label: 'Years of Excellence' },
-              { num: '98%',  label: 'Client Satisfaction' },
-              { num: '3',    label: 'States Covered' },
+              { n: `${totalProjects}+`, l: 'Projects' },
+              { n: '12+', l: 'Years' },
+              { n: '98%', l: 'Satisfaction' },
             ].map((s, i) => (
-              <div key={i} className="bg-white/[0.03] px-8 py-7 text-center hover:bg-white/[0.06] transition-colors duration-300">
-                <div className="text-3xl font-black text-secondary mb-1">{s.num}</div>
-                <div className="text-white/30 text-[11px] tracking-widest uppercase font-bold">{s.label}</div>
+              <div key={i}>
+                <div className="text-4xl font-black" style={{
+                  color: TERRA,
+                  textShadow: `0 0 20px ${TERRA}BB, 0 0 40px ${TERRA}55, 0 2px 6px rgba(0,0,0,0.9)`
+                }}>{s.n}</div>
+                <div className="text-[11px] font-bold tracking-[0.3em] uppercase mt-1" style={{
+                  color: '#FFFFFF',
+                  textShadow: '0 1px 8px rgba(0,0,0,1)'
+                }}>{s.l}</div>
               </div>
             ))}
           </motion.div>
-        </div>
-      </section>
 
-      {/* ── COMMITMENT STRIP ─────────────────────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={heroInView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.6 }}
-        className="border-y border-white/5 bg-[#111] py-10"
-      >
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { icon: FiCheckCircle, color: '#41634A', title: 'Engineering Excellence', desc: 'Every project is built to the highest structural and material standards.' },
-              { icon: FiClock,       color: '#B85C38', title: 'On-Time Delivery',       desc: 'We respect your timeline — disciplined project management from day one.' },
-              { icon: FiZap,        color: '#2D4B37', title: 'Client Satisfaction',    desc: 'Transparent communication and quality that speaks for itself.' },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.6 + i * 0.1 }}
-                className="flex items-start gap-4"
-              >
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{ background: `${item.color}22`, border: `1px solid ${item.color}44` }}>
-                  <item.icon size={16} style={{ color: item.color }} />
-                </div>
-                <div>
-                  <div className="text-white font-bold text-sm mb-1">{item.title}</div>
-                  <div className="text-white/35 text-sm font-light leading-relaxed">{item.desc}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-
-      {/* ── TABS + GRID ──────────────────────────────────────────────────── */}
-      <div ref={bodyRef} className="max-w-7xl mx-auto px-6 md:px-12 py-20">
-
-        {/* Tab switcher */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-16">
-          {TABS.map((tab) => {
-            const isActive = activeTab === tab.key
-            return (
-              <motion.button
-                key={tab.key}
-                onClick={() => setActiveTab(tab.key)}
-                whileTap={{ scale: 0.97 }}
-                className={`relative flex items-center gap-3 px-7 py-4 rounded-xl font-black text-[11px] tracking-[0.25em] uppercase transition-all duration-400 border overflow-hidden ${
-                  isActive ? 'text-white border-transparent' : 'text-white/40 border-white/8 hover:text-white/70 hover:border-white/15'
-                }`}
-              >
-                {/* Active background */}
-                {isActive && (
-                  <motion.div
-                    layoutId="tabBg"
-                    className="absolute inset-0 -z-10"
-                    style={{ background: tab.color }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <tab.icon size={14} />
-                {tab.label}
-                <span className={`ml-auto text-[10px] px-2 py-0.5 rounded-full font-black ${
-                  isActive ? 'bg-white/20 text-white' : 'bg-white/5 text-white/30'
-                }`}>
-                  {tab.count}
-                </span>
-              </motion.button>
-            )
-          })}
-        </div>
-
-        {/* Section heading */}
-        <AnimatePresence mode="wait">
+          {/* Scroll cue */}
           <motion.div
-            key={activeTab + '-heading'}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4 }}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-4 mb-3">
-              <div className="w-8 h-[2px] rounded-full" style={{ background: currentTab.color }} />
-              <span className="text-[11px] font-black tracking-[0.4em] uppercase" style={{ color: currentTab.color }}>
-                {activeTab === 'completed' ? 'Portfolio Archive' : activeTab === 'ongoing' ? 'Currently Building' : 'Coming Next'}
-              </span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-black font-serif text-white">
-              {activeTab === 'completed' && 'Delivered with Excellence'}
-              {activeTab === 'ongoing'   && 'Work in Progress'}
-              {activeTab === 'upcoming'  && 'On the Horizon'}
-            </h2>
-            <p className="text-white/35 text-sm mt-2 font-light max-w-xl">
-              {activeTab === 'completed' && 'Every completed project reflects our dedication to durability, craftsmanship, and client satisfaction.'}
-              {activeTab === 'ongoing'   && 'These projects are actively under construction — built with precision and monitored daily.'}
-              {activeTab === 'upcoming'  && 'Exciting new projects in the pipeline, designed and ready to break ground soon.'}
-            </p>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Cards grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className={`grid gap-6 ${
-              PROJECTS[activeTab].length === 2
-                ? 'grid-cols-1 md:grid-cols-2 max-w-3xl'
-                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-            }`}
+            transition={{ delay: 1.2 }}
+            className="absolute bottom-10 left-6 md:left-16 flex items-center gap-3"
           >
-            {PROJECTS[activeTab].map((project, i) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                category={activeTab}
-                index={i}
-                inView={bodyInView}
-              />
-            ))}
+            <motion.div
+              className="w-[1px] h-12"
+              style={{ background: `linear-gradient(to bottom, transparent, ${TERRA})` }}
+              animate={{ scaleY: [0, 1, 0], originY: 0 }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: `${STONE}40` }}>Scroll</span>
           </motion.div>
-        </AnimatePresence>
+        </motion.div>
+      </section>
+
+      {/* ── INTRO BAND ──────────────────────────────────────────────────── */}
+      <div style={{ background: DARK }} className="py-12">
+        <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-3 gap-px">
+          {[
+            { icon: FiCheckCircle, color: FOREST, t: 'Engineering Excellence',  d: 'Built to the highest structural and material standards.' },
+            { icon: FiClock,       color: TERRA,  t: 'On-Time Delivery',        d: 'Disciplined project management from blueprint to possession.' },
+            { icon: FiZap,        color: '#8B7355',t:'Client Satisfaction',     d: 'Transparent communication and quality that speaks for itself.' },
+          ].map((item, i) => (
+            <motion.div key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.12 }}
+              className="flex items-start gap-4 px-8 py-8"
+              style={{ borderLeft: i > 0 ? `1px solid rgba(255,255,255,0.06)` : 'none' }}
+            >
+              <div className="w-9 h-9 rounded-sm flex items-center justify-center flex-shrink-0"
+                style={{ background: `${item.color}20`, border: `1px solid ${item.color}40` }}>
+                <item.icon size={14} style={{ color: item.color }} />
+              </div>
+              <div>
+                <div className="font-bold text-sm mb-1" style={{ color: STONE }}>{item.t}</div>
+                <div className="text-sm font-light leading-relaxed" style={{ color: `${STONE}45` }}>{item.d}</div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="relative py-28 overflow-hidden" style={{ background: '#41634A' }}>
-        <div className="absolute inset-0 opacity-[0.06]"
-          style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '60px 60px' }}
+      {/* ── THREE CATEGORY SECTIONS ─────────────────────────────────────── */}
+      <div style={{ background: CREAM }}>
+        {/* Divider */}
+        <div className="max-w-7xl mx-auto px-6 md:px-16 pt-6">
+          <div className="h-px" style={{ background: `${DARK}10` }} />
+        </div>
+
+        <CategorySection category="completed" />
+
+        <div className="max-w-7xl mx-auto px-6 md:px-16">
+          <div className="h-px" style={{ background: `${DARK}10` }} />
+        </div>
+
+        <CategorySection category="ongoing" />
+
+        <div className="max-w-7xl mx-auto px-6 md:px-16">
+          <div className="h-px" style={{ background: `${DARK}10` }} />
+        </div>
+
+        <CategorySection category="upcoming" />
+      </div>
+
+      {/* ── CTA ─────────────────────────────────────────────────────────── */}
+      <section className="relative py-32 overflow-hidden" style={{ background: FOREST }}>
+        <div className="absolute inset-0 opacity-[0.07]"
+          style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/dark-matter.png")' }}
         />
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 70% 50%, rgba(219,127,80,0.18) 0%, transparent 60%)' }} />
+        <div className="absolute inset-0"
+          style={{ background: `radial-gradient(ellipse at 65% 50%, ${TERRA}25 0%, transparent 65%)` }}
+        />
+        {/* Big ghost text */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+          <span className="text-[20vw] font-black font-serif opacity-[0.04] select-none whitespace-nowrap" style={{ color: STONE }}>
+            BUILD
+          </span>
+        </div>
 
         <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
           <motion.div
@@ -377,19 +486,23 @@ export default function Projects() {
             viewport={{ once: true }}
             className="flex items-center justify-center gap-3 mb-6"
           >
-            <div className="h-px w-10 bg-secondary" />
-            <span className="text-secondary font-black text-[11px] tracking-[0.35em] uppercase">Let's Build Together</span>
-            <div className="h-px w-10 bg-secondary" />
+            <div className="h-px w-10" style={{ background: TERRA }} />
+            <span className="text-[11px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>
+              Let's Build Together
+            </span>
+            <div className="h-px w-10" style={{ background: TERRA }} />
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-white font-serif leading-tight mb-6"
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="text-4xl md:text-6xl font-black font-serif leading-tight mb-6"
+            style={{ color: STONE }}
           >
-            Have a Project in Mind?
+            Have a Project<br />
+            <span style={{ color: TERRA, fontStyle: 'italic' }}>in Mind?</span>
           </motion.h2>
 
           <motion.p
@@ -397,9 +510,10 @@ export default function Projects() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-white/55 text-base mb-10 font-light leading-relaxed"
+            className="text-base font-light leading-relaxed mb-12"
+            style={{ color: `${STONE}65` }}
           >
-            Let's turn your vision into a landmark. Get a free consultation and walk through every step of your construction journey.
+            Let's turn your vision into a landmark. Get a free consultation and walk through every step of your construction journey — from planning to possession.
           </motion.p>
 
           <motion.div
@@ -411,7 +525,7 @@ export default function Projects() {
           >
             <Link to="/contact">
               <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
+                whileHover={{ scale: 1.04, y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 className="btn-primary text-sm tracking-[0.15em] uppercase flex items-center gap-2"
               >
@@ -420,7 +534,7 @@ export default function Projects() {
             </Link>
             <Link to="/services">
               <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
+                whileHover={{ scale: 1.04, y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 className="btn-outline text-sm tracking-[0.15em] uppercase"
               >
