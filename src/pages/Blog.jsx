@@ -326,7 +326,7 @@ const Blog = () => {
         {/* ── ASYMMETRICAL FEATURED EDITORIAL ── */}
         <section className="py-16 md:py-24 px-6 bg-[#fdfbf7] relative">
           <div className="max-w-7xl mx-auto relative z-10">
-            <div className="mb-12 md:mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
+            <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-8 mb-12 md:mb-16 text-center md:text-left">
               <motion.div {...fadeInUp} className="max-w-xl">
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block">Top Picks</span>
                 <h2 className="text-4xl md:text-6xl font-bold leading-none tracking-tight text-[#1a1a1a]">
@@ -432,7 +432,7 @@ const Blog = () => {
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none paper-texture" />
           
           <div className="max-w-7xl mx-auto relative z-10">
-            <div className="mb-12 md:mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
+            <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-8 mb-12 md:mb-16 text-center md:text-left">
               <motion.div {...fadeInUp} className="max-w-xl">
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block">Knowledge Base</span>
                 <h2 className="text-4xl md:text-6xl font-bold leading-none tracking-tight">
