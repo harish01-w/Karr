@@ -7,6 +7,7 @@ import WhyChooseUs from '../components/WhyChooseUs'
 import HighlightsSection from '../components/HighlightsSection'
 import BlogSection from '../components/BlogSection'
 import VideoShowcase from '../components/VideoShowcase'
+import QualityShowcase from '../components/QualityShowcase'
 import FootprintMapSection from '../components/FootprintMapSection'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
@@ -68,6 +69,9 @@ const Home = () => {
       <section id="why-us">
         <WhyChooseUs />
       </section>
+
+      {/* ── Quality Showcase Video ── */}
+      <QualityShowcase />
 
       {/* ── Highlights ── */}
       <section id="projects">
