@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight } from 'react-icons/fa'
@@ -35,6 +35,12 @@ const Cholai = () => {
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
+  })
+
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
   })
 
   const y1 = useTransform(scrollYProgress, [0, 0.5], [0, 200])
@@ -86,6 +92,12 @@ const Cholai = () => {
   return (
     <div ref={containerRef} className="bg-[#fcfcf9] min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
       <Navbar />
+
+      {/* Scroll Progress Bar */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-secondary z-[100] origin-left"
+        style={{ scaleX }}
+      />
 
       <main>
         {/* --- HERO SECTION --- */}
