@@ -101,7 +101,7 @@ const Cholai = () => {
 
       <main>
         {/* --- HERO SECTION --- */}
-        <section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-dark">
+        <section className="relative h-screen flex items-center justify-center overflow-hidden bg-dark">
           <motion.div 
             style={{ y: y1, opacity }}
             className="absolute inset-0 z-0"
@@ -125,16 +125,16 @@ const Cholai = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
             >
-              <h2 className="text-secondary font-black tracking-[0.4em] uppercase text-xs md:text-sm mb-6 block">Sustainable Living</h2>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-[0.95] mb-8">
-                CHOLAI <span className="text-transparent stroke-text italic font-serif">Solutions</span>
+              <h2 className="text-secondary font-black tracking-[0.4em] uppercase text-[10px] md:text-sm mb-4 md:mb-6 block">Sustainable Living</h2>
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-[0.95] mb-6 md:mb-8">
+                CHOLAI <br className="md:hidden" /> <span className="text-transparent stroke-text italic font-serif">Solutions</span>
               </h1>
-              <div className="flex items-center justify-center gap-4 mb-8">
-                <div className="h-[1px] w-12 bg-secondary/50" />
-                <p className="text-white/70 text-sm md:text-lg font-light tracking-[0.2em] uppercase max-w-2xl">
+              <div className="flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-8">
+                <div className="h-[1px] w-8 md:w-12 bg-secondary/50" />
+                <p className="text-white/70 text-[10px] md:text-lg font-light tracking-[0.2em] uppercase max-w-[250px] md:max-w-2xl">
                   Environmentally responsible solutions for a greener tomorrow
                 </p>
-                <div className="h-[1px] w-12 bg-secondary/50" />
+                <div className="h-[1px] w-8 md:w-12 bg-secondary/50" />
               </div>
             </motion.div>
           </div>
@@ -164,9 +164,9 @@ const Cholai = () => {
                 Our Mission
                 <span className="w-8 h-[1px] bg-secondary" />
               </p>
-              <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-dark leading-[0.95] mb-8 italic">
-                The Cholai division focuses on <br/>
-                <span className="text-primary not-italic">environmentally responsible</span> <br/>
+              <h2 className="text-2xl md:text-5xl lg:text-7xl font-black text-dark leading-[1.1] md:leading-[0.95] mb-8 italic">
+                The Cholai division focuses on <br className="hidden md:block" />
+                <span className="text-primary not-italic">environmentally responsible</span> <br className="hidden md:block" />
                 <span className="text-primary/40 not-italic">solutions.</span>
               </h2>
               <div className="w-20 h-1 bg-secondary/20 mx-auto" />
@@ -183,7 +183,7 @@ const Cholai = () => {
               className={`py-24 md:py-40 px-6 relative overflow-hidden ${index % 2 === 1 ? 'bg-white' : 'bg-[#fafafa]'}`}
             >
               <div className="container mx-auto max-w-7xl">
-                <div className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 md:gap-24`}>
+                <div className={`flex flex-col-reverse ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-12 md:gap-24`}>
                   
                   {/* Content Side */}
                   <div className="w-full md:w-1/2">
@@ -200,8 +200,8 @@ const Cholai = () => {
                         <span className="text-secondary font-black text-[10px] tracking-[0.4em] uppercase">{service.subtitle}</span>
                       </div>
 
-                      <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-dark leading-[0.95] mb-8">
-                        {service.title.split(' ')[0]} <br/>
+                      <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-dark leading-[0.95] mb-6 md:mb-8">
+                        {service.title.split(' ')[0]} <br className="hidden md:block" />
                         <span className="text-primary/40">{service.title.split(' ').slice(1).join(' ')}</span>
                       </h3>
                       
@@ -310,9 +310,9 @@ const Cholai = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-10 leading-[0.95] tracking-tighter">
-                Ready to transform <br/>
-                your home into a <br/>
+              <h3 className="text-3xl md:text-5xl lg:text-7xl font-black mb-10 leading-[1.1] md:leading-[0.95] tracking-tighter">
+                Ready to transform <br className="hidden md:block" />
+                your home into a <br className="hidden md:block" />
                 <span className="font-black italic text-secondary font-serif">sustainable sanctuary?</span>
               </h3>
               
