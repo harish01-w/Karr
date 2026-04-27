@@ -167,9 +167,9 @@ const Cholai = () => {
                 Our Mission
                 <span className="w-8 h-[1px] bg-secondary" />
               </p>
-              <h2 className="text-2xl md:text-5xl lg:text-7xl font-black text-dark leading-[1.1] md:leading-[0.95] mb-8 italic">
-                The Cholai division focuses on <br className="hidden md:block" />
-                <span className="text-primary not-italic">environmentally responsible</span> <br className="hidden md:block" />
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-dark leading-[1.2] md:leading-[1.1] mb-8 italic max-w-5xl mx-auto">
+                The Cholai division focuses on 
+                <span className="text-primary not-italic"> environmentally responsible </span>
                 <span className="text-primary/40 not-italic">solutions.</span>
               </h2>
               <div className="w-20 h-1 bg-secondary/20 mx-auto" />
