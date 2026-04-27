@@ -26,7 +26,7 @@ import img18 from '../../assets/img18.jpg'
 import img19 from '../../assets/img19.jpg'
 import img20 from '../../assets/img20.jpg'
 import img21 from '../../assets/img21.jpg'
-import heroImg from '../../assets/Exterior of modern luxury house with garden and beautiful sky.jpg'
+import heroImg from '../../assets/project.mp4'
 
 // ─── Brand palette from theme image ───────────────────────────────────────────
 const FOREST  = '#3F5F4A'
@@ -596,13 +596,17 @@ export default function Projects() {
         ref={heroRef}
         className="relative h-screen flex items-center justify-center overflow-hidden bg-black"
       >
-        {/* Parallax BG */}
-        <motion.div className="absolute inset-0 z-0" style={{ y: springY, scale: 1.05, opacity: heroOpacity }}>
-          <img
-            src={heroImg}
-            alt="Karrcholai Projects"
-            className="w-full h-full object-cover object-center"
-          />
+        {/* Parallax BG — video */}
+        <motion.div className="absolute inset-0 z-0" style={{ y: springY, opacity: heroOpacity }}>
+          <motion.video
+            autoPlay muted loop playsInline
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            initial={{ scale: 1.12, opacity: 0 }}
+            animate={{ scale: 1.04, opacity: 1 }}
+            transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <source src={heroImg} type="video/mp4" />
+          </motion.video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
         </motion.div>
 
