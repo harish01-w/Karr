@@ -12,6 +12,7 @@ import rainwaterImg from '../assets/cholai/rainwater.png'
 import rainwater1 from '../assets/cholai/rainwater_1.jpg'
 import rainwater2 from '../assets/cholai/rainwater_2.jpg'
 import solarImg from '../assets/cholai/solar.png'
+import solar1 from '../assets/cholai/solar_image.jpg'
 import wasteImg from '../assets/cholai/waste.png'
 import cholaiVideo from '../assets/cholai/cholai_video.mp4'
 
@@ -20,6 +21,7 @@ const Cholai = () => {
   const videoRef = useRef(null)
   const [landscapeIdx, setLandscapeIdx] = useState(0)
   const [rainwaterIdx, setRainwaterIdx] = useState(0)
+  const [solarIdx, setSolarIdx] = useState(0)
 
   useEffect(() => {
     if (videoRef.current) {
@@ -28,6 +30,7 @@ const Cholai = () => {
     const interval = setInterval(() => {
       setLandscapeIdx(prev => (prev + 1) % 3)
       setRainwaterIdx(prev => (prev + 1) % 3)
+      setSolarIdx(prev => (prev + 1) % 2)
     }, 5000)
     return () => clearInterval(interval)
   }, [])
@@ -72,7 +75,7 @@ const Cholai = () => {
       title: "Solar Energy Solutions",
       subtitle: "Powering the Future",
       description: "We provide renewable energy solutions that help homeowners reduce electricity costs and environmental impact. Clean, silent, and sustainable energy for modern homes.",
-      image: solarImg,
+      images: [solarImg, solar1],
       items: ["Solar panel installation", "Solar energy system planning", "Renewable energy integration"],
       icon: <FaSun />,
       color: "from-yellow-500/20 to-orange-500/20"
@@ -242,7 +245,12 @@ const Cholai = () => {
                       <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border border-dark/5 bg-white">
                         <AnimatePresence>
                           <motion.img 
-                            key={service.id === 'landscape' ? `img-l-${landscapeIdx}` : service.id === 'rainwater' ? `img-r-${rainwaterIdx}` : 'static'}
+                            key={
+                              service.id === 'landscape' ? `img-l-${landscapeIdx}` : 
+                              service.id === 'rainwater' ? `img-r-${rainwaterIdx}` : 
+                              service.id === 'solar' ? `img-s-${solarIdx}` : 
+                              'static'
+                            }
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
@@ -250,6 +258,7 @@ const Cholai = () => {
                             src={
                               service.id === 'landscape' ? service.images[landscapeIdx] : 
                               service.id === 'rainwater' ? service.images[rainwaterIdx] : 
+                              service.id === 'solar' ? service.images[solarIdx] : 
                               service.image
                             } 
                             alt={service.title} 
