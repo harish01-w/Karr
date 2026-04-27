@@ -4,7 +4,7 @@ import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiArrowRight, FiNavigation,
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import heroBg    from '../../assets/Exterior of modern luxury house with garden and beautiful sky.jpg'
-import heroVid   from '../../assets/contact.mp4'
+import heroVid   from '../../assets/mov.mp4'
 import img1      from '../../assets/img1.jpg'
 import img5      from '../../assets/img5.jpg'
 import img9      from '../../assets/img9.jpg'
