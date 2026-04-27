@@ -139,9 +139,9 @@ const Karr = () => {
         </section>
 
         {/* ── SECTION 1: RESIDENTIAL CONSTRUCTION ── */}
-        <section className="py-24 md:py-40 px-6 bg-[#fdfbf7]">
+        <section className="py-16 md:py-24 px-6 bg-[#fdfbf7]">
           <div className="max-w-7xl mx-auto">
-            <div className="mb-20 flex flex-col md:flex-row justify-between items-end gap-8">
+            <div className="mb-12 md:mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
               <motion.div {...fadeInUp} className="max-w-xl">
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block">Residential Construction</span>
                 <h2 className="text-4xl md:text-6xl font-bold leading-none tracking-tight">
@@ -169,7 +169,7 @@ const Karr = () => {
                 <motion.div
                   key={i}
                   variants={fadeInUp}
-                  className="group p-10 bg-white rounded-[32px] border border-[#1a1a1a]/5 hover:border-[#B85C38]/40 transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-2"
+                  className="group p-6 md:p-10 bg-white rounded-[24px] md:rounded-[32px] border border-[#1a1a1a]/5 hover:border-[#B85C38]/40 transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-2"
                 >
                   <motion.div 
                     variants={floatingAnim}
@@ -189,7 +189,7 @@ const Karr = () => {
         </section>
 
         {/* ── SECTION 2: PMC ── */}
-        <section className="py-24 md:py-40 px-6 bg-[#1a1a1a] text-white">
+        <section className="py-16 md:py-24 px-6 bg-[#1a1a1a] text-white">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
               <motion.div {...fadeInUp}>
@@ -228,7 +228,7 @@ const Karr = () => {
                     key={i}
                     variants={fadeInUp}
                     whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
-                    className="p-8 bg-white/5 backdrop-blur-sm rounded-[24px] border border-white/10 flex flex-col items-start gap-4 transition-all duration-300"
+                    className="p-6 md:p-8 bg-white/5 backdrop-blur-sm rounded-[20px] md:rounded-[24px] border border-white/10 flex flex-col items-start gap-4 transition-all duration-300"
                   >
                     <motion.div
                       variants={floatingAnim}
@@ -245,7 +245,7 @@ const Karr = () => {
         </section>
 
         {/* ── SECTION 3: RENOVATION ── */}
-        <section className="py-24 md:py-40 px-6 bg-[#fdfbf7] relative overflow-hidden">
+        <section className="py-16 md:py-24 px-6 bg-[#fdfbf7] relative overflow-hidden">
           {/* Decorative Texture Overlay */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none paper-texture" />
           
@@ -290,7 +290,7 @@ const Karr = () => {
                   ))}
                 </div>
 
-                <button className="mt-16 px-10 py-5 bg-[#1a1a1a] text-white text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#B85C38] transition-all duration-500 rounded-sm">
+                <button className="mt-16 px-10 py-5 bg-[#1a1a1a] text-white text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#B85C38] transition-all duration-500 rounded-full w-full sm:w-auto">
                   Start Your Project
                 </button>
               </motion.div>
@@ -299,9 +299,9 @@ const Karr = () => {
         </section>
 
         {/* ── SECTION 4: ESTIMATION ── */}
-        <section className="py-24 md:py-40 px-6 bg-white">
+        <section className="py-16 md:py-24 px-6 bg-white">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-24">
+            <div className="text-center mb-12 md:mb-16">
               <motion.div {...fadeInUp}>
                 <span className="text-[#B85C38] font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-4 block text-center">Planning & Estimation</span>
                 <h2 className="text-4xl md:text-7xl font-bold leading-none tracking-tighter">
@@ -314,7 +314,7 @@ const Karr = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <motion.div 
                 {...fadeInUp}
-                className="p-12 bg-[#fdfbf7] rounded-[40px] border border-[#1a1a1a]/5 relative group"
+                className="p-8 md:p-12 bg-[#fdfbf7] rounded-[30px] md:rounded-[40px] border border-[#1a1a1a]/5 relative group"
               >
                 <div className="absolute top-10 right-10 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity">
                   <FiDollarSign size={120} />
@@ -341,7 +341,7 @@ const Karr = () => {
               <motion.div 
                 {...fadeInUp}
                 transition={{ delay: 0.2 }}
-                className="flex flex-col justify-center p-12 bg-[#2D4B37] text-white rounded-[40px] shadow-2xl relative overflow-hidden"
+                className="flex flex-col justify-center p-8 md:p-12 bg-[#2D4B37] text-white rounded-[30px] md:rounded-[40px] shadow-2xl relative overflow-hidden"
               >
                 <div className="absolute inset-0 stone-texture opacity-10" />
                 <div className="relative z-10">
