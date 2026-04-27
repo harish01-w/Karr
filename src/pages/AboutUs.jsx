@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import React, { useRef, useEffect } from 'react'
+import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import { FaHardHat, FaClock, FaDollarSign, FaShieldAlt, FaQuoteLeft, FaPlay } from 'react-icons/fa'
@@ -8,6 +8,7 @@ import { FaHardHat, FaClock, FaDollarSign, FaShieldAlt, FaQuoteLeft, FaPlay } fr
 import founderImg from '../../assets/Founder.jpeg'
 import aboutBg from '../../assets/pic7.png' 
 import testimonialVid from '../../assets/VID.mp4'
+import constructionVid from '../../assets/Karcholai Construction.mp4'
 
 const AboutUs = () => {
   const containerRef = useRef(null)
@@ -44,6 +45,21 @@ const AboutUs = () => {
     }
   ]
 
+  const brandVideoRef = useRef(null)
+  const isVideoInView = useInView(brandVideoRef, { amount: 0.3 })
+
+  useEffect(() => {
+    if (brandVideoRef.current) {
+      if (isVideoInView) {
+        brandVideoRef.current.play().catch(e => {
+          console.log("Autoplay check:", e)
+        })
+      } else {
+        brandVideoRef.current.pause()
+      }
+    }
+  }, [isVideoInView])
+
   return (
     <div ref={containerRef} className="bg-cream min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
       <Navbar />
@@ -68,16 +84,16 @@ const AboutUs = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
             >
-              <h2 className="text-secondary font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-6 block">Building Excellence</h2>
-              <h1 className="text-6xl md:text-9xl font-black text-white uppercase tracking-tighter leading-none mb-8">
+              <h2 className="text-secondary font-bold tracking-[0.4em] md:tracking-[0.6em] uppercase text-[10px] md:text-sm mb-4 md:mb-6 block">Building Excellence</h2>
+              <h1 className="text-5xl md:text-9xl font-black text-white uppercase tracking-tighter leading-[0.9] md:leading-none mb-6 md:mb-8">
                 ABOUT <span className="text-transparent stroke-text italic">US</span>
               </h1>
-              <div className="flex items-center justify-center gap-4 mb-8">
-                <div className="h-[1px] w-12 bg-secondary/50" />
-                <p className="text-white/60 text-sm md:text-lg font-light tracking-[0.3em] uppercase">
+              <div className="flex items-center justify-center gap-3 md:gap-4 mb-8">
+                <div className="h-[1px] w-8 md:w-12 bg-secondary/50" />
+                <p className="text-white/60 text-[10px] md:text-lg font-light tracking-[0.2em] md:tracking-[0.3em] uppercase max-w-[200px] md:max-w-none mx-auto">
                   A Legacy of Strength & Sustainability
                 </p>
-                <div className="h-[1px] w-12 bg-secondary/50" />
+                <div className="h-[1px] w-8 md:w-12 bg-secondary/50" />
               </div>
             </motion.div>
           </div>
@@ -104,7 +120,7 @@ const AboutUs = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
-                  className="aspect-[3/4] md:aspect-[4/5] overflow-hidden relative group rounded-sm shadow-xl"
+                  className="aspect-[4/5] md:aspect-[4/5] overflow-hidden relative group rounded-sm shadow-xl"
                 >
                   <motion.img 
                     initial={{ scale: 1.2 }}
@@ -116,12 +132,12 @@ const AboutUs = () => {
                   />
                   <div className="absolute inset-0 bg-black/5 transition-opacity duration-700 group-hover:bg-black/20" />
                   
-                  {/* Small Floating Experience Badge */}
+                  {/* Floating Experience Badge */}
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8, duration: 0.8 }}
-                    className="absolute bottom-6 right-[-10px] md:-right-8 bg-white/95 backdrop-blur-md px-4 py-3 shadow-lg border-l-[2px] border-secondary z-20 flex items-center gap-3 rounded-sm"
+                    className="absolute bottom-6 right-[-5px] md:-right-8 bg-white/95 backdrop-blur-md px-4 py-3 shadow-lg border-l-[2px] border-secondary z-20 flex items-center gap-3 rounded-sm"
                   >
                     <span className="text-2xl md:text-3xl font-light text-dark leading-none">
                       12<span className="text-secondary font-bold text-lg md:text-xl">+</span>
@@ -134,10 +150,10 @@ const AboutUs = () => {
                 </motion.div>
                 
                 {/* Minimalist Accents */}
-                <div className="absolute -left-6 top-1/2 -translate-y-1/2 rotate-180 hidden md:block" style={{ writingMode: 'vertical-rl' }}>
-                  <span className="text-[10px] tracking-[0.4em] uppercase text-dark/30 font-semibold">Established 2012</span>
+                <div className="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 rotate-180 hidden sm:block" style={{ writingMode: 'vertical-rl' }}>
+                  <span className="text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-dark/30 font-semibold">Established 2012</span>
                 </div>
-                <div className="absolute -right-4 -bottom-4 w-24 h-24 border-r border-b border-secondary/30" />
+                <div className="absolute -right-2 md:-right-4 -bottom-2 md:-bottom-4 w-16 md:w-24 h-16 md:h-24 border-r border-b border-secondary/30" />
               </div>
 
               {/* Compact Typography */}
@@ -179,12 +195,79 @@ const AboutUs = () => {
             </div>
           </div>
         </section>
+        
+        {/* --- 2.5 SLEEK IMMERSIVE VIDEO --- */}
+        <section className="py-16 md:py-32 bg-white overflow-hidden border-t border-dark/5">
+          <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+            
+            {/* Professional Header */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-6">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 md:w-10 h-[1px] bg-secondary" />
+                  <span className="text-secondary font-bold text-[9px] md:text-[10px] tracking-[0.3em] md:tracking-[0.4em] uppercase">Cinematic Showcase</span>
+                </div>
+                <h3 className="text-2xl md:text-4xl font-light text-dark tracking-tighter leading-tight">
+                  Crafting <span className="font-medium">Excellence</span> <br /> 
+                  <span className="text-dark/20 font-serif italic">In every detail.</span>
+                </h3>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="max-w-xs text-left md:text-right"
+              >
+                <p className="text-dark/40 text-[9px] md:text-[10px] leading-relaxed uppercase tracking-widest font-medium">
+                  A visual journey through our construction process, highlighting structural integrity and architectural precision.
+                </p>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              className="relative aspect-video md:aspect-[21/9] rounded-lg md:rounded-2xl overflow-hidden shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] bg-black group"
+            >
+              <video
+                ref={brandVideoRef}
+                src={constructionVid}
+                className="w-full h-full object-cover"
+                autoPlay
+                loop
+                playsInline
+              />
+              
+              {/* Sleek Minimalist Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+              {/* Bottom Label */}
+              <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8">
+                <p className="text-white/60 text-[8px] md:text-[9px] uppercase tracking-[0.3em] md:tracking-[0.4em] font-medium mb-1">Legacy Division</p>
+                <div className="flex items-center gap-3 md:gap-4">
+                  <h4 className="text-white text-xs md:text-base font-light tracking-wide">Karrcholai Showcase 2024</h4>
+                  <div className="w-[1px] h-3 md:h-4 bg-white/20" />
+                  <span className="text-white/30 text-[8px] md:text-[9px] font-bold">4K HDR</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
         {/* --- 3. STATS STRIP --- */}
-        <section className="py-16 bg-dark text-white border-y border-white/5 relative overflow-hidden">
+        <section className="py-12 md:py-16 bg-dark text-white border-y border-white/5 relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20" />
           <div className="container mx-auto px-6 max-w-6xl relative z-10">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 divide-x-0 md:divide-x divide-white/10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-8 divide-x-0 md:divide-x divide-white/10">
               {[
                 { number: "12+", label: "Years Experience" },
                 { number: "150+", label: "Projects Completed" },
@@ -199,8 +282,8 @@ const AboutUs = () => {
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   className="text-center md:text-left pl-0 md:pl-10 first:pl-0 flex flex-col items-center md:items-start"
                 >
-                  <div className="text-4xl md:text-5xl font-light text-secondary mb-3 tracking-tighter">{stat.number}</div>
-                  <div className="text-[9px] uppercase tracking-[0.3em] text-white/50 font-semibold">{stat.label}</div>
+                  <div className="text-3xl md:text-5xl font-light text-secondary mb-2 md:mb-3 tracking-tighter">{stat.number}</div>
+                  <div className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/50 font-semibold">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -279,17 +362,17 @@ const AboutUs = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
                 >
-                  <p className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-6 flex items-center gap-4">
+                  <p className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-4 md:mb-6 flex items-center gap-4">
                     <span className="w-8 h-[1px] bg-secondary" />
                     The Karrcholai Advantage
                   </p>
-                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] mb-8 tracking-tight">
+                  <h3 className="text-3xl md:text-5xl lg:text-6xl font-light leading-[1.1] mb-6 md:mb-8 tracking-tight">
                     Our expertise <br/>
                     <span className="font-semibold italic text-secondary font-serif">empowers clients to:</span>
                   </h3>
                   
-                  <div className="p-8 border-l-2 border-secondary/50 bg-white/5 backdrop-blur-sm rounded-r-2xl mt-8">
-                    <p className="text-base md:text-lg text-white/80 font-light leading-relaxed">
+                  <div className="p-6 md:p-8 border-l-2 border-secondary/50 bg-white/5 backdrop-blur-sm rounded-r-2xl mt-4 md:mt-8">
+                    <p className="text-sm md:text-lg text-white/80 font-light leading-relaxed">
                       We combine technical construction knowledge, practical site experience, and professional management to deliver successful residential projects.
                     </p>
                   </div>
@@ -298,7 +381,7 @@ const AboutUs = () => {
 
               {/* Right Side: Animated List */}
               <div className="w-full lg:w-1/2">
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-3 md:gap-4">
                   {[
                     { text: "Plan projects effectively", icon: "01" },
                     { text: "Control construction costs", icon: "02" },
@@ -312,7 +395,7 @@ const AboutUs = () => {
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.15, duration: 0.5 }}
                       whileHover={{ scale: 1.02, x: 10 }}
-                      className="group relative flex items-center gap-6 p-6 bg-white/5 border border-white/10 rounded-xl hover:bg-secondary/10 hover:border-secondary/30 transition-all duration-300 cursor-default overflow-hidden"
+                      className="group relative flex items-center gap-4 md:gap-6 p-4 md:p-6 bg-white/5 border border-white/10 rounded-xl hover:bg-secondary/10 hover:border-secondary/30 transition-all duration-300 cursor-default overflow-hidden"
                     >
                       {/* Hover effect background slide */}
                       <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 to-transparent translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
