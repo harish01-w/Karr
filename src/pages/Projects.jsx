@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useInView, useScroll, useTransform, useSpring 
 import { Link } from 'react-router-dom'
 import { FiMapPin, FiArrowRight, FiArrowUpRight, FiCheckCircle, FiClock, FiZap, FiPlay, FiSun, FiDroplet, FiWind } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
+import UnifiedFooter from '../components/UnifiedFooter'
 import FootprintMapSection from '../components/FootprintMapSection'
 import img1  from '../../assets/img1.jpg'
 import img2  from '../../assets/img2.jpg'
@@ -811,6 +812,7 @@ export default function Projects() {
           </motion.div>
         </div>
       </section>
+      <UnifiedFooter />
     </div>
   )
 }
