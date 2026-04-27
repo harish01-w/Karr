@@ -1,0 +1,305 @@
+import React, { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import Navbar from '../components/Navbar'
+import UnifiedFooter from '../components/UnifiedFooter'
+import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight } from 'react-icons/fa'
+
+// Images from the assets folder
+import landscapeImg from '../assets/cholai/landscape.png'
+import rainwaterImg from '../assets/cholai/rainwater.png'
+import solarImg from '../assets/cholai/solar.png'
+import wasteImg from '../assets/cholai/waste.png'
+
+const Cholai = () => {
+  const containerRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  })
+
+  const y1 = useTransform(scrollYProgress, [0, 0.5], [0, 200])
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
+
+  const services = [
+    {
+      id: "landscape",
+      title: "Landscape Development",
+      subtitle: "Designing with Nature",
+      description: "We design and develop attractive outdoor spaces that enhance both the beauty and environmental value of residential properties. Our approach integrates native flora with modern aesthetics.",
+      image: landscapeImg,
+      items: ["Garden planning and development", "Landscape design", "Green space planning"],
+      icon: <FaLeaf />,
+      color: "from-green-500/20 to-emerald-500/20"
+    },
+    {
+      id: "rainwater",
+      title: "Rainwater Harvesting",
+      subtitle: "Conserving Every Drop",
+      description: "Rainwater harvesting helps conserve water and recharge groundwater resources. Our advanced collection systems ensure long-term water security for homeowners.",
+      image: rainwaterImg,
+      items: ["Rainwater collection systems", "Groundwater recharge solutions", "Water conservation planning"],
+      icon: <FaCloudRain />,
+      color: "from-blue-500/20 to-cyan-500/20"
+    },
+    {
+      id: "solar",
+      title: "Solar Energy Solutions",
+      subtitle: "Powering the Future",
+      description: "We provide renewable energy solutions that help homeowners reduce electricity costs and environmental impact. Clean, silent, and sustainable energy for modern homes.",
+      image: solarImg,
+      items: ["Solar panel installation", "Solar energy system planning", "Renewable energy integration"],
+      icon: <FaSun />,
+      color: "from-yellow-500/20 to-orange-500/20"
+    },
+    {
+      id: "waste",
+      title: "Waste Management",
+      subtitle: "Circular Living",
+      description: "Responsible waste management improves environmental health and sustainability. We implement systems that turn waste into resources, supporting a clean living space.",
+      image: wasteImg,
+      items: ["Waste segregation systems", "Composting solutions", "Sustainable waste management planning"],
+      icon: <FaRecycle />,
+      color: "from-brown-500/20 to-stone-500/20"
+    }
+  ]
+
+  return (
+    <div ref={containerRef} className="bg-[#fcfcf9] min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
+      <Navbar />
+
+      <main>
+        {/* --- HERO SECTION --- */}
+        <section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-dark">
+          <motion.div 
+            style={{ y: y1, opacity }}
+            className="absolute inset-0 z-0"
+          >
+            <div 
+              className="absolute inset-0 bg-cover bg-center scale-110"
+              style={{ backgroundImage: `url(${landscapeImg})` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-dark" />
+          </motion.div>
+
+          <div className="relative z-10 text-center px-4 max-w-5xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            >
+              <h2 className="text-secondary font-black tracking-[0.4em] uppercase text-xs md:text-sm mb-6 block">Sustainable Living</h2>
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-[0.95] mb-8">
+                CHOLAI <span className="text-transparent stroke-text italic font-serif">Solutions</span>
+              </h1>
+              <div className="flex items-center justify-center gap-4 mb-8">
+                <div className="h-[1px] w-12 bg-secondary/50" />
+                <p className="text-white/70 text-sm md:text-lg font-light tracking-[0.2em] uppercase max-w-2xl">
+                  Environmentally responsible solutions for a greener tomorrow
+                </p>
+                <div className="h-[1px] w-12 bg-secondary/50" />
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Decorative Scroll Indicator */}
+          <motion.div 
+            animate={{ y: [0, 15, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+          >
+            <span className="text-white/30 text-[9px] uppercase tracking-[0.4em] font-bold">Discover</span>
+            <div className="w-[1px] h-12 bg-gradient-to-b from-secondary to-transparent" />
+          </motion.div>
+        </section>
+
+        {/* --- INTRODUCTION --- */}
+        <section className="py-24 px-6">
+          <div className="container mx-auto max-w-4xl text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <p className="text-secondary text-[11px] font-black uppercase tracking-[0.4em] mb-6 flex items-center justify-center gap-4">
+                <span className="w-8 h-[1px] bg-secondary" />
+                Our Mission
+                <span className="w-8 h-[1px] bg-secondary" />
+              </p>
+              <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-dark leading-[0.95] mb-8 italic">
+                The Cholai division focuses on <br/>
+                <span className="text-primary not-italic">environmentally responsible</span> <br/>
+                <span className="text-primary/40 not-italic">solutions.</span>
+              </h2>
+              <div className="w-20 h-1 bg-secondary/20 mx-auto" />
+            </motion.div>
+          </div>
+        </section>
+
+        {/* --- SERVICES SECTIONS --- */}
+        <div className="space-y-0">
+          {services.map((service, index) => (
+            <section 
+              key={service.id}
+              id={service.id}
+              className={`py-24 md:py-40 px-6 relative overflow-hidden ${index % 2 === 1 ? 'bg-white' : 'bg-[#fafafa]'}`}
+            >
+              <div className="container mx-auto max-w-7xl">
+                <div className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 md:gap-24`}>
+                  
+                  {/* Content Side */}
+                  <div className="w-full md:w-1/2">
+                    <motion.div
+                      initial={{ opacity: 0, x: index % 2 === 1 ? 50 : -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.8, ease: "easeOut" }}
+                    >
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+                          {service.icon}
+                        </div>
+                        <span className="text-secondary font-black text-[10px] tracking-[0.4em] uppercase">{service.subtitle}</span>
+                      </div>
+
+                      <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-dark leading-[0.95] mb-8">
+                        {service.title.split(' ')[0]} <br/>
+                        <span className="text-primary/40">{service.title.split(' ').slice(1).join(' ')}</span>
+                      </h3>
+                      
+                      <p className="text-dark/60 text-lg font-light leading-relaxed mb-10 max-w-xl">
+                        {service.description}
+                      </p>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+                        {service.items.map((item, i) => (
+                          <div key={i} className="flex items-center gap-3">
+                            <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                            <span className="text-[10px] font-black text-dark/40 tracking-[0.2em] uppercase">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <motion.button
+                        whileHover={{ x: 10 }}
+                        className="group flex items-center gap-4 text-dark font-bold text-xs tracking-[0.2em] uppercase"
+                      >
+                        Learn More <FaArrowRight className="text-secondary group-hover:translate-x-2 transition-transform" />
+                      </motion.button>
+                    </motion.div>
+                  </div>
+
+                  {/* Image Side */}
+                  <div className="w-full md:w-1/2">
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, ease: "easeOut" }}
+                      className="relative group"
+                    >
+                      {/* Decorative Background Shape */}
+                      <div className={`absolute -inset-4 bg-gradient-to-br ${service.color} rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+                      
+                      <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border border-dark/5">
+                        <img 
+                          src={service.image} 
+                          alt={service.title} 
+                          className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-dark/5 group-hover:bg-transparent transition-colors duration-700" />
+                      </div>
+
+                      {/* Floating Badge */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                        className="absolute -bottom-6 -right-6 md:right-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-dark/5 hidden sm:block"
+                      >
+                        <p className="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-1">Impact</p>
+                        <p className="text-sm font-bold text-dark uppercase tracking-widest">100% Sustainable</p>
+                      </motion.div>
+                    </motion.div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Background Text Accent */}
+              <div className={`absolute top-1/2 -translate-y-1/2 ${index % 2 === 1 ? 'left-10' : 'right-10'} opacity-[0.03] pointer-events-none hidden lg:block`}>
+                <span className="text-[15rem] font-black uppercase tracking-tighter text-dark select-none">
+                  {service.id.slice(0, 4)}
+                </span>
+              </div>
+            </section>
+          ))}
+        </div>
+
+        {/* --- CALL TO ACTION --- */}
+        <section className="py-24 md:py-40 bg-dark text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20" />
+          
+          {/* Animated Background Orbs */}
+          <motion.div 
+            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+            transition={{ duration: 10, repeat: Infinity }}
+            className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-secondary/10 blur-[150px] rounded-full pointer-events-none"
+          />
+          <motion.div 
+            animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.4, 0.2] }}
+            transition={{ duration: 8, repeat: Infinity }}
+            className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"
+          />
+
+          <div className="container mx-auto max-w-4xl px-6 relative z-10 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-10 leading-[0.95] tracking-tighter">
+                Ready to transform <br/>
+                your home into a <br/>
+                <span className="font-black italic text-secondary font-serif">sustainable sanctuary?</span>
+              </h3>
+              
+              <p className="text-white/50 text-lg font-light mb-12 max-w-2xl mx-auto leading-relaxed">
+                Join our mission for responsible living. These systems help homeowners reduce dependency and support sustainable management of our planet's resources.
+              </p>
+
+              <div className="flex flex-wrap justify-center gap-6">
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-secondary text-white px-10 py-5 text-xs font-black uppercase tracking-[0.2em] rounded-sm shadow-xl hover:bg-white hover:text-dark transition-all duration-300"
+                >
+                  Book a Consultation
+                </motion.button>
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border border-white/20 text-white px-10 py-5 text-xs font-black uppercase tracking-[0.2em] rounded-sm hover:bg-white/5 transition-all duration-300"
+                >
+                  View Case Studies
+                </motion.button>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </main>
+
+      <UnifiedFooter />
+
+      <style jsx>{`
+        .stroke-text {
+          -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+          color: transparent;
+        }
+      `}</style>
+    </div>
+  )
+}
+
+export default Cholai
