@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
-import { FaHardHat, FaClock, FaDollarSign, FaShieldAlt, FaQuoteLeft, FaPlay } from 'react-icons/fa'
+import { FaHardHat, FaClock, FaDollarSign, FaShieldAlt, FaQuoteLeft, FaPlay, FaProjectDiagram, FaHandHoldingUsd } from 'react-icons/fa'
 
 // Images from the root assets folder
 import founderImg from '../../assets/Founder.jpeg'
@@ -336,80 +336,89 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* --- 4.5 EXPERTISE IMPACT SECTION --- */}
-        <section className="py-24 md:py-32 px-6 bg-dark text-white relative overflow-hidden">
-          {/* Animated Background Elements */}
+        {/* --- 4.5 COMPACT EXPERTISE IMPACT --- */}
+        <section className="py-20 md:py-28 px-6 bg-[#0a0a0a] text-white relative overflow-hidden">
+          {/* Subtle Background Accent */}
           <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
+            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03]" />
             <motion.div 
-              animate={{ 
-                scale: [1, 1.2, 1],
-                opacity: [0.1, 0.2, 0.1]
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-secondary/20 rounded-full blur-[150px] pointer-events-none"
+              animate={{ opacity: [0.05, 0.1, 0.05] }}
+              transition={{ duration: 10, repeat: Infinity }}
+              className="absolute -top-1/4 -right-1/4 w-[60vw] h-[60vw] bg-secondary/10 rounded-full blur-[120px] pointer-events-none"
             />
           </div>
 
           <div className="container mx-auto max-w-6xl relative z-10">
-            <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
               
-              {/* Left Side: Statement */}
-              <div className="w-full lg:w-1/2">
+              {/* Left Side: Compact Statement */}
+              <div className="lg:col-span-5">
                 <motion.div
-                  initial={{ opacity: 0, x: -50 }}
+                  initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  transition={{ duration: 0.8 }}
                 >
-                  <p className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-4 md:mb-6 flex items-center gap-4">
-                    <span className="w-8 h-[1px] bg-secondary" />
-                    The Karrcholai Advantage
-                  </p>
-                  <h3 className="text-3xl md:text-5xl lg:text-6xl font-light leading-[1.1] mb-6 md:mb-8 tracking-tight">
-                    Our expertise <br/>
-                    <span className="font-semibold italic text-secondary font-serif">empowers clients to:</span>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-[1px] bg-secondary" />
+                    <span className="text-secondary text-[9px] font-black uppercase tracking-[0.4em]">The Advantage</span>
+                  </div>
+                  
+                  <h3 className="text-4xl md:text-5xl font-light leading-[1.1] mb-8 tracking-tighter">
+                    Expertise that <br/>
+                    <span className="font-bold italic text-white font-serif">empowers</span> <br/>
+                    <span className="text-secondary italic">your vision.</span>
                   </h3>
                   
-                  <div className="p-6 md:p-8 border-l-2 border-secondary/50 bg-white/5 backdrop-blur-sm rounded-r-2xl mt-4 md:mt-8">
-                    <p className="text-sm md:text-lg text-white/80 font-light leading-relaxed">
-                      We combine technical construction knowledge, practical site experience, and professional management to deliver successful residential projects.
+                  <div className="p-6 bg-white/[0.02] border-l border-secondary/40 backdrop-blur-md rounded-r-xl">
+                    <p className="text-sm md:text-base text-white/50 font-light leading-relaxed">
+                      We fuse technical mastery with disciplined oversight to transform blueprints into architectural reality.
                     </p>
                   </div>
                 </motion.div>
               </div>
 
-              {/* Right Side: Animated List */}
-              <div className="w-full lg:w-1/2">
-                <div className="flex flex-col gap-3 md:gap-4">
+              {/* Right Side: Compact Grid */}
+              <div className="lg:col-span-7">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
                   {[
-                    { text: "Plan projects effectively", icon: "01" },
-                    { text: "Control construction costs", icon: "02" },
-                    { text: "Maintain construction quality", icon: "03" },
-                    { text: "Complete projects on time", icon: "04" }
+                    { title: "Plan Effectively", icon: <FaProjectDiagram />, delay: 0 },
+                    { title: "Control Costs", icon: <FaHandHoldingUsd />, delay: 0.1 },
+                    { title: "Maintain Quality", icon: <FaShieldAlt />, delay: 0.2 },
+                    { title: "Complete On Time", icon: <FaClock />, delay: 0.3 }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: i * 0.15, duration: 0.5 }}
-                      whileHover={{ scale: 1.02, x: 10 }}
-                      className="group relative flex items-center gap-4 md:gap-6 p-4 md:p-6 bg-white/5 border border-white/10 rounded-xl hover:bg-secondary/10 hover:border-secondary/30 transition-all duration-300 cursor-default overflow-hidden"
+                      transition={{ delay: item.delay, duration: 0.6 }}
+                      className="group relative p-6 bg-white/[0.03] border border-white/5 rounded-2xl hover:bg-white/[0.07] hover:border-secondary/20 transition-all duration-300"
                     >
-                      {/* Hover effect background slide */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 to-transparent translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-                      
-                      <div className="relative z-10 flex items-center justify-center min-w-[3rem] h-12 rounded-full bg-dark/50 border border-white/20 text-white/50 group-hover:text-secondary group-hover:border-secondary transition-colors duration-300 font-black">
-                        {item.icon}
+                      <div className="flex items-center gap-5">
+                        <div className="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all duration-300 text-xl">
+                          {item.icon}
+                        </div>
+                        <div>
+                          <h4 className="text-base font-semibold text-white tracking-tight group-hover:text-secondary transition-colors duration-300">
+                            {item.title}
+                          </h4>
+                          <div className="h-[1px] w-0 group-hover:w-full bg-secondary/30 transition-all duration-500 mt-1" />
+                        </div>
                       </div>
-                      
-                      <p className="relative z-10 text-lg md:text-xl font-medium text-white/90 group-hover:text-white transition-colors duration-300 tracking-wide">
-                        {item.text}
-                      </p>
                     </motion.div>
                   ))}
                 </div>
+                
+                {/* Additional context line */}
+                <motion.p 
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="mt-8 text-[9px] uppercase tracking-[0.5em] text-white/20 text-center lg:text-left"
+                >
+                  Disciplined Execution • 12+ Years Experience
+                </motion.p>
               </div>
               
             </div>
@@ -625,8 +634,8 @@ const AboutUs = () => {
       <UnifiedFooter />
 
       <style jsx>{`
-        .stroke-text {
-          -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+        .stroke-text-thin {
+          -webkit-text-stroke: 1px rgba(255,255,255,0.6);
           color: transparent;
         }
         .stroke-text-dark {
