@@ -26,7 +26,7 @@ import img18 from '../../assets/img18.jpg'
 import img19 from '../../assets/img19.jpg'
 import img20 from '../../assets/img20.jpg'
 import img21 from '../../assets/img21.jpg'
-import heroImg from '../../assets/project.mp4'
+import heroImg from '../../assets/mov.mp4'
 
 // ─── Brand palette from theme image ───────────────────────────────────────────
 const FOREST  = '#3F5F4A'
