@@ -11,12 +11,12 @@ const navLinks = [
   { name: 'Karr',     path: '/karr' },
   { name: 'Cholai',   path: '/cholai' },
   { name: 'Projects', path: '/projects' },
-  { name: 'Insights', path: '/#insights' },
+  { name: 'Blog',     path: '/blog' },
   { name: 'Contact',  path: '/contact' },
 ]
 
 // Pages where navbar is always solid white
-const SOLID_PAGES = ['/projects', '/about', '/contact', '/services', '/karr', '/cholai']
+const SOLID_PAGES = ['/projects', '/about', '/contact', '/services', '/karr', '/cholai', '/blog']
 
 const Navbar = () => {
   const [scrolled, setScrolled]       = useState(false)
