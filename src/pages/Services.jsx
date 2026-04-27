@@ -11,7 +11,7 @@ import UnifiedFooter from '../components/UnifiedFooter'
 // Assets - using relative paths from src/pages/ to assets/
 import servicesVideo from '../../assets/Karcholai Construction Quality Showcase.mp4'
 import imgRes from '../../assets/Residential_construction.jpg'
-import imgPmc from '../../assets/img2.jpg'
+import imgPmc from '../../assets/Projectmanagemnt.png'
 import imgReno from '../../assets/img3.jpg'
 import imgPlan from '../../assets/construction.jpg'
 import imgSuper from '../../assets/site.jpg'
