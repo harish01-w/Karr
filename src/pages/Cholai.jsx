@@ -1,17 +1,37 @@
-import React, { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import React, { useRef, useEffect, useState } from 'react'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import { FaLeaf, FaCloudRain, FaSun, FaRecycle, FaArrowRight } from 'react-icons/fa'
 
 // Images from the assets folder
 import landscapeImg from '../assets/cholai/landscape.png'
+import landscape1 from '../assets/cholai/landscape_1.jpg'
+import landscape3 from '../assets/cholai/landscape_3.jpg'
 import rainwaterImg from '../assets/cholai/rainwater.png'
+import rainwater1 from '../assets/cholai/rainwater_1.jpg'
+import rainwater2 from '../assets/cholai/rainwater_2.jpg'
 import solarImg from '../assets/cholai/solar.png'
 import wasteImg from '../assets/cholai/waste.png'
+import cholaiVideo from '../assets/cholai/cholai_video.mp4'
 
 const Cholai = () => {
   const containerRef = useRef(null)
+  const videoRef = useRef(null)
+  const [landscapeIdx, setLandscapeIdx] = useState(0)
+  const [rainwaterIdx, setRainwaterIdx] = useState(0)
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.5
+    }
+    const interval = setInterval(() => {
+      setLandscapeIdx(prev => (prev + 1) % 3)
+      setRainwaterIdx(prev => (prev + 1) % 3)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -26,7 +46,7 @@ const Cholai = () => {
       title: "Landscape Development",
       subtitle: "Designing with Nature",
       description: "We design and develop attractive outdoor spaces that enhance both the beauty and environmental value of residential properties. Our approach integrates native flora with modern aesthetics.",
-      image: landscapeImg,
+      images: [landscapeImg, landscape1, landscape3],
       items: ["Garden planning and development", "Landscape design", "Green space planning"],
       icon: <FaLeaf />,
       color: "from-green-500/20 to-emerald-500/20"
@@ -36,7 +56,7 @@ const Cholai = () => {
       title: "Rainwater Harvesting",
       subtitle: "Conserving Every Drop",
       description: "Rainwater harvesting helps conserve water and recharge groundwater resources. Our advanced collection systems ensure long-term water security for homeowners.",
-      image: rainwaterImg,
+      images: [rainwaterImg, rainwater1, rainwater2],
       items: ["Rainwater collection systems", "Groundwater recharge solutions", "Water conservation planning"],
       icon: <FaCloudRain />,
       color: "from-blue-500/20 to-cyan-500/20"
@@ -74,10 +94,16 @@ const Cholai = () => {
             style={{ y: y1, opacity }}
             className="absolute inset-0 z-0"
           >
-            <div 
-              className="absolute inset-0 bg-cover bg-center scale-110"
-              style={{ backgroundImage: `url(${landscapeImg})` }}
-            />
+            <video 
+              ref={videoRef}
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src={cholaiVideo} type="video/mp4" />
+            </video>
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-dark" />
           </motion.div>
 
@@ -201,12 +227,23 @@ const Cholai = () => {
                       {/* Decorative Background Shape */}
                       <div className={`absolute -inset-4 bg-gradient-to-br ${service.color} rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
                       
-                      <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border border-dark/5">
-                        <img 
-                          src={service.image} 
-                          alt={service.title} 
-                          className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
-                        />
+                      <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border border-dark/5 bg-white">
+                        <AnimatePresence>
+                          <motion.img 
+                            key={service.id === 'landscape' ? `img-l-${landscapeIdx}` : service.id === 'rainwater' ? `img-r-${rainwaterIdx}` : 'static'}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.8, ease: "easeInOut" }}
+                            src={
+                              service.id === 'landscape' ? service.images[landscapeIdx] : 
+                              service.id === 'rainwater' ? service.images[rainwaterIdx] : 
+                              service.image
+                            } 
+                            alt={service.title} 
+                            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                          />
+                        </AnimatePresence>
                         <div className="absolute inset-0 bg-dark/5 group-hover:bg-transparent transition-colors duration-700" />
                       </div>
 
@@ -227,11 +264,13 @@ const Cholai = () => {
               </div>
 
               {/* Background Text Accent */}
-              <div className={`absolute top-1/2 -translate-y-1/2 ${index % 2 === 1 ? 'left-10' : 'right-10'} opacity-[0.03] pointer-events-none hidden lg:block`}>
-                <span className="text-[15rem] font-black uppercase tracking-tighter text-dark select-none">
-                  {service.id.slice(0, 4)}
-                </span>
-              </div>
+              {service.id !== 'landscape' && service.id !== 'rainwater' && (
+                <div className={`absolute top-1/2 -translate-y-1/2 ${index % 2 === 1 ? 'left-10' : 'right-10'} opacity-[0.03] pointer-events-none hidden lg:block`}>
+                  <span className="text-[15rem] font-black uppercase tracking-tighter text-dark select-none">
+                    {service.id.slice(0, 4)}
+                  </span>
+                </div>
+              )}
             </section>
           ))}
         </div>
