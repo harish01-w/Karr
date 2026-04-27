@@ -85,8 +85,8 @@ const AboutUs = () => {
               transition={{ duration: 1.2, ease: "easeOut" }}
             >
               <h2 className="text-secondary font-bold tracking-[0.4em] md:tracking-[0.6em] uppercase text-[10px] md:text-sm mb-4 md:mb-6 block">Building Excellence</h2>
-              <h1 className="text-5xl md:text-9xl font-black text-white uppercase tracking-tighter leading-[0.9] md:leading-none mb-6 md:mb-8">
-                ABOUT <span className="text-transparent stroke-text italic">US</span>
+              <h1 className="text-5xl md:text-9xl font-black text-white uppercase tracking-tighter leading-tight md:leading-none mb-6 md:mb-8">
+                ABOUT <span className="text-transparent stroke-text italic font-serif inline-block ml-2">US</span>
               </h1>
               <div className="flex items-center justify-center gap-3 md:gap-4 mb-8">
                 <div className="h-[1px] w-8 md:w-12 bg-secondary/50" />
@@ -632,20 +632,6 @@ const AboutUs = () => {
       </main>
 
       <UnifiedFooter />
-
-      <style jsx>{`
-        .stroke-text-thin {
-          -webkit-text-stroke: 1px rgba(255,255,255,0.6);
-          color: transparent;
-        }
-        .stroke-text-dark {
-          -webkit-text-stroke: 1px rgba(0,0,0,0.1);
-          color: transparent;
-        }
-        .stone-texture {
-          background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
-        }
-      `}</style>
     </div>
   )
 }

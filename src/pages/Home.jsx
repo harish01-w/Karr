@@ -78,6 +78,8 @@ const Home = () => {
         <HighlightsSection />
       </section>
 
+
+
       {/* ── Blog / Insights ── */}
       <BlogSection />
 

@@ -181,3 +181,21 @@ body {
 
 /* ── Prevent text overflow on mobile ── */
 p, span, h1, h2, h3, h4 { overflow-wrap: break-word; word-break: break-word; }
+
+/* ── Stroke Text ── */
+.stroke-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+  color: transparent;
+}
+.stroke-text-thin {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
+  color: transparent;
+}
+.stroke-text-white {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8);
+  color: transparent;
+}
+.stroke-text-dark {
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.4);
+  color: transparent;
+}
