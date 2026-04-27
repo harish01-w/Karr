@@ -1,6 +1,7 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { FiPlayCircle, FiPauseCircle, FiArrowRight } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 import pic2 from '../../assets/pic2.png'
 import pic3 from '../../assets/pic3.png'
 import pic4 from '../../assets/pic4.png'
@@ -9,34 +10,34 @@ import pic5 from '../../assets/pic5.png'
 const highlights = [
   {
     id: 1,
-    title: 'Engineered for Permanence.',
-    subtitle: 'Structural Integrity',
+    title: 'Modern Villa.',
+    subtitle: 'Chennai, TN',
     image: pic4,
-    description: 'We use premium grade materials and advanced structural engineering to ensure your home stands strong for generations.',
+    description: 'A sleek contemporary villa blending open-plan living with lush landscaping and smart home systems.',
     color: 'text-white'
   },
   {
     id: 2,
-    title: 'Lush. Sustainable. Alive.',
-    subtitle: 'Cholai Landscapes',
+    title: 'Heritage Duplex.',
+    subtitle: 'Coimbatore, TN',
     image: pic5,
-    description: 'Integrating nature into your daily life with sustainable landscaping and green energy solutions.',
+    description: 'Timeless duplex design honoring traditional Tamil architecture with modern comforts.',
     color: 'text-white'
   },
   {
     id: 3,
-    title: 'The Art of Management.',
-    subtitle: 'Professional PMC',
+    title: 'Eco-Living Hub.',
+    subtitle: 'Madurai, TN',
     image: pic3,
-    description: 'Every brick, every minute, and every rupee is managed with absolute precision and transparency.',
+    description: 'Net-zero energy home with solar integration and rainwater harvesting systems.',
     color: 'text-white'
   },
   {
     id: 4,
-    title: 'Designed for the Future.',
-    subtitle: 'Modern Aesthetics',
+    title: 'Luxury Bungalow.',
+    subtitle: 'Trichy, TN',
     image: pic2,
-    description: 'Merging traditional architectural values with modern, clean-line designs that inspire.',
+    description: 'Premium bungalow with infinity pool, home theatre, and full smart home automation.',
     color: 'text-white'
   }
 ]
@@ -93,33 +94,29 @@ const HighlightsSection = () => {
   }
 
   return (
-    <section className="bg-black py-24 md:py-32 overflow-hidden font-sans">
+    <section className="bg-black py-16 md:py-20 overflow-hidden font-sans">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        {/* Apple-style Header */}
-        <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        {/* Compact Modern Header */}
+        <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.42, 0, 0.58, 1] }}
           >
             <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-none">
-              Get the highlights.
+              Projects.
             </h2>
           </motion.div>
           
-          <motion.div
+          <motion.p
             initial={{ opacity: 0 }}
             animate={headerInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex items-center gap-8"
+            className="text-white/40 text-sm md:text-lg max-w-sm font-light leading-relaxed italic md:text-right"
           >
-            <button className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors font-medium group text-lg">
-              Watch the film <FiPlayCircle className="text-2xl group-hover:scale-110 transition-transform" />
-            </button>
-            <button className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors font-medium group text-lg">
-              View the archive <FiArrowRight className="text-2xl group-hover:translate-x-1 transition-transform" />
-            </button>
-          </motion.div>
+            "A curated showcase of architectural excellence and engineering precision, 
+            delivered with absolute discipline."
+          </motion.p>
         </div>
       </div>
 

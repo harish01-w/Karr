@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useInView, useScroll, useTransform, useSpring } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FiMapPin, FiArrowRight, FiArrowUpRight, FiCheckCircle, FiClock, FiZap } from 'react-icons/fi'
+import { FiMapPin, FiArrowRight, FiArrowUpRight, FiCheckCircle, FiClock, FiZap, FiPlay, FiSun, FiDroplet, FiWind } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
+import FootprintMapSection from '../components/FootprintMapSection'
 import img1  from '../../assets/img1.jpg'
 import img2  from '../../assets/img2.jpg'
 import img3  from '../../assets/img3.jpg'
@@ -42,8 +43,6 @@ const PROJECTS = {
     { id:4,  title:'Urban Townhouse',     sub:'Vertical Living',         location:'Chennai, TN',     type:'Construction', image:img7,  year:'2022', size:'3,900 Sq.Ft', desc:'Compact urban townhouse maximizing vertical space with a stunning rooftop terrace.' },
     { id:5,  title:'Stone Arch Villa',    sub:'Classic Courtyard Home',  location:'Madurai, TN',     type:'Residential',  image:img9,  year:'2021', size:'5,000 Sq.Ft', desc:'Courtyard-style villa with stone arch entrances and traditional Chettinad-inspired interiors.' },
     { id:6,  title:'Palm Grove House',    sub:'Tropical Modern',         location:'Coimbatore, TN',  type:'Residential',  image:img11, year:'2021', size:'3,600 Sq.Ft', desc:'Tropical modern home surrounded by palm groves with open verandas and natural ventilation.' },
-    { id:7,  title:'Skyline Apartment',   sub:'Premium Urban Living',    location:'Chennai, TN',     type:'Construction', image:img13, year:'2020', size:'2,400 Sq.Ft', desc:'High-rise apartment unit with panoramic city views and premium finishes throughout.' },
-    { id:8,  title:'Forest Edge Home',    sub:'Nature-Integrated Design',location:'Ooty, TN',        type:'Residential',  image:img15, year:'2020', size:'4,100 Sq.Ft', desc:'A hillside home seamlessly integrated into the forest landscape with floor-to-ceiling glass.' },
   ],
   ongoing: [
     { id:9,  title:'Eco-Living Hub',      sub:'Net-Zero Home',           location:'Madurai, TN',     type:'Sustainable',  image:img2,  year:'2024', size:'5,100 Sq.Ft', progress:68, desc:'Net-zero energy home with solar integration and rainwater harvesting systems.' },
@@ -52,7 +51,6 @@ const PROJECTS = {
     { id:12, title:'Solar Farmhouse',     sub:'Off-Grid Living',         location:'Erode, TN',       type:'Sustainable',  image:img8,  year:'2024', size:'3,500 Sq.Ft', progress:30, desc:'Fully off-grid farmhouse powered by solar panels with organic farming integration.' },
     { id:13, title:'Twin Courtyard',      sub:'Dual-Family Residence',   location:'Coimbatore, TN',  type:'Construction', image:img10, year:'2024', size:'6,000 Sq.Ft', progress:78, desc:'Dual-family residence sharing a central courtyard garden with independent living wings.' },
     { id:14, title:'Riverside Cottage',   sub:'Waterfront Living',       location:'Thanjavur, TN',   type:'Residential',  image:img12, year:'2024', size:'2,200 Sq.Ft', progress:20, desc:'Intimate riverside cottage with wraparound deck and natural timber construction.' },
-    { id:15, title:'Green Roof Bungalow', sub:'Sustainable Luxury',      location:'Chennai, TN',     type:'Sustainable',  image:img14, year:'2024', size:'4,300 Sq.Ft', progress:60, desc:'Luxury bungalow with a full green roof system, passive cooling, and rainwater recycling.' },
   ],
   upcoming: [
     { id:16, title:'Hilltop Residence',   sub:'Valley View Estate',      location:'Ooty, TN',        type:'Residential',  image:img16, year:'2025', size:'7,000 Sq.Ft', desc:'A panoramic hilltop home designed to frame breathtaking valley views year-round.' },
@@ -61,7 +59,6 @@ const PROJECTS = {
     { id:19, title:'Heritage Mansion',    sub:'Colonial Revival',        location:'Madurai, TN',     type:'Construction', image:img19, year:'2025', size:'9,500 Sq.Ft', desc:'Grand colonial revival mansion with heritage-style columns, arches, and period detailing.' },
     { id:20, title:'Cliff Edge Villa',    sub:'Dramatic Landscape Home', location:'Yercaud, TN',     type:'Residential',  image:img20, year:'2026', size:'5,600 Sq.Ft', desc:'Dramatic cliff-edge villa cantilevered over the hillside with 270° panoramic views.' },
     { id:21, title:'Bamboo Grove House',  sub:'Eco Architecture',        location:'Coimbatore, TN',  type:'Sustainable',  image:img21, year:'2026', size:'2,900 Sq.Ft', desc:'Eco-architecture home built with bamboo structural elements and natural earth plasters.' },
-    { id:22, title:'Smart City Flat',     sub:'Tech-Integrated Living',  location:'Chennai, TN',     type:'Construction', image:img9,  year:'2026', size:'1,800 Sq.Ft', desc:'Fully automated smart apartment with AI-driven climate, security, and energy management.' },
   ],
 }
 
@@ -379,6 +376,197 @@ function CategorySection({ category }) {
   )
 }
 
+// ─── Virtual Tour Section ───────────────────────────────────────────────────────
+function VirtualTourSection() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-100px' })
+
+  return (
+    <section ref={ref} className="py-24 relative overflow-hidden" style={{ background: DARK }}>
+      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cubes.png")' }} />
+      
+      <div className="max-w-7xl mx-auto px-6 md:px-16 relative z-10 flex flex-col lg:flex-row items-center gap-16">
+        
+        {/* Left: Text Content */}
+        <div className="w-full lg:w-5/12">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <span className="w-10 h-px" style={{ background: TERRA }} />
+              <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>Interactive Experience</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-serif text-white leading-tight mb-8">
+              Step Inside Our <br/>
+              <span style={{ color: TERRA, fontStyle: 'italic' }}>Flagship Villa.</span>
+            </h2>
+            
+            <p className="text-sm font-light leading-relaxed mb-10" style={{ color: `${STONE}80` }}>
+              Experience the unmatched quality and flow of a Karrcholai-built home before it's even constructed. Take a 360° virtual walkthrough of our latest award-winning model home.
+            </p>
+            
+            <div className="flex items-center gap-6">
+              <div className="flex -space-x-4">
+                <div className="w-12 h-12 rounded-full border-2 border-dark" style={{ background: TERRA }}>
+                  <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Preview 1" className="w-full h-full rounded-full object-cover opacity-80" />
+                </div>
+                <div className="w-12 h-12 rounded-full border-2 border-dark" style={{ background: FOREST }}>
+                  <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Preview 2" className="w-full h-full rounded-full object-cover opacity-80" />
+                </div>
+                <div className="w-12 h-12 rounded-full border-2 border-dark flex items-center justify-center text-white text-[10px] font-bold" style={{ background: '#333' }}>
+                  +3
+                </div>
+              </div>
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: STONE }}>5 Available Tours</span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right: Video/Interactive Element */}
+        <div className="w-full lg:w-7/12 relative mt-8 lg:mt-0">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group cursor-pointer border border-white/10"
+          >
+            {/* Main Image */}
+            <img 
+              src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+              alt="Virtual Tour Preview" 
+              className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+            />
+            
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
+            
+            {/* Play Button */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:bg-white group-hover:text-dark text-white transition-all duration-500 shadow-[0_0_0_0_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_0_15px_rgba(255,255,255,0.1)]">
+              <FiPlay className="text-2xl ml-1" />
+            </div>
+            
+            {/* 360 Badge */}
+            <div className="absolute top-6 right-6 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-full border border-white/20">
+              <span className="text-[10px] font-bold tracking-widest text-white uppercase flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                360° View
+              </span>
+            </div>
+          </motion.div>
+          
+          {/* Accent Box Behind */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20, y: 20 }}
+            animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="absolute -bottom-6 -right-6 w-full h-full border border-white/5 rounded-2xl -z-10 hidden md:block" 
+            style={{ borderColor: `${TERRA}40` }}
+          />
+        </div>
+        
+      </div>
+    </section>
+  )
+}
+
+// ─── Sustainability Spotlight ──────────────────────────────────────────────────
+function SustainabilitySection() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-100px' })
+
+  const ecoFeatures = [
+    { icon: FiSun, title: 'Solar Integration', desc: 'Seamlessly integrated roof panels powering up to 80% of daily energy needs.' },
+    { icon: FiDroplet, title: 'Rainwater Harvesting', desc: 'Advanced filtration systems turning monsoon rains into usable household water.' },
+    { icon: FiWind, title: 'Passive Cooling', desc: 'Strategic cross-ventilation and thermal mass walls reducing AC dependency.' }
+  ]
+
+  return (
+    <section ref={ref} className="py-24 relative overflow-hidden" style={{ background: FOREST }}>
+      {/* Background patterns */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white opacity-[0.02] rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-16 relative z-10 flex flex-col lg:flex-row items-center gap-16">
+        
+        {/* Left: Huge image with leaf/eco accent */}
+        <div className="w-full lg:w-1/2 relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] max-w-md mx-auto lg:mx-0"
+          >
+            <img 
+              src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+              alt="Sustainable Architecture" 
+              className="w-full h-full object-cover"
+            />
+            {/* Green overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            
+            {/* Badge inside image */}
+            <div className="absolute bottom-8 left-8 right-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-4">
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <span className="text-[10px] font-bold text-white uppercase tracking-widest">Net-Zero Ready</span>
+              </div>
+              <h3 className="text-2xl font-serif text-white leading-tight">Building for the next hundred years.</h3>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right: Content */}
+        <div className="w-full lg:w-1/2">
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <span className="w-10 h-px" style={{ background: TERRA }} />
+              <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>Eco-Engineering</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-serif text-white leading-tight mb-8">
+              Sustainable Luxury, <br/>
+              <span style={{ color: TERRA, fontStyle: 'italic' }}>Without Compromise.</span>
+            </h2>
+            
+            <p className="text-sm font-light leading-relaxed mb-12" style={{ color: `${STONE}90` }}>
+              We believe that true luxury doesn't cost the earth. Karrcholai integrates state-of-the-art green technologies seamlessly into every design, ensuring your home is as environmentally responsible as it is breathtaking.
+            </p>
+
+            <div className="grid gap-8">
+              {ecoFeatures.map((feat, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.4 + (i * 0.15) }}
+                  className="flex gap-4"
+                >
+                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                    <feat.icon className="text-xl" style={{ color: TERRA }} />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold text-white mb-2">{feat.title}</h4>
+                    <p className="text-sm font-light leading-relaxed" style={{ color: `${STONE}70` }}>{feat.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+      </div>
+    </section>
+  )
+}
+
+
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function Projects() {
   const heroRef = useRef(null)
@@ -405,103 +593,50 @@ export default function Projects() {
       {/* ── HERO ────────────────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative flex items-center justify-center overflow-hidden"
-        style={{ minHeight: 'clamp(480px, 80vw, 620px)' }}
+        className="relative h-screen flex items-center justify-center overflow-hidden bg-black"
       >
         {/* Parallax BG */}
-        <motion.div className="absolute inset-0" style={{ y: springY, scale: 1.08 }}>
+        <motion.div className="absolute inset-0 z-0" style={{ y: springY, scale: 1.05, opacity: heroOpacity }}>
           <img
             src={heroImg}
             alt="Karrcholai Projects"
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0" style={{
-            background: 'linear-gradient(to bottom, rgba(20,18,14,0.60) 0%, rgba(20,18,14,0.65) 50%, rgba(20,18,14,0.85) 100%)'
-          }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
         </motion.div>
 
-        {/* Centered content — pt accounts for fixed navbar */}
-        <motion.div
-          className="relative z-10 flex flex-col items-center text-center w-full px-4 sm:px-6"
-          style={{ opacity: heroOpacity, paddingTop: '90px', paddingBottom: '40px' }}
-        >
-          {/* Label */}
+        {/* Centered content */}
+        <div className="relative z-10 text-center px-4 max-w-5xl">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6"
+            transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            <span className="w-6 sm:w-8 h-px" style={{ background: TERRA }} />
-            <span className="text-[9px] sm:text-[11px] font-black tracking-[0.4em] sm:tracking-[0.5em] uppercase"
-              style={{ color: TERRA, textShadow: `0 0 16px ${TERRA}99` }}>
+            <h2 className="font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-6 block" style={{ color: TERRA }}>
               Karrcholai · Stone Grove
-            </span>
-            <span className="w-6 sm:w-8 h-px" style={{ background: TERRA }} />
-          </motion.div>
-
-          {/* Heading */}
-          <div style={{ paddingBottom: '0.2em' }}>
-            <h1 className="font-black font-serif leading-none"
-              style={{ fontSize: 'clamp(2.4rem, 12vw, 8rem)' }}>
-              <ParallaxWord delay={0.1}>
-                <span style={{ color: '#fff', textShadow: '0 2px 24px rgba(0,0,0,0.85)' }}>
-                  OUR&nbsp;
-                </span>
-              </ParallaxWord>
-              <ParallaxWord delay={0.2}>
-                <span style={{
-                  color: TERRA,
-                  fontStyle: 'italic',
-                  textShadow: `0 0 30px ${TERRA}CC, 0 0 70px ${TERRA}55, 0 2px 14px rgba(0,0,0,0.95)`
-                }}>
-                  PROJECTS
-                </span>
-              </ParallaxWord>
+            </h2>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tighter leading-none mb-8 font-sans">
+              OUR <span className="text-transparent italic" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.6)' }}>PROJECTS</span>
             </h1>
-          </div>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-[9px] sm:text-[11px] font-bold tracking-[0.2em] sm:tracking-[0.35em] uppercase mt-4 sm:mt-6 px-2 leading-relaxed"
-            style={{ color: 'rgba(232,229,223,0.7)', textShadow: '0 1px 10px rgba(0,0,0,0.9)' }}
-          >
-            Quality Construction · Professional Management · Responsible Development
-          </motion.p>
-
-          {/* Stats row */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
-            className="flex items-center gap-6 sm:gap-10 mt-6 sm:mt-10"
-          >
-            {[
-              { n: '120+', l: 'Projects' },
-              { n: '12+',  l: 'Years' },
-              { n: '98%',  l: 'Satisfaction' },
-            ].map((s, i) => (
-              <div key={i} className="text-center">
-                <div className="text-2xl sm:text-3xl font-black" style={{
-                  color: TERRA,
-                  textShadow: `0 0 18px ${TERRA}BB, 0 2px 8px rgba(0,0,0,0.9)`
-                }}>{s.n}</div>
-                <div className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase mt-1"
-                  style={{ color: 'rgba(255,255,255,0.65)', textShadow: '0 1px 6px rgba(0,0,0,1)' }}>
-                  {s.l}
-                </div>
-              </div>
-            ))}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
+              <div className="hidden md:block h-[1px] w-12" style={{ background: `${TERRA}80` }} />
+              <p className="text-white/70 text-xs md:text-sm font-light tracking-[0.3em] uppercase">
+                Quality Construction · Professional Management
+              </p>
+              <div className="hidden md:block h-[1px] w-12" style={{ background: `${TERRA}80` }} />
+            </div>
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* Smooth bottom fade into cream */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
-          style={{ background: `linear-gradient(to bottom, transparent, ${CREAM})` }}
-        />
+        {/* Decorative Elements */}
+        <motion.div 
+          animate={{ y: [0, 20, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10"
+        >
+          <span className="text-white/30 text-[10px] uppercase tracking-[0.4em] rotate-90 mb-8">Scroll</span>
+          <div className="w-[1px] h-20" style={{ background: `linear-gradient(to bottom, ${TERRA}, transparent)` }} />
+        </motion.div>
       </section>
 
       {/* ── INTRO BAND ──────────────────────────────────────────────────── */}
@@ -567,6 +702,17 @@ export default function Projects() {
           />
         </div>
 
+        <VirtualTourSection />
+
+        <div className="max-w-7xl mx-auto px-6 md:px-16 pt-16">
+          <motion.div
+            initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="h-px origin-left"
+            style={{ background: `linear-gradient(90deg, ${TERRA}40, transparent)` }}
+          />
+        </div>
+
         <CategorySection category="ongoing" />
 
         <div className="max-w-7xl mx-auto px-6 md:px-16">
@@ -580,6 +726,10 @@ export default function Projects() {
 
         <CategorySection category="upcoming" />
       </div>
+
+      <SustainabilitySection />
+
+      <FootprintMapSection />
 
       {/* ── CTA ─────────────────────────────────────────────────────────── */}
       <section className="relative py-32 overflow-hidden" style={{ background: FOREST }}>

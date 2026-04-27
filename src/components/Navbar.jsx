@@ -11,6 +11,7 @@ const navLinks = [
   { name: 'Karr',     path: '/karr' },
   { name: 'Cholai',   path: '/#karr-cholai' },
   { name: 'Projects', path: '/projects' },
+  { name: 'Insights', path: '/#insights' },
   { name: 'Contact',  path: '/contact' },
 ]
 
@@ -73,7 +74,7 @@ const Navbar = () => {
             <img
               src={logoImg}
               alt="KARRCHOLAI"
-              className={`w-auto object-contain transition-all duration-400 ${isSolid ? 'h-10 md:h-14' : 'h-12 md:h-16'}`}
+              className={`w-auto object-contain transition-all duration-400 drop-shadow-lg ${isSolid ? 'h-12 md:h-20' : 'h-16 md:h-28'}`}
             />
           </Link>
 
@@ -149,7 +150,7 @@ const Navbar = () => {
             >
               {/* Drawer header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-dark/8">
-                <img src={logoImg} alt="KARRCHOLAI" className="h-10 w-auto object-contain" />
+                <img src={logoImg} alt="KARRCHOLAI" className="h-14 w-auto object-contain" />
                 <button onClick={() => setMobileOpen(false)} className="text-dark/60 hover:text-primary transition-colors">
                   <FiX size={22} />
                 </button>

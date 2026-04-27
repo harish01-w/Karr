@@ -4,9 +4,10 @@ import WelcomeSection from '../components/WelcomeSection'
 import KarrCholaiSection from '../components/KarrCholaiSection'
 import ServicesSection from '../components/ServicesSection'
 import WhyChooseUs from '../components/WhyChooseUs'
-import ProjectsSection from '../components/ProjectsSection'
 import HighlightsSection from '../components/HighlightsSection'
+import BlogSection from '../components/BlogSection'
 import VideoShowcase from '../components/VideoShowcase'
+import FootprintMapSection from '../components/FootprintMapSection'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
@@ -61,89 +62,88 @@ const Home = () => {
         <KarrCholaiSection />
       </section>
 
+      <FootprintMapSection />
+
       {/* ── Why Choose Us ── */}
       <section id="why-us">
         <WhyChooseUs />
       </section>
 
       {/* ── Highlights ── */}
-      <section id="highlights">
+      <section id="projects">
         <HighlightsSection />
       </section>
 
-      {/* ── Projects ── */}
-      <section id="projects">
-        <ProjectsSection />
-      </section>
+      {/* ── Blog / Insights ── */}
+      <BlogSection />
 
-      {/* ── CTA Band ── */}
-      <section className="relative py-16 md:py-24 overflow-hidden" style={{ background: '#41634A' }}>
-        <div className="absolute inset-0 stone-texture opacity-15 pointer-events-none" />
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse at 70% 50%, rgba(219,127,80,0.15) 0%, transparent 60%)'
-        }} />
-
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-3 mb-6"
-          >
-            <div className="h-px w-10 bg-secondary" />
-            <span className="text-secondary font-bold text-xs tracking-[0.3em] uppercase">Let's Build Together</span>
-            <div className="h-px w-10 bg-secondary" />
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold text-white font-serif leading-tight mb-6"
-          >
-            Ready to Build Your<br />
-            <span className="text-secondary">Dream Home?</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-white/65 text-lg max-w-xl mx-auto mb-10 leading-relaxed font-light"
-          >
-            Get a free consultation with our experts. We'll walk you through every step of your
-            construction journey — from planning to possession.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link to="/contact">
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                className="btn-primary text-sm tracking-[0.15em] uppercase"
+      {/* ── Compact Sleek CTA ── */}
+      <section className="bg-white py-20 border-y border-dark/5">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-24">
+            
+            {/* Left: Content */}
+            <div className="max-w-xl">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="flex items-center gap-3 mb-6"
               >
-                Get a Free Consultation
-              </motion.button>
-            </Link>
-            <Link to="/services">
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                className="btn-outline text-sm tracking-[0.15em] uppercase"
+                <span className="w-10 h-[1px] bg-secondary" />
+                <span className="text-secondary font-black text-[10px] tracking-[0.4em] uppercase">Let's Collaborate</span>
+              </motion.div>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-3xl md:text-4xl font-bold text-dark font-serif leading-tight mb-4"
               >
-                View Our Services
-              </motion.button>
-            </Link>
-          </motion.div>
+                Ready to build your <span className="italic text-primary">vision?</span>
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-dark/50 text-sm md:text-base font-light leading-relaxed"
+              >
+                Transforming complex ideas into structured reality. Join us for a 
+                strategic consultation to map out your project's future.
+              </motion.p>
+            </div>
+
+            {/* Right: Actions */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap items-center gap-6"
+            >
+              <Link to="/contact">
+                <button className="px-8 py-4 bg-dark text-white text-[11px] font-black tracking-[0.2em] uppercase hover:bg-secondary transition-all duration-300">
+                  Book Consultation
+                </button>
+              </Link>
+              
+              <Link to="/services">
+                <button className="group flex items-center gap-4 text-dark hover:text-secondary transition-colors py-2">
+                  <span className="text-[11px] font-black tracking-[0.2em] uppercase">Our Approach</span>
+                  <div className="w-10 h-10 rounded-full border border-dark/10 flex items-center justify-center group-hover:border-secondary group-hover:bg-secondary/5 transition-all">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M1 13L13 1M13 1H1M13 1V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                </button>
+              </Link>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
@@ -157,7 +157,7 @@ const Home = () => {
             {/* Column 1: Branding */}
             <div className="lg:col-span-1">
               <Link to="/" className="inline-block mb-8">
-                <span className="text-2xl font-bold tracking-tighter">
+                <span className="text-3xl font-bold tracking-tighter">
                   KARR<span className="text-secondary italic">CHOLAI</span>
                 </span>
               </Link>

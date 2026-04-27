@@ -30,13 +30,17 @@ const Preloader = ({ onComplete }) => {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="flex flex-col items-center mb-10"
       >
-        <img src={logoImg} alt="KARRCHOLAI" className="h-20 md:h-28 w-auto object-contain" />
+        <img 
+          src={logoImg} 
+          alt="KARRCHOLAI" 
+          className="h-32 md:h-48 w-auto object-contain drop-shadow-2xl" 
+        />
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: phase >= 1 ? 1 : 0 }}
           transition={{ delay: 0.3 }}
-          className="mt-4 text-[10px] tracking-[0.5em] uppercase font-black"
-          style={{ color: 'rgba(201,117,74,0.7)' }}
+          className="mt-6 text-[10px] tracking-[0.5em] uppercase font-black"
+          style={{ color: 'rgba(201,117,74,0.85)' }}
         >
           Stone · Grove · Living
         </motion.p>
@@ -57,7 +61,7 @@ const Preloader = ({ onComplete }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: phase >= 1 ? 0.3 : 0 }}
         transition={{ delay: 0.2 }}
-        className="mt-4 text-[9px] tracking-[0.4em] uppercase text-white/30"
+        className="mt-4 text-[11px] tracking-[0.4em] uppercase text-white/30"
       >
         Loading
       </motion.p>

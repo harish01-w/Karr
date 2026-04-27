@@ -1,145 +1,563 @@
-import { motion } from 'framer-motion'
+import React, { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
-import aboutImg from '../../assets/pic2.png'
-import missionImg from '../../assets/pic3.png'
+import { FaHardHat, FaClock, FaDollarSign, FaShieldAlt, FaQuoteLeft, FaPlay } from 'react-icons/fa'
+
+// Images from the root assets folder
+import founderImg from '../../assets/Founder.jpeg'
+import aboutBg from '../../assets/pic7.png' 
+import testimonialVid from '../../assets/VID.mp4'
 
 const AboutUs = () => {
-  const values = [
-    { title: 'Quality', text: 'We never compromise on the quality of materials and craftsmanship.' },
-    { title: 'Discipline', text: 'Built with discipline is not just a tagline, it is our core operational principle.' },
-    { title: 'Transparency', text: 'Complete openness in project timelines, costs, and material specifications.' },
-    { title: 'Sustainability', text: 'Innovating with rainwater harvesting and waste management systems.' }
+  const containerRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  })
+
+  const y1 = useTransform(scrollYProgress, [0, 0.5], [0, 300])
+  const y2 = useTransform(scrollYProgress, [0, 0.5], [0, -150])
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.2])
+
+  const expertise = [
+    { 
+      icon: <FaHardHat />, 
+      title: "Plan Effectively", 
+      desc: "Meticulous project planning ensuring every detail is accounted for before the first stone is laid." 
+    },
+    { 
+      icon: <FaDollarSign />, 
+      title: "Control Costs", 
+      desc: "Professional cost management to prevent budget overruns and ensure maximum value." 
+    },
+    { 
+      icon: <FaShieldAlt />, 
+      title: "Quality Control", 
+      desc: "Rigorous quality checks at every stage to maintain the highest standards of excellence." 
+    },
+    { 
+      icon: <FaClock />, 
+      title: "On-Time Delivery", 
+      desc: "Disciplined management to ensure your dream home is ready exactly when promised." 
+    }
   ]
 
   return (
-    <div className="bg-white min-h-screen text-dark selection:bg-secondary selection:text-white">
+    <div ref={containerRef} className="bg-cream min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
       <Navbar />
 
-      <main className="pt-24 overflow-hidden">
-        
-        {/* 1. Hero Section */}
-        <section className="relative h-[45vh] sm:h-[55vh] flex items-center justify-center bg-black">
+      <main>
+        {/* --- 1. MODERN HERO SECTION --- */}
+        <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
           <motion.div 
-            initial={{ scale: 1.1, opacity: 0 }}
-            animate={{ scale: 1, opacity: 0.8 }}
-            transition={{ duration: 1.5 }}
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${aboutImg})` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/70"></div>
-          
-          <div className="relative z-10 text-center text-white px-4 max-w-3xl">
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="text-3xl sm:text-4xl md:text-7xl font-bold font-serif mb-4 uppercase tracking-normal drop-shadow-xl"
-            >
-              Who We Are
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.8 }}
-              className="text-lg md:text-xl font-light tracking-[0.1em] mb-8 text-white/80 max-w-2xl mx-auto"
-            >
-              Building a legacy of strength and sustainability, one brick at a time.
-            </motion.p>
-            <motion.div 
-              initial={{ width: 0 }}
-              animate={{ width: '80px' }}
-              transition={{ duration: 1, delay: 1.2 }}
-              className="h-1 bg-secondary mx-auto"
+            style={{ y: y1, scale, opacity }}
+            className="absolute inset-0 z-0"
+          >
+            <div 
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${aboutBg})` }}
             />
-          </div>
-        </section>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
+          </motion.div>
 
-
-
-        {/* 2. Intro Section */}
-        <section className="py-16 md:py-24 px-6 md:px-8">
-          <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+          <div className="relative z-10 text-center px-4 max-w-5xl">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-center lg:text-left"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
             >
-              <h2 className="text-[10px] md:text-sm font-bold text-secondary uppercase tracking-[0.4em] mb-4">Our Heritage</h2>
-              <h3 className="text-3xl md:text-5xl font-bold font-serif mb-6 md:mb-8 leading-tight">
-                Crafting Legacies Since <span className="text-primary italic">2024</span>
-              </h3>
-              <p className="text-base md:text-lg text-dark/70 mb-6 leading-relaxed">
-                Karrcholai Construction stands as a beacon of architectural excellence and engineering precision. We don't just build structures; we craft environments where life flourishes. 
-              </p>
-              <p className="text-base md:text-lg text-dark/70 italic border-l-4 border-primary pl-6 text-left">
-                "Our philosophy is simple: Strength in every brick, Sustainability in every design. We are dedicated to redefining oasis living in the heart of Chennai."
-              </p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="relative px-4 md:px-0"
-            >
-              <div className="absolute inset-0 bg-primary/10 rounded-2xl -rotate-3 z-0"></div>
-              <img 
-                src={missionImg} 
-                alt="Our Vision" 
-                className="rounded-2xl shadow-2xl relative z-10 w-full object-cover h-[350px] md:h-[500px]"
-              />
-              <div className="absolute -bottom-6 -left-2 md:-bottom-8 md:-left-8 bg-secondary p-6 md:p-8 rounded-lg shadow-xl text-white z-20">
-                <p className="text-3xl md:text-4xl font-bold mb-1">15+</p>
-                <p className="text-[10px] uppercase tracking-widest font-bold">Planned Projects</p>
+              <h2 className="text-secondary font-bold tracking-[0.6em] uppercase text-xs md:text-sm mb-6 block">Building Excellence</h2>
+              <h1 className="text-6xl md:text-9xl font-black text-white uppercase tracking-tighter leading-none mb-8">
+                ABOUT <span className="text-transparent stroke-text italic">US</span>
+              </h1>
+              <div className="flex items-center justify-center gap-4 mb-8">
+                <div className="h-[1px] w-12 bg-secondary/50" />
+                <p className="text-white/60 text-sm md:text-lg font-light tracking-[0.3em] uppercase">
+                  A Legacy of Strength & Sustainability
+                </p>
+                <div className="h-[1px] w-12 bg-secondary/50" />
               </div>
             </motion.div>
           </div>
+
+          {/* Decorative Elements */}
+          <motion.div 
+            animate={{ y: [0, 20, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+          >
+            <span className="text-white/30 text-[10px] uppercase tracking-[0.4em] rotate-90 mb-8">Scroll</span>
+            <div className="w-[1px] h-20 bg-gradient-to-b from-secondary to-transparent" />
+          </motion.div>
         </section>
 
-        {/* 3. Our Values - Grid Animation */}
-        <section className="py-16 md:py-24 bg-primary text-white relative overflow-hidden">
-          <div className="absolute inset-0 stone-texture opacity-10 mix-blend-overlay"></div>
-          
-          <div className="container mx-auto px-6 md:px-8 relative z-10">
-            <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-6xl font-bold font-serif mb-4">Our Core Values</h2>
-              <p className="text-white/60 tracking-[0.2em] md:tracking-[0.3em] uppercase text-[10px] md:text-sm">Discipline in every detail</p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-              {values.map((v, i) => (
-                <motion.div
-                  key={i}
+        {/* --- 2. THE STORY / FOUNDER --- */}
+        <section className="py-20 md:py-32 px-6 bg-[#fdfdfd]">
+          <div className="container mx-auto max-w-6xl">
+            <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center">
+              {/* Sleek Image Reveal */}
+              <div className="w-full md:w-5/12 relative">
+                <motion.div 
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ y: -10 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
+                  className="aspect-[3/4] md:aspect-[4/5] overflow-hidden relative group rounded-sm shadow-xl"
+                >
+                  <motion.img 
+                    initial={{ scale: 1.2 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    src={founderImg} 
+                    alt="Founder" 
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/5 transition-opacity duration-700 group-hover:bg-black/20" />
+                  
+                  {/* Small Floating Experience Badge */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8, duration: 0.8 }}
+                    className="absolute bottom-6 right-[-10px] md:-right-8 bg-white/95 backdrop-blur-md px-4 py-3 shadow-lg border-l-[2px] border-secondary z-20 flex items-center gap-3 rounded-sm"
+                  >
+                    <span className="text-2xl md:text-3xl font-light text-dark leading-none">
+                      12<span className="text-secondary font-bold text-lg md:text-xl">+</span>
+                    </span>
+                    <div className="w-[1px] h-6 bg-dark/10" />
+                    <span className="text-[8px] uppercase tracking-[0.2em] font-bold text-dark/50 leading-tight">
+                      Years <br/> Experience
+                    </span>
+                  </motion.div>
+                </motion.div>
+                
+                {/* Minimalist Accents */}
+                <div className="absolute -left-6 top-1/2 -translate-y-1/2 rotate-180 hidden md:block" style={{ writingMode: 'vertical-rl' }}>
+                  <span className="text-[10px] tracking-[0.4em] uppercase text-dark/30 font-semibold">Established 2012</span>
+                </div>
+                <div className="absolute -right-4 -bottom-4 w-24 h-24 border-r border-b border-secondary/30" />
+              </div>
+
+              {/* Compact Typography */}
+              <div className="w-full md:w-7/12">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <p className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-6 flex items-center gap-4">
+                    <span className="w-6 h-[1px] bg-secondary" />
+                    Our Genesis
+                  </p>
+                  <h2 className="text-3xl md:text-5xl font-light text-dark leading-[1.2] mb-8 tracking-tight">
+                    A vision grounded in <br />
+                    <span className="font-medium">practical expertise</span> and <br />
+                    <span className="italic text-dark/60 font-serif">architectural precision.</span>
+                  </h2>
+                  <div className="space-y-6 text-sm md:text-base text-dark/60 font-light leading-relaxed max-w-lg">
+                    <p>
+                      With over 12 years of hands-on experience in residential construction, Karrcholai Construction was founded on a simple premise: to bridge the gap between complex blueprints and the homeowner's peace of mind.
+                    </p>
+                    <p>
+                      We recognized that true quality isn't just about the final coat of paint; it's rooted in disciplined project management, rigorous site oversight, and a transparent partnership with our clients.
+                    </p>
+                  </div>
+                  
+                  {/* Sleek Signature Block */}
+                  <div className="mt-12 flex items-center gap-6">
+                    <div className="w-12 h-[1px] bg-dark/20" />
+                    <div>
+                      <p className="font-semibold text-dark text-base tracking-wide">Karrcholai</p>
+                      <p className="text-[9px] uppercase tracking-[0.2em] text-dark/40 mt-1 font-bold">Founder & Director</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* --- 3. STATS STRIP --- */}
+        <section className="py-16 bg-dark text-white border-y border-white/5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20" />
+          <div className="container mx-auto px-6 max-w-6xl relative z-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 divide-x-0 md:divide-x divide-white/10">
+              {[
+                { number: "12+", label: "Years Experience" },
+                { number: "150+", label: "Projects Completed" },
+                { number: "100%", label: "Client Satisfaction" },
+                { number: "24/7", label: "Project Support" }
+              ].map((stat, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.5 }}
-                  className="bg-white/5 backdrop-blur-sm p-8 md:p-10 rounded-xl border border-white/10 hover:border-secondary transition-all"
+                  className="text-center md:text-left pl-0 md:pl-10 first:pl-0 flex flex-col items-center md:items-start"
                 >
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-secondary/20 flex items-center justify-center mb-6 rounded-lg text-secondary text-xl md:text-2xl font-bold">
-                    0{i+1}
-                  </div>
-                  <h4 className="text-xl md:text-2xl font-bold mb-4">{v.title}</h4>
-                  <p className="text-white/60 leading-relaxed text-sm">
-                    {v.text}
-                  </p>
+                  <div className="text-4xl md:text-5xl font-light text-secondary mb-3 tracking-tighter">{stat.number}</div>
+                  <div className="text-[9px] uppercase tracking-[0.3em] text-white/50 font-semibold">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
+        {/* --- 4. CORE PHILOSOPHY (SLEEK GRID) --- */}
+        <section className="py-24 md:py-32 px-6 bg-white">
+          <div className="container mx-auto max-w-6xl">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+              <div>
+                <p className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-4 flex items-center gap-4">
+                  <span className="w-6 h-[1px] bg-secondary" />
+                  How We Operate
+                </p>
+                <h3 className="text-3xl md:text-5xl font-light text-dark tracking-tight">
+                  Our Core <span className="font-medium">Philosophy</span>
+                </h3>
+              </div>
+              <p className="text-dark/40 text-xs uppercase tracking-widest font-semibold">Excellence by design</p>
+            </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              {[
+                { icon: <FaHardHat size={24} />, title: "Meticulous Planning", desc: "Every successful build starts long before the foundation is poured. We focus heavily on pre-construction analysis and precise blueprint execution." },
+                { icon: <FaShieldAlt size={24} />, title: "Uncompromising Quality", desc: "We implement rigorous, multi-stage quality control checks throughout the lifecycle of the project to ensure structural and aesthetic perfection." },
+                { icon: <FaDollarSign size={24} />, title: "Transparent Value", desc: "Cost control is paramount. We provide clear, detailed financial oversight to prevent budget overruns without sacrificing the integrity of the build." }
+              ].map((item, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.15 }}
+                  className="group relative p-8 border border-dark/5 hover:border-secondary/30 transition-colors duration-500 bg-[#fafafa] hover:bg-white"
+                >
+                  <div className="text-secondary mb-8 transition-transform duration-500 group-hover:-translate-y-2">
+                    {item.icon}
+                  </div>
+                  <h4 className="text-lg font-semibold text-dark mb-4 tracking-wide">{item.title}</h4>
+                  <p className="text-sm text-dark/60 leading-relaxed font-light">
+                    {item.desc}
+                  </p>
+                  
+                  {/* Subtle hover line */}
+                  <div className="absolute bottom-0 left-0 h-[2px] bg-secondary w-0 group-hover:w-full transition-all duration-700 ease-out" />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* --- 4.5 EXPERTISE IMPACT SECTION --- */}
+        <section className="py-24 md:py-32 px-6 bg-dark text-white relative overflow-hidden">
+          {/* Animated Background Elements */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
+            <motion.div 
+              animate={{ 
+                scale: [1, 1.2, 1],
+                opacity: [0.1, 0.2, 0.1]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-secondary/20 rounded-full blur-[150px] pointer-events-none"
+            />
+          </div>
+
+          <div className="container mx-auto max-w-6xl relative z-10">
+            <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+              
+              {/* Left Side: Statement */}
+              <div className="w-full lg:w-1/2">
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                >
+                  <p className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-6 flex items-center gap-4">
+                    <span className="w-8 h-[1px] bg-secondary" />
+                    The Karrcholai Advantage
+                  </p>
+                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] mb-8 tracking-tight">
+                    Our expertise <br/>
+                    <span className="font-semibold italic text-secondary font-serif">empowers clients to:</span>
+                  </h3>
+                  
+                  <div className="p-8 border-l-2 border-secondary/50 bg-white/5 backdrop-blur-sm rounded-r-2xl mt-8">
+                    <p className="text-base md:text-lg text-white/80 font-light leading-relaxed">
+                      We combine technical construction knowledge, practical site experience, and professional management to deliver successful residential projects.
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Right Side: Animated List */}
+              <div className="w-full lg:w-1/2">
+                <div className="flex flex-col gap-4">
+                  {[
+                    { text: "Plan projects effectively", icon: "01" },
+                    { text: "Control construction costs", icon: "02" },
+                    { text: "Maintain construction quality", icon: "03" },
+                    { text: "Complete projects on time", icon: "04" }
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.15, duration: 0.5 }}
+                      whileHover={{ scale: 1.02, x: 10 }}
+                      className="group relative flex items-center gap-6 p-6 bg-white/5 border border-white/10 rounded-xl hover:bg-secondary/10 hover:border-secondary/30 transition-all duration-300 cursor-default overflow-hidden"
+                    >
+                      {/* Hover effect background slide */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 to-transparent translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+                      
+                      <div className="relative z-10 flex items-center justify-center min-w-[3rem] h-12 rounded-full bg-dark/50 border border-white/20 text-white/50 group-hover:text-secondary group-hover:border-secondary transition-colors duration-300 font-black">
+                        {item.icon}
+                      </div>
+                      
+                      <p className="relative z-10 text-lg md:text-xl font-medium text-white/90 group-hover:text-white transition-colors duration-300 tracking-wide">
+                        {item.text}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </section>
+
+        {/* --- 5. THE PROCESS (VERTICAL TIMELINE) --- */}
+        <section className="py-24 md:py-32 px-6 bg-[#fafafa] overflow-hidden">
+          <div className="container mx-auto max-w-5xl">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-24"
+            >
+              <p className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-4 justify-center flex items-center gap-4">
+                <span className="w-8 h-[1px] bg-secondary" />
+                Our Methodology
+                <span className="w-8 h-[1px] bg-secondary" />
+              </p>
+              <h3 className="text-3xl md:text-5xl font-light text-dark tracking-tight">
+                The Journey to <span className="font-medium">Completion</span>
+              </h3>
+            </motion.div>
+
+            <div className="relative">
+              {/* Center Line Track */}
+              <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-dark/5 -translate-x-1/2" />
+              
+              {/* Animated Center Line Fill */}
+              <motion.div 
+                initial={{ height: 0 }}
+                whileInView={{ height: '100%' }}
+                transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
+                viewport={{ once: true, margin: "-20%" }}
+                className="absolute left-8 md:left-1/2 top-0 w-[2px] bg-gradient-to-b from-secondary to-primary -translate-x-1/2 origin-top"
+              />
+
+              {[
+                { step: "01", title: "Consultation & Scope", desc: "Understanding your vision, lifestyle needs, and project constraints to build a solid foundation of expectations." },
+                { step: "02", title: "Design & Engineering", desc: "Collaborating with top-tier architects to finalize structurally sound, aesthetically brilliant blueprints." },
+                { step: "03", title: "Site Preparation", desc: "Meticulous clearing, excavating, and laying the groundwork with precise geographical measurements." },
+                { step: "04", title: "Construction Phase", desc: "Executing the build with strict adherence to timelines, safety protocols, and unyielding quality standards." },
+                { step: "05", title: "Final Handover", desc: "A comprehensive walk-through and inspection ensuring every single detail exceeds your expectations." }
+              ].map((item, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, x: i % 2 === 0 ? 50 : -50, y: 30 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{ duration: 0.8, delay: 0.1, type: "spring", bounce: 0.4 }}
+                  className={`relative flex items-center justify-between mb-24 last:mb-0 group ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                >
+                  <div className="hidden md:block w-5/12" />
+                  
+                  {/* Animated Node */}
+                  <div className="absolute left-8 md:left-1/2 w-12 h-12 bg-[#fafafa] border-4 border-white rounded-full flex items-center justify-center -translate-x-1/2 z-10 shadow-xl group-hover:scale-125 transition-transform duration-500">
+                    <div className="w-full h-full rounded-full border-2 border-secondary/30 flex items-center justify-center group-hover:border-secondary transition-colors duration-500">
+                      <motion.div 
+                        animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        className="w-3 h-3 bg-secondary rounded-full" 
+                      />
+                    </div>
+                  </div>
+
+                  <div className="w-full pl-24 md:pl-0 md:w-5/12">
+                    {/* Sleek Premium Card */}
+                    <motion.div 
+                      whileHover={{ y: -10 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      className="relative p-8 md:p-10 bg-white border border-dark/5 rounded-[2rem] shadow-sm hover:shadow-2xl transition-shadow duration-500 overflow-hidden text-left"
+                    >
+                      {/* Decorative Background Blob */}
+                      <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-secondary/10 to-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
+                      
+                      <div className="relative z-10">
+                        <div className="flex items-center gap-4 mb-6">
+                          <span className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-dark/10 to-dark/5 group-hover:from-secondary/30 group-hover:to-primary/30 transition-all duration-500">
+                            {item.step}
+                          </span>
+                          <h4 className="text-xl md:text-2xl font-semibold text-dark tracking-wide">{item.title}</h4>
+                        </div>
+                        <p className="text-sm md:text-base text-dark/60 font-light leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                      
+                      {/* Hover Line Overlay */}
+                      <div className="absolute bottom-0 left-0 h-[3px] bg-gradient-to-r from-secondary to-primary w-0 group-hover:w-full transition-all duration-700 ease-in-out" />
+                    </motion.div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* --- 5.5 VIDEO TESTIMONIALS (GRID) --- */}
+        <section className="py-24 md:py-32 px-6 bg-[#fdfdfd] overflow-hidden">
+          <div className="container mx-auto max-w-6xl">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-20"
+            >
+              <p className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-4 justify-center flex items-center gap-4">
+                <span className="w-6 h-[1px] bg-secondary" />
+                Client Stories
+                <span className="w-6 h-[1px] bg-secondary" />
+              </p>
+              <h3 className="text-3xl md:text-5xl font-light text-dark tracking-tight">
+                Don't just take our word for it. <br/>
+                <span className="font-medium italic text-secondary">Hear from our homeowners.</span>
+              </h3>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+              {[
+                { name: "The Sharma Family", project: "Custom Luxury Villa", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", delay: 0 },
+                { name: "Mr. & Mrs. Patel", project: "Modern Minimalist Home", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", delay: 0.2 },
+                { name: "Arora Residence", project: "Architectural Renovation", img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", delay: 0.4 },
+                { name: "Dr. Singh", project: "Eco-Friendly Estate", img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", delay: 0.6 }
+              ].map((vid, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.9, y: 50 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{ duration: 0.8, delay: vid.delay, type: "spring", bounce: 0.3 }}
+                  className="group relative aspect-[16/9] md:aspect-[4/3] lg:aspect-[16/9] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                >
+                  {/* Placeholder Background */}
+                  <img src={vid.img} alt={vid.project} className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-110" />
+                  
+                  {/* Overlay Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                  
+                  {/* Play Button */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-md border border-white/40 rounded-full flex items-center justify-center group-hover:bg-secondary group-hover:border-secondary transition-all duration-500 shadow-[0_0_0_0_rgba(255,255,255,0.4)] group-hover:shadow-[0_0_0_15px_rgba(255,165,0,0.2)]">
+                    <FaPlay className="text-white text-xl md:text-2xl ml-1 group-hover:scale-110 transition-transform duration-500" />
+                  </div>
+
+                  {/* Text Content */}
+                  <div className="absolute bottom-0 left-0 w-full p-8 md:p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <div className="flex items-center gap-4 mb-2">
+                      <div className="w-2 h-2 rounded-full bg-secondary" />
+                      <p className="text-white/80 text-[10px] uppercase tracking-[0.3em] font-bold">
+                        {vid.project}
+                      </p>
+                    </div>
+                    <h4 className="text-white text-2xl md:text-3xl font-light tracking-wide group-hover:text-secondary transition-colors duration-500">
+                      {vid.name}
+                    </h4>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* View More Button */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1, duration: 0.8 }}
+              className="mt-16 text-center"
+            >
+              <button className="text-xs uppercase tracking-[0.2em] font-bold text-dark/60 hover:text-secondary transition-colors pb-1 border-b border-dark/20 hover:border-secondary">
+                View All Testimonials
+              </button>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* --- 6. SLEEK CTA --- */}
+        <section className="py-24 md:py-32 bg-dark text-white text-center px-6 border-t border-white/10 relative overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          
+          <div className="container mx-auto max-w-2xl relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h3 className="text-3xl md:text-5xl font-light mb-6 tracking-tight">
+                Ready to begin your <br />
+                <span className="font-medium italic text-secondary font-serif">architectural journey?</span>
+              </h3>
+              <p className="text-sm md:text-base text-white/50 font-light mb-12 max-w-lg mx-auto leading-relaxed">
+                Schedule a consultation with our experts and take the first step towards realizing your vision with precision and elegance.
+              </p>
+              
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative overflow-hidden inline-flex items-center gap-4 bg-white text-dark px-10 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:text-white transition-colors duration-500 rounded-sm"
+              >
+                <span className="relative z-10 flex items-center gap-3">
+                  Start the Conversation
+                  <div className="w-4 h-[1px] bg-dark group-hover:bg-white group-hover:w-6 transition-all duration-300" />
+                </span>
+                <div className="absolute inset-0 bg-secondary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+              </motion.button>
+            </motion.div>
+          </div>
+        </section>
       </main>
 
       <UnifiedFooter />
+
+      <style jsx>{`
+        .stroke-text {
+          -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+          color: transparent;
+        }
+        .stroke-text-dark {
+          -webkit-text-stroke: 1px rgba(0,0,0,0.1);
+          color: transparent;
+        }
+        .stone-texture {
+          background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
+        }
+      `}</style>
     </div>
   )
 }
 
 export default AboutUs
+
+
