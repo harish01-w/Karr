@@ -38,9 +38,9 @@ const UnifiedFooter = () => {
           <div>
             <h4 className="text-xs font-bold tracking-[0.3em] uppercase text-secondary mb-8">Company</h4>
             <ul className="space-y-4">
-              {['Home', 'About Us', 'Our Projects', 'Our Services', 'Contact'].map((link) => (
+              {['Home', 'About Us', 'Our Projects', 'Our Services', 'Manaiyadi', 'Contact'].map((link) => (
                 <li key={link}>
-                  <Link to={link === 'Home' ? '/' : `/${link.toLowerCase().replace(' ', '')}`} className="text-white/40 hover:text-white text-sm transition-colors duration-300">
+                  <Link to={link === 'Home' ? '/' : link === 'Manaiyadi' ? '/manaiyadi' : `/${link.toLowerCase().replace(' ', '')}`} className="text-white/40 hover:text-white text-sm transition-colors duration-300">
                     {link}
                   </Link>
                 </li>
@@ -54,6 +54,7 @@ const UnifiedFooter = () => {
             <ul className="space-y-4">
               {[
                 'Residential Construction',
+                'Manaiyadi Sastram',
                 'Project Management',
                 'Landscape Design',
                 'Solar Integration',

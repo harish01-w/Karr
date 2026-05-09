@@ -7,16 +7,16 @@ import logoImg from '../../assets/KARRCHOLAI LOGO.png'
 const navLinks = [
   { name: 'Home',     path: '/' },
   { name: 'About',    path: '/about' },
-  { name: 'Services', path: '/services' },
   { name: 'Karr',     path: '/karr' },
   { name: 'Cholai',   path: '/cholai' },
   { name: 'Projects', path: '/projects' },
   { name: 'Blog',     path: '/blog' },
+  { name: 'Manaiyadi', path: '/manaiyadi' },
   { name: 'Contact',  path: '/contact' },
 ]
 
 // Pages where navbar is always solid white
-const SOLID_PAGES = ['/projects', '/about', '/contact', '/services', '/karr', '/cholai', '/blog']
+const SOLID_PAGES = ['/projects', '/about', '/contact', '/services', '/karr', '/cholai', '/blog', '/manaiyadi']
 
 const Navbar = () => {
   const [scrolled, setScrolled]       = useState(false)
