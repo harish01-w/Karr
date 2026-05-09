@@ -50,18 +50,18 @@ const ManaiyadiCalculator = () => {
       {/* Decorative backdrop glow */}
       <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-[3rem] blur-2xl opacity-50 group-hover:opacity-75 transition duration-1000"></div>
       
-      <div className="relative bg-white/80 backdrop-blur-2xl rounded-[3rem] border border-white p-8 md:p-12 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] overflow-hidden grain">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="relative bg-white/80 backdrop-blur-2xl rounded-[2.5rem] md:rounded-[3rem] border border-white p-6 md:p-12 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] overflow-hidden grain">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           
           {/* Controls - Left side (4 cols) */}
           <div className="lg:col-span-5 space-y-10">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-dark flex items-center justify-center text-white">
-                <FiSliders size={20} />
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-dark flex items-center justify-center text-white">
+                <FiSliders size={18} />
               </div>
               <div>
-                <h3 className="text-xl font-black text-dark tracking-tight uppercase">Configuration</h3>
-                <p className="text-[10px] font-bold text-dark/30 tracking-[0.2em] uppercase">Set your dimensions</p>
+                <h3 className="text-lg md:text-xl font-black text-dark tracking-tight uppercase">Configuration</h3>
+                <p className="text-[9px] md:text-[10px] font-bold text-dark/30 tracking-[0.2em] uppercase">Set your dimensions</p>
               </div>
             </div>
 
@@ -148,15 +148,15 @@ const ManaiyadiCalculator = () => {
                   </div>
 
                   {/* Main Metrics Grid */}
-                  <div className="grid grid-cols-2 gap-4 mb-8">
-                    <div className="p-8 bg-cream/50 rounded-[2.5rem] border border-dark/5 group/card hover:bg-primary transition-all duration-500">
-                      <p className="text-[9px] font-black text-dark/30 uppercase tracking-widest mb-4 group-hover/card:text-white/40">Ayam (Income)</p>
-                      <div className="text-5xl font-black text-primary group-hover/card:text-white transition-colors">{results.ayam}</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                    <div className="p-6 md:p-8 bg-cream/50 rounded-[2rem] md:rounded-[2.5rem] border border-dark/5 group/card hover:bg-primary transition-all duration-500">
+                      <p className="text-[9px] font-black text-dark/30 uppercase tracking-widest mb-3 md:mb-4 group-hover/card:text-white/40">Ayam (Income)</p>
+                      <div className="text-4xl md:text-5xl font-black text-primary group-hover/card:text-white transition-colors">{results.ayam}</div>
                       <div className="mt-4 w-8 h-1 bg-primary group-hover/card:bg-white transition-all"></div>
                     </div>
-                    <div className="p-8 bg-cream/50 rounded-[2.5rem] border border-dark/5 group/card hover:bg-secondary transition-all duration-500">
-                      <p className="text-[9px] font-black text-dark/30 uppercase tracking-widest mb-4 group-hover/card:text-white/40">Vyayam (Expense)</p>
-                      <div className="text-5xl font-black text-secondary group-hover/card:text-white transition-colors">{results.vyayam}</div>
+                    <div className="p-6 md:p-8 bg-cream/50 rounded-[2rem] md:rounded-[2.5rem] border border-dark/5 group/card hover:bg-secondary transition-all duration-500">
+                      <p className="text-[9px] font-black text-dark/30 uppercase tracking-widest mb-3 md:mb-4 group-hover/card:text-white/40">Vyayam (Expense)</p>
+                      <div className="text-4xl md:text-5xl font-black text-secondary group-hover/card:text-white transition-colors">{results.vyayam}</div>
                       <div className="mt-4 w-8 h-1 bg-secondary group-hover/card:bg-white transition-all"></div>
                     </div>
                   </div>
