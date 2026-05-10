@@ -2,7 +2,7 @@ import { useState, lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import ScrollToTop from './components/ScrollToTop'
-import AIAssistant from './components/AIAssistant'
+import WhatsAppButton from './components/WhatsAppButton'
 import Preloader from './components/Preloader'
 
 // Lazy-load all pages — only Home loads eagerly
@@ -48,7 +48,7 @@ function App() {
               <Route path="/manaiyadi" element={<Manaiyadi />} />
             </Routes>
           </Suspense>
-          <AIAssistant />
+          <WhatsAppButton />
         </>
       )}
     </Router>
