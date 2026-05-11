@@ -13,17 +13,6 @@ import UnifiedFooter from '../components/UnifiedFooter'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
-// Marquee ticker items
-const ticker = [
-  '✦ Residential Construction',
-  '✦ Project Management',
-  '✦ 12+ Years Experience',
-  '✦ Quality Workmanship',
-  '✦ Transparent Pricing',
-  '✦ Tamil Nadu, India',
-  '✦ Sustainable Living',
-  '✦ Karrcholai Construction',
-]
 
 const Home = () => {
   return (
@@ -35,16 +24,6 @@ const Home = () => {
         <HeroSection />
       </section>
 
-      {/* ── Marquee Ticker ── */}
-      <div className="relative overflow-hidden bg-secondary py-4 z-10">
-        <div className="flex animate-marquee whitespace-nowrap">
-          {[...ticker, ...ticker].map((t, i) => (
-            <span key={i} className="text-white font-bold text-xs tracking-[0.25em] uppercase mx-8 flex-shrink-0">
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
 
       {/* ── Welcome / About intro ── */}
       <section id="about">

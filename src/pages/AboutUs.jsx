@@ -9,6 +9,7 @@ import founderImg from '../../assets/Founder.jpeg'
 import aboutBg from '../../assets/pic7.png' 
 import testimonialVid from '../../assets/VID.mp4'
 import constructionVid from '../../assets/Karcholai Construction.mp4'
+import courtyardImg from '../../assets/img1.jpg'
 
 const AboutUs = () => {
   const containerRef = useRef(null)
@@ -110,88 +111,144 @@ const AboutUs = () => {
         </section>
 
         {/* --- 2. THE STORY / FOUNDER --- */}
-        <section className="py-20 md:py-32 px-6 bg-[#fdfdfd]">
+        <section className="py-20 md:py-32 px-6 bg-[#fcfbfa] paper-texture">
           <div className="container mx-auto max-w-6xl">
-            <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center">
+            <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-start">
               {/* Sleek Image Reveal */}
-              <div className="w-full md:w-5/12 relative">
+              <div className="w-full md:w-4/12 relative">
                 <motion.div 
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
-                  className="aspect-[4/5] md:aspect-[4/5] overflow-hidden relative group rounded-sm shadow-xl"
+                  className="aspect-[4/5] overflow-hidden relative group rounded-[1.5rem] shadow-xl mb-6"
                 >
                   <motion.img 
-                    initial={{ scale: 1.2 }}
+                    initial={{ scale: 1.1 }}
                     whileInView={{ scale: 1 }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
                     src={founderImg} 
                     alt="Founder" 
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-black/5 transition-opacity duration-700 group-hover:bg-black/20" />
-                  
-                  {/* Floating Experience Badge */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8, duration: 0.8 }}
-                    className="absolute bottom-6 right-[-5px] md:-right-8 bg-white/95 backdrop-blur-md px-4 py-3 shadow-lg border-l-[2px] border-secondary z-20 flex items-center gap-3 rounded-sm"
-                  >
-                    <span className="text-2xl md:text-3xl font-light text-dark leading-none">
-                      12<span className="text-secondary font-bold text-lg md:text-xl">+</span>
-                    </span>
-                    <div className="w-[1px] h-6 bg-dark/10" />
-                    <span className="text-[8px] uppercase tracking-[0.2em] font-bold text-dark/50 leading-tight">
-                      Years <br/> Experience
-                    </span>
-                  </motion.div>
+                  <div className="absolute inset-0 bg-black/5 transition-opacity duration-700 group-hover:bg-black/10" />
                 </motion.div>
                 
-                {/* Minimalist Accents */}
-                <div className="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 rotate-180 hidden sm:block" style={{ writingMode: 'vertical-rl' }}>
-                  <span className="text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-dark/30 font-semibold">Established 2012</span>
-                </div>
-                <div className="absolute -right-2 md:-right-4 -bottom-2 md:-bottom-4 w-16 md:w-24 h-16 md:h-24 border-r border-b border-secondary/30" />
+                {/* Founder Details Below Image */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="text-left"
+                >
+                  <h3 className="text-2xl md:text-[28px] font-semibold text-[#4a3b32] tracking-tight mb-3">Saravanakumar B.</h3>
+                  <p className="text-[15px] text-[#4a3b32]/80 font-medium leading-relaxed">
+                    BE Civil Engineer | Founder - Karrcholai Construction
+                  </p>
+                </motion.div>
               </div>
 
               {/* Compact Typography */}
-              <div className="w-full md:w-7/12">
+              <div className="w-full md:w-8/12 md:pl-6 md:pt-4">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.8 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  <p className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-6 flex items-center gap-4">
-                    <span className="w-6 h-[1px] bg-secondary" />
-                    Our Genesis
-                  </p>
-                  <h2 className="text-3xl md:text-5xl font-light text-dark leading-[1.2] mb-8 tracking-tight">
-                    A vision grounded in <br />
-                    <span className="font-medium">practical expertise</span> and <br />
-                    <span className="italic text-dark/60 font-serif">architectural precision.</span>
+                  <h2 className="text-3xl md:text-[42px] font-semibold text-[#4a3b32] mb-10 tracking-tight">
+                    Meet the Founder
                   </h2>
-                  <div className="space-y-6 text-sm md:text-base text-dark/60 font-light leading-relaxed max-w-lg">
+                  <div className="space-y-7 text-[15px] md:text-[17px] text-[#4a3b32]/80 font-medium leading-[1.8]">
                     <p>
-                      With over 12 years of hands-on experience in residential construction, Karrcholai Construction was founded on a simple premise: to bridge the gap between complex blueprints and the homeowner's peace of mind.
+                      Hello, I'm <strong className="text-[#4a3b32] font-bold">Saravanakumar B.</strong>, a BE Civil Engineer and the founder of <strong className="text-[#4a3b32] font-bold">Karrcholai Construction.</strong> With more than 12 years of experience in residential construction, my journey has been build through practical site knowledge, disciplined execution, and a strong belief in honest building practices.
                     </p>
                     <p>
-                      We recognized that true quality isn't just about the final coat of paint; it's rooted in disciplined project management, rigorous site oversight, and a transparent partnership with our clients.
+                      For me, construction is not only about creating structures — it is about creating spaces for life. A home must be strong in its foundation, clear in planning, practical in execution, and peaceful for the people who live in it. This belief became the reason for starting <span className="text-[#C9754A]">Karrcholai Construction.</span>
                     </p>
-                  </div>
-                  
-                  {/* Sleek Signature Block */}
-                  <div className="mt-12 flex items-center gap-6">
-                    <div className="w-12 h-[1px] bg-dark/20" />
-                    <div>
-                      <p className="font-semibold text-dark text-base tracking-wide">Karrcholai</p>
-                      <p className="text-[9px] uppercase tracking-[0.2em] text-dark/40 mt-1 font-bold">Founder & Director</p>
+                    <p>
+                      The name Karrcholai comes from two ideas — <strong className="text-[#4a3b32] font-bold">Karr</strong>, meaning stone, and <strong className="text-[#4a3b32] font-bold">Cholai</strong>, meaning oasis. Together, they represent my vision: <strong className="text-[#4a3b32] font-bold">strong construction with peaceful living.</strong> Through my work, I aim to combine engineering knowledge, traditional values, and systematic project management to create homes that are durable, functional.
+                    </p>
+                    <p>
+                      My focus is on custom residential construction, project management consultancy, and responsible building practices that give long-term value to the client.
+                    </p>
+                    <div className="pt-4 space-y-1">
+                      <p className="text-[#4a3b32]/80">With regards,</p>
+                      <p className="font-bold text-[#4a3b32] text-lg">Saravanakumar B.</p>
                     </div>
                   </div>
                 </motion.div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* --- 2.2 MY THOUGHT ON CONSTRUCTION --- */}
+        <section className="py-20 md:py-32 px-6 bg-[#fcfbfa] paper-texture">
+          <div className="container mx-auto max-w-6xl">
+            <div className="flex flex-col-reverse md:flex-row gap-12 md:gap-20 items-center">
+              
+              {/* Compact Typography */}
+              <div className="w-full md:w-6/12 md:pr-6 md:py-4">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <h2 className="text-3xl md:text-[42px] font-semibold text-[#4a3b32] mb-10 tracking-tight">
+                    My Thought on Construction
+                  </h2>
+                  <div className="space-y-7 text-[15px] md:text-[17px] text-[#4a3b32]/80 font-medium leading-[1.8]">
+                    <p>
+                      Construction is not just about building a structure.<br className="hidden md:block" />
+                      It is about creating a space where life happens.
+                    </p>
+                    <p>
+                      A good house should not depend only on design.<br className="hidden md:block" />
+                      It must have a strong foundation, proper planning,<br className="hidden md:block" />
+                      correct materials, and disciplined execution.
+                    </p>
+                    <p>
+                      Through my experience in residential construction, I have learned<br className="hidden md:block" />
+                      that most problems come from poor planning and lack of supervision.<br className="hidden md:block" />
+                      Because of that, I always follow a systematic approach in every project.
+                    </p>
+                    <p>
+                      I believe in practical buildings rather than decorative buildings.<br className="hidden md:block" />
+                      A home should be strong, functional, comfortable,<br className="hidden md:block" />
+                      and peaceful for the people who live in it.
+                    </p>
+                    <p>
+                      My goal in every project is simple —<br className="hidden md:block" />
+                      to build with responsibility, clarity, and long-term thinking.
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Sleek Image Reveal */}
+              <div className="w-full md:w-6/12 relative">
+                <motion.div 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
+                  className="aspect-[4/5] md:aspect-square overflow-hidden relative group rounded-[1.5rem] border border-[#4a3b32]/10 shadow-xl mb-8 md:mb-0"
+                >
+                  <motion.img 
+                    initial={{ scale: 1.1 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    src={courtyardImg} 
+                    alt="Courtyard Construction" 
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/5 transition-opacity duration-700 group-hover:bg-black/10" />
+                </motion.div>
+              </div>
+
             </div>
           </div>
         </section>
