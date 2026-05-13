@@ -3,21 +3,21 @@ import { motion, AnimatePresence, useInView, useScroll, useTransform, useSpring 
 import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiArrowRight, FiNavigation, FiChevronDown, FiInstagram, FiFacebook } from 'react-icons/fi'
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
-import heroBg    from '../../assets/Exterior of modern luxury house with garden and beautiful sky.jpg'
-import heroVid   from '../../assets/contact.mp4'
-import img1      from '../../assets/img1.jpg'
-import img5      from '../../assets/img5.jpg'
-import img9      from '../../assets/img9.jpg'
-import img3      from '../../assets/img3.jpg'
+import heroBg from '../../assets/Exterior of modern luxury house with garden and beautiful sky.jpg'
+import heroVid from '../../assets/contact.mp4'
+import img1 from '../../assets/img1.jpg'
+import img5 from '../../assets/img5.jpg'
+import img9 from '../../assets/img9.jpg'
+import img3 from '../../assets/img3.jpg'
 import modernHouse from '../../assets/MORDEN HOUSE.jpg'
 
 const FOREST = '#3F5F4A'
-const TERRA  = '#C9754A'
-const CREAM  = '#F5F2EC'
-const DARK   = '#1C1C1A'
-const WA     = '919876543210'
+const TERRA = '#C9754A'
+const CREAM = '#F5F2EC'
+const DARK = '#1C1C1A'
 
-const inp = `w-full px-4 py-3.5 rounded-xl text-sm font-medium outline-none transition-all duration-300 border-2 border-transparent bg-[#F5F2EC] focus:bg-white focus:border-[#C9754A]`
+
+const inp = `w-full px-4 py-2.5 rounded-xl text-sm font-medium outline-none transition-all duration-300 border-2 border-transparent bg-[#F5F2EC] focus:bg-white focus:border-[#C9754A]`
 
 // ── Parallax word (same as Projects) ─────────────────────────────────────────
 function PWord({ children, delay = 0 }) {
@@ -34,7 +34,7 @@ function PWord({ children, delay = 0 }) {
 function Field({ label, children }) {
   return (
     <motion.div initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }} transition={{ duration: 0.5 }} className="flex flex-col gap-1.5">
+      viewport={{ once: true }} transition={{ duration: 0.5 }} className="flex flex-col gap-1">
       <label className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: `${DARK}55` }}>{label}</label>
       {children}
     </motion.div>
@@ -117,18 +117,18 @@ function FAQDark({ q, a, i, inView }) {
 
 export default function ContactUs() {
   const [sent, setSent] = useState(false)
-  const heroRef  = useRef(null)
+  const heroRef = useRef(null)
   const introRef = useRef(null)
-  const formRef  = useRef(null)
-  const howRef   = useRef(null)
-  const mapRef   = useRef(null)
-  const faqRef   = useRef(null)
+  const formRef = useRef(null)
+  const howRef = useRef(null)
+  const mapRef = useRef(null)
+  const faqRef = useRef(null)
 
   const introInView = useInView(introRef, { once: true, amount: 0.15 })
-  const formInView  = useInView(formRef,  { once: true, amount: 0.1 })
-  const howInView   = useInView(howRef,   { once: true, amount: 0.1 })
-  const mapInView   = useInView(mapRef,   { once: true, amount: 0.2 })
-  const faqInView   = useInView(faqRef,   { once: true, amount: 0.1 })
+  const formInView = useInView(formRef, { once: true, amount: 0.1 })
+  const howInView = useInView(howRef, { once: true, amount: 0.1 })
+  const mapInView = useInView(mapRef, { once: true, amount: 0.2 })
+  const faqInView = useInView(faqRef, { once: true, amount: 0.1 })
 
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 })
@@ -144,19 +144,6 @@ export default function ContactUs() {
       <motion.div className="fixed top-0 left-0 right-0 h-[3px] z-[200] origin-left"
         style={{ scaleX, background: `linear-gradient(90deg, ${FOREST}, ${TERRA})` }} />
 
-      {/* ── Floating WhatsApp ── */}
-      <motion.a href={`https://wa.me/${WA}?text=Hi%20Karrcholai%2C%20I%27m%20interested%20in%20your%20construction%20services.`}
-        target="_blank" rel="noopener noreferrer"
-        className="fixed bottom-6 left-6 z-[150] flex items-center gap-2 px-4 py-3 rounded-full shadow-2xl"
-        style={{ background: '#25D366', boxShadow: '0 8px 32px rgba(37,211,102,0.45)' }}
-        initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 1.5, type: 'spring', stiffness: 200 }}
-        whileHover={{ scale: 1.08, y: -2 }} whileTap={{ scale: 0.95 }}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span className="text-white text-xs font-black tracking-wide hidden sm:block">WhatsApp Us</span>
-        <motion.div className="absolute inset-0 rounded-full" style={{ border: '2px solid #25D366' }}
-          animate={{ scale: [1, 1.5, 1], opacity: [0.7, 0, 0.7] }} transition={{ duration: 2, repeat: Infinity }} />
-      </motion.a>
 
       <Navbar />
 
@@ -222,17 +209,7 @@ export default function ContactUs() {
               <div className="h-px w-12" style={{ background: `${TERRA}60` }} />
             </div>
 
-            {/* Stats */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="flex items-center justify-center gap-8 sm:gap-14 mt-6">
-              {[{ n: '120+', l: 'Projects' }, { n: '12+', l: 'Years' }, { n: '98%', l: 'Satisfaction' }].map((s, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-2xl sm:text-3xl font-black" style={{ color: TERRA }}>{s.n}</div>
-                  <div className="text-[9px] font-bold tracking-[0.25em] uppercase mt-0.5 text-white/50">{s.l}</div>
-                </div>
-              ))}
-            </motion.div>
+
           </motion.div>
         </div>
 
@@ -279,9 +256,9 @@ export default function ContactUs() {
             {/* Contact rows */}
             <div className="space-y-4">
               {[
-                { Icon: FiPhone,  label: 'Phone',    value: '+91 98765 43210',     href: 'tel:+919876543210',                              color: TERRA },
-                { Icon: FiMail,   label: 'Email',    value: 'info@karrcholai.com', href: 'mailto:info@karrcholai.com',                     color: FOREST },
-                { Icon: FiMapPin, label: 'Location', value: 'Tamil Nadu, India',   href: 'https://maps.google.com/?q=Tamil+Nadu,India',    color: '#8B7355' },
+                { Icon: FiPhone, label: 'Phone', value: '+91 97414 16747', href: 'tel:+919741416747', color: TERRA },
+                { Icon: FiMail, label: 'Email', value: 'karrcholai@gmail.com', href: 'mailto:karrcholai@gmail.com', color: FOREST },
+                { Icon: FiMapPin, label: 'Location', value: 'Karur, Tamil Nadu', href: 'https://maps.google.com/?q=Karur,Tamil+Nadu', color: '#8B7355' },
               ].map((item, i) => (
                 <motion.a key={i} href={item.href}
                   target={item.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
@@ -302,17 +279,7 @@ export default function ContactUs() {
               ))}
             </div>
 
-            {/* WhatsApp CTA */}
-            <motion.a href={`https://wa.me/${WA}?text=Hi%20Karrcholai%2C%20I%27m%20interested%20in%20your%20services.`}
-              target="_blank" rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 16 }} animate={introInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.7 }}
-              whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}
-              className="mt-8 inline-flex items-center gap-3 px-7 py-4 rounded-2xl cursor-pointer"
-              style={{ background: '#25D366', boxShadow: '0 8px 28px rgba(37,211,102,0.35)' }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              <span className="text-white font-black text-sm tracking-[0.15em] uppercase">Chat on WhatsApp</span>
-            </motion.a>
+
           </div>
 
           {/* Image collage */}
@@ -337,102 +304,68 @@ export default function ContactUs() {
                 <p className="text-xs font-bold text-white">Premium Construction</p>
               </div>
             </motion.div>
-            <motion.div initial={{ opacity: 0, scale: 0 }} animate={introInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.8, type: 'spring' }}
-              className="absolute top-1/2 -translate-y-1/2 -right-4 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex flex-col items-center justify-center shadow-xl"
-              style={{ background: `linear-gradient(135deg, ${TERRA}, ${FOREST})` }}>
-              <span className="text-lg sm:text-2xl font-black text-white leading-none">12</span>
-              <span className="text-[8px] font-black text-white/70 tracking-wider uppercase">Yrs</span>
-            </motion.div>
+
           </div>
         </div>
       </section>
 
-      {/* ── HOW TO CONTACT US ────────────────────────────────────────────── */}
-      <section ref={howRef} className="py-16 md:py-20" style={{ background: DARK }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={howInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }} className="text-center mb-12">
+      {/* ── FORM + SIDEBAR (Merged with Reach Us) ───────────────────────── */}
+      <section ref={formRef} className="py-16 md:py-24" style={{ background: DARK }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={formInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }} className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-3">
-              <motion.span className="h-px" style={{ background: TERRA }}
-                initial={{ width: 0 }} animate={howInView ? { width: 32 } : { width: 0 }}
-                transition={{ duration: 0.8 }} />
-              <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>Simple Process</span>
-              <motion.span className="h-px" style={{ background: TERRA }}
-                initial={{ width: 0 }} animate={howInView ? { width: 32 } : { width: 0 }}
-                transition={{ duration: 0.8 }} />
+              <span className="w-8 h-px" style={{ background: TERRA }} />
+              <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>How to reach us</span>
+              <span className="w-8 h-px" style={{ background: TERRA }} />
             </div>
-            <motion.h2 initial={{ y: 30, opacity: 0 }} animate={howInView ? { y: 0, opacity: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-2xl sm:text-3xl font-black font-serif text-white">How to Reach Us</motion.h2>
+            <h2 className="text-3xl sm:text-5xl font-black font-serif text-white">Get in Touch</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {/* Step cards merged here */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-20">
             {[
-              { step:'01', title:'Call or WhatsApp', desc:"Call us directly or send a WhatsApp message. We respond within minutes during office hours.", Icon:FiPhone, color:TERRA, image:img3, action:{ label:'Call Now', href:'tel:+919876543210' } },
-              { step:'02', title:'Send a Message',   desc:"Fill out our contact form with your project details. We'll review and get back within 24 hours.", Icon:FiMail, color:FOREST, image:img5, action:{ label:'Email Us', href:'mailto:info@karrcholai.com' } },
-              { step:'03', title:'Visit Our Office', desc:"Meet our team in person at our Tamil Nadu office. We'd love to discuss your vision face to face.", Icon:FiMapPin, color:'#8B7355', image:img9, action:{ label:'Get Directions', href:'https://maps.google.com/?q=Chennai,Tamil+Nadu' } },
+              { step: '01', title: 'Call or WhatsApp', desc: "Call us directly or send a WhatsApp message. We respond within minutes during office hours.", Icon: FiPhone, color: TERRA, image: img3, action: { label: 'Call Now', href: 'tel:+919876543210' } },
+              { step: '02', title: 'Send a Message', desc: "Fill out our contact form with your project details. We'll review and get back within 24 hours.", Icon: FiMail, color: FOREST, image: img5, action: { label: 'Email Us', href: 'mailto:info@karrcholai.com' } },
+              { step: '03', title: 'Visit Our Office', desc: "Meet our team in person at our Tamil Nadu office. We'd love to discuss your vision face to face.", Icon: FiMapPin, color: '#8B7355', image: img9, action: { label: 'Get Directions', href: 'https://maps.google.com/?q=Chennai,Tamil+Nadu' } },
             ].map((item, i) => (
               <motion.div key={i}
-                initial={{ opacity: 0, y: 50, clipPath: 'inset(100% 0% 0% 0%)' }}
-                animate={howInView ? { opacity: 1, y: 0, clipPath: 'inset(0% 0% 0% 0%)' } : {}}
-                transition={{ delay: i * 0.15, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={formInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: i * 0.1, duration: 0.8 }}
+                whileHover={{ y: -6 }}
                 className="rounded-3xl overflow-hidden group cursor-pointer"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
-                <div className="relative h-44 overflow-hidden">
-                  <motion.img src={item.image} alt={item.title} className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.07 }} transition={{ duration: 0.7 }} />
-                  <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${DARK}EE 0%, ${DARK}44 60%, transparent 100%)` }} />
-                  <div className="absolute top-4 left-4 w-9 h-9 rounded-xl flex items-center justify-center"
-                    style={{ background: `${item.color}CC`, backdropFilter: 'blur(8px)' }}>
-                    <span className="text-xs font-black text-white">{item.step}</span>
-                  </div>
-                  <div className="absolute bottom-4 right-4 w-9 h-9 rounded-xl flex items-center justify-center"
-                    style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.15)' }}>
-                    <item.Icon size={15} className="text-white" />
+                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                <div className="relative h-40 overflow-hidden">
+                  <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-black/40" />
+                  <div className="absolute top-4 left-4 w-8 h-8 rounded-lg flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20">
+                    <span className="text-[10px] font-black text-white">{item.step}</span>
                   </div>
                 </div>
-                <div className="p-5">
+                <div className="p-6">
                   <h3 className="text-base font-black text-white mb-2">{item.title}</h3>
-                  <p className="text-xs font-light leading-relaxed mb-4" style={{ color: 'rgba(232,229,223,0.5)' }}>{item.desc}</p>
-                  <motion.a href={item.action.href}
-                    target={item.action.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
-                    whileHover={{ x: 4 }} transition={{ duration: 0.2 }}
-                    className="flex items-center gap-2 text-xs font-black tracking-[0.2em] uppercase cursor-pointer"
-                    style={{ color: item.color }}>
-                    {item.action.label} <FiArrowRight size={11} />
-                  </motion.a>
+                  <p className="text-[11px] font-light leading-relaxed mb-4 text-white/50">{item.desc}</p>
+                  <a href={item.action.href} className="flex items-center gap-2 text-[10px] font-black tracking-widest uppercase" style={{ color: item.color }}>
+                    {item.action.label} <FiArrowRight size={10} />
+                  </a>
                 </div>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ── FORM + SIDEBAR ───────────────────────────────────────────────── */}
-      <section ref={formRef} className="py-16 md:py-20" style={{ background: DARK }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={formInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }} className="text-center mb-12">
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <span className="w-8 h-px" style={{ background: TERRA }} />
-              <span className="text-[10px] font-black tracking-[0.4em] uppercase" style={{ color: TERRA }}>Start a Conversation</span>
-              <span className="w-8 h-px" style={{ background: TERRA }} />
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black font-serif text-white">Send Us a Message</h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-start">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={formInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-3 rounded-3xl p-6 sm:p-10" style={{ background: CREAM }}>
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="lg:col-span-3 rounded-[2rem] p-5 sm:p-6 flex flex-col" style={{ background: CREAM }}>
+              <div className="mb-3">
+                <h3 className="text-xl font-black font-serif mb-0.5" style={{ color: DARK }}>Get in Touch</h3>
+                <p className="text-[11px] font-light" style={{ color: `${DARK}60` }}>We'll get back to you shortly.</p>
+              </div>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3">
                   <Field label="Full Name"><input type="text" placeholder="Your name" className={inp} required /></Field>
                   <Field label="Email Address"><input type="email" placeholder="you@email.com" className={inp} required /></Field>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <Field label="Phone Number"><input type="tel" placeholder="+91 98765 43210" className={inp} /></Field>
                   <Field label="Service Needed">
                     <select className={inp} style={{ appearance: 'none' }}>
@@ -443,50 +376,44 @@ export default function ContactUs() {
                       <option>Renovation</option>
                     </select>
                   </Field>
+                  <div className="sm:col-span-2">
+                    <Field label="Budget Range">
+                      <select className={inp} style={{ appearance: 'none' }}>
+                        <option>Under ₹30 Lakhs</option>
+                        <option>₹30 – ₹60 Lakhs</option>
+                        <option>₹60 Lakhs – ₹1 Crore</option>
+                        <option>Above ₹1 Crore</option>
+                      </select>
+                    </Field>
+                  </div>
                 </div>
-                <Field label="Budget Range">
-                  <select className={inp} style={{ appearance: 'none' }}>
-                    <option>Under ₹30 Lakhs</option>
-                    <option>₹30 – ₹60 Lakhs</option>
-                    <option>₹60 Lakhs – ₹1 Crore</option>
-                    <option>Above ₹1 Crore</option>
-                  </select>
-                </Field>
                 <Field label="Your Message">
-                  <textarea rows={4} placeholder="Tell us about your project, location, and timeline..." className={inp + ' resize-none'} required />
+                  <textarea rows={3} placeholder="Tell us about your project, location, and timeline..." className={inp + ' resize-none'} required />
                 </Field>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="pt-2">
                   <motion.button type="submit" whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.97 }}
                     className="w-full py-4 rounded-xl font-black text-sm tracking-[0.2em] uppercase text-white flex items-center justify-center gap-2"
                     style={{ background: sent ? FOREST : `linear-gradient(135deg, ${TERRA}, ${FOREST})`, boxShadow: `0 8px 24px ${TERRA}40` }}>
                     {sent ? <><span>Sent!</span><motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}>✓</motion.span></> : <><FiSend size={14} />Send Message</>}
                   </motion.button>
-                  <motion.a href={`https://wa.me/${WA}?text=Hi%20Karrcholai%2C%20I%27d%20like%20to%20discuss%20a%20project.`}
-                    target="_blank" rel="noopener noreferrer"
-                    whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.97 }}
-                    className="w-full py-4 rounded-xl font-black text-sm tracking-[0.2em] uppercase text-white flex items-center justify-center gap-2 cursor-pointer"
-                    style={{ background: '#25D366', boxShadow: '0 8px 24px rgba(37,211,102,0.35)' }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    WhatsApp
-                  </motion.a>
                 </div>
               </form>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 30 }} animate={formInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.15 }} className="lg:col-span-2 flex flex-col gap-5">
-              <div className="rounded-3xl overflow-hidden h-44 flex-shrink-0">
+              <div className="rounded-3xl overflow-hidden h-36 flex-shrink-0">
                 <img src={modernHouse} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="rounded-3xl p-6" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <div className="flex items-center gap-3 mb-5">
+                <div className="flex items-center gap-3 mb-4">
                   <FiClock size={15} style={{ color: TERRA }} />
                   <h3 className="font-black text-sm tracking-[0.25em] uppercase text-white">Office Hours</h3>
                 </div>
                 {[
                   { day: 'Monday – Friday', time: '9:00 AM – 6:00 PM', open: true },
-                  { day: 'Saturday',        time: '10:00 AM – 4:00 PM', open: true },
-                  { day: 'Sunday',          time: 'Closed', open: false },
+                  { day: 'Saturday', time: '10:00 AM – 4:00 PM', open: true },
+                  { day: 'Sunday', time: 'Closed', open: false },
                 ].map((row, i) => (
                   <motion.div key={i} initial={{ opacity: 0, x: 10 }} animate={formInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ delay: 0.4 + i * 0.1 }}
@@ -500,12 +427,18 @@ export default function ContactUs() {
                   <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.3)' }}>Currently Open</span>
                 </div>
               </div>
+              <div className="rounded-3xl p-5" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <div className="flex flex-col gap-1">
+                  <p className="text-[10px] font-black tracking-[0.3em] uppercase text-white/30">Proprietor</p>
+                  <p className="text-sm font-black text-white tracking-widest uppercase">SARAVANAKUMAR.B</p>
+                </div>
+              </div>
               <div className="rounded-3xl p-5 flex items-center gap-4"
                 style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
                 <p className="text-xs font-black tracking-widest uppercase text-white/40 flex-1">Follow Us</p>
                 {[
                   { Icon: FiInstagram, color: '#E1306C', href: 'https://instagram.com' },
-                  { Icon: FiFacebook,  color: '#1877F2', href: 'https://facebook.com' },
+                  { Icon: FiFacebook, color: '#1877F2', href: 'https://facebook.com' },
                 ].map((s, i) => (
                   <motion.a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
                     whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.95 }}
@@ -568,23 +501,12 @@ export default function ContactUs() {
             ))}
           </div>
 
-          {/* CTA below FAQ */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={faqInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.6 }}
-            className="mt-12 flex flex-col sm:flex-row items-center gap-4 p-6 rounded-2xl"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <div className="flex-1 text-center sm:text-left">
-              <p className="text-sm font-bold text-white mb-1">Still have questions?</p>
-              <p className="text-xs font-light" style={{ color: 'rgba(232,229,223,0.45)' }}>Our team is ready to help you plan your project.</p>
-            </div>
-            <motion.a href={`https://wa.me/${WA}?text=Hi%20Karrcholai%2C%20I%20have%20a%20question.`}
-              target="_blank" rel="noopener noreferrer"
-              whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl font-black text-xs tracking-[0.2em] uppercase text-white cursor-pointer flex-shrink-0"
-              style={{ background: '#25D366', boxShadow: '0 6px 20px rgba(37,211,102,0.35)' }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              Ask on WhatsApp
-            </motion.a>
+            className="mt-12 p-8 rounded-3xl text-center"
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <p className="text-sm font-bold text-white mb-2">Still have questions?</p>
+            <p className="text-xs font-light" style={{ color: 'rgba(232,229,223,0.45)' }}>Our team is ready to help you plan your project. Contact us via email or phone above.</p>
           </motion.div>
         </div>
       </section>
@@ -624,7 +546,10 @@ export default function ContactUs() {
               <h3 className="text-2xl sm:text-3xl font-black font-serif text-white leading-tight">
                 Find <span style={{ color: TERRA, fontStyle: 'italic' }}>Us</span>
               </h3>
-              <p className="text-xs font-light mt-1" style={{ color: 'rgba(232,229,223,0.4)' }}>Tamil Nadu, India</p>
+              <p className="text-[10px] font-light mt-1 leading-relaxed" style={{ color: 'rgba(232,229,223,0.4)' }}>
+                5/20, Puliyampatti, Cv Palayam,<br />
+                Karur - 639 206
+              </p>
             </div>
 
             {/* Divider */}
@@ -633,9 +558,9 @@ export default function ContactUs() {
             {/* Info rows */}
             <div className="flex flex-col gap-3">
               {[
-                { Icon: FiMapPin, v: 'Chennai · Coimbatore · Madurai', c: TERRA },
-                { Icon: FiPhone,  v: '+91 98765 43210',                 c: FOREST },
-                { Icon: FiClock,  v: 'Mon–Sat · 9:00 AM – 6:00 PM',    c: '#8B7355' },
+                { Icon: FiMapPin, v: 'Thennilai (West), Karur', c: TERRA },
+                { Icon: FiPhone, v: '+91 97414 16747', c: FOREST },
+                { Icon: FiClock, v: 'Mon–Sat · 9:00 AM – 6:00 PM', c: '#8B7355' },
               ].map((row, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -12 }} animate={mapInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.9 + i * 0.1 }} className="flex items-center gap-3">
@@ -671,7 +596,7 @@ export default function ContactUs() {
           transition={{ delay: 1.2 }}
           className="absolute top-5 right-5 z-20 px-4 py-2 rounded-full"
           style={{ background: 'rgba(22,20,16,0.82)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-          <span className="text-[9px] font-black tracking-[0.35em] uppercase text-white/50">Tamil Nadu · India</span>
+          <span className="text-[9px] font-black tracking-[0.35em] uppercase text-white/50">Karur · Tamil Nadu · India</span>
         </motion.div>
       </section>
 
