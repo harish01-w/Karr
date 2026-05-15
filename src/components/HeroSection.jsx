@@ -11,7 +11,14 @@ const HeroSection = () => {
 
 
   return (
-    <div ref={ref} className="relative w-full h-[92vh] min-h-[650px] flex items-center justify-center overflow-hidden bg-dark">
+    <div
+      ref={ref}
+      className="relative w-full overflow-hidden bg-dark"
+      style={{
+        height: 'calc(100vh - 72px)',
+        marginTop: '72px',
+      }}
+    >
 
       {/* ── Background Image ── */}
       <div
