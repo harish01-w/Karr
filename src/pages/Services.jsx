@@ -16,6 +16,8 @@ import imgReno from '../../assets/img3.jpg'
 import imgPlan from '../../assets/construction.jpg'
 import imgSuper from '../../assets/site.jpg'
 
+import { Helmet } from 'react-helmet-async'
+
 const Services = () => {
   const videoRef = useRef(null)
 
@@ -36,40 +38,40 @@ const Services = () => {
       features: ['Luxury Villas', 'Independent Houses', 'Structural Integrity', 'Premium Finishing']
     },
     {
-      id: "pmc",
-      icon: <FiBriefcase />,
-      title: 'Project Management Consultancy (PMC)',
-      tagline: 'Expert Project Oversight',
-      desc: 'Our PMC services help you manage your construction project efficiently. We handle the coordination, so you can focus on the result. We bridge the gap between vision and execution.',
-      image: imgPmc,
-      features: ['Timeline Management', 'Budget Control', 'Contractor Coordination', 'Resource Planning']
-    },
-    {
-      id: "renovation",
-      icon: <FiTool />,
-      title: 'Renovation & House Extensions',
-      tagline: 'Revitalize Your Space',
-      desc: 'Transform your existing space with our renovation and extension services. Whether it\'s a modern upgrade or adding extra rooms, we deliver seamless structural and aesthetic improvements.',
-      image: imgReno,
-      features: ['Room Extensions', 'Interior Remodeling', 'Structural Repairs', 'Modern Upgrades']
-    },
-    {
       id: "planning",
       icon: <FiActivity />,
-      title: 'Construction Planning & Cost Estimation',
-      tagline: 'Financial & Structural Clarity',
-      desc: 'Detailed planning and precise estimation are the foundation of a successful build. We provide comprehensive cost analysis and scheduling to prevent budget overruns and delays.',
+      title: 'Planning & Consultant',
+      tagline: 'Expert Guidance',
+      desc: 'Expert guidance from concept to completion. We manage permits, approvals, timelines and budgets so you can focus on your vision.',
       image: imgPlan,
       features: ['Detailed Costing', 'Material Estimation', 'Project Scheduling', 'Feasibility Studies']
     },
     {
-      id: "supervision",
+      id: "renovation",
+      icon: <FiTool />,
+      title: 'Renovation',
+      tagline: 'Revitalize Your Space',
+      desc: 'Complete home renovation services — structural changes, modern finishes, and Vastu-compliant redesigns that breathe new life into your space.',
+      image: imgReno,
+      features: ['Room Extensions', 'Interior Remodeling', 'Structural Repairs', 'Modern Upgrades']
+    },
+    {
+      id: "architect",
+      icon: <FiBriefcase />,
+      title: 'Architect Design',
+      tagline: 'Designing with Nature',
+      desc: 'Blending traditional Tamil architecture with contemporary design principles to create homes that are both timeless and functional.',
+      image: imgPmc,
+      features: ['Custom Home Design', 'Traditional Tamil Architecture', 'Modern Aesthetics', 'Vastu Integration']
+    },
+    {
+      id: "landscape",
       icon: <FiSearch />,
-      title: 'Site Supervision & Quality Control',
-      tagline: 'Uncompromising Standards',
-      desc: 'Our rigorous site supervision ensures that construction adheres to safety standards and design specifications. We maintain strict quality control at every stage of the project.',
+      title: 'Landscape',
+      tagline: 'Outdoor Excellence',
+      desc: 'Thoughtfully designed outdoor spaces that complement your home\'s architecture while thriving in Tamil Nadu\'s climate.',
       image: imgSuper,
-      features: ['Daily Site Logs', 'Material Quality Checks', 'Safety Compliance', 'Structural Inspection']
+      features: ['Garden Planning', 'Native Flora', 'Aesthetic Hardscaping', 'Sustainable Maintenance']
     }
   ]
 
@@ -91,6 +93,11 @@ const Services = () => {
 
   return (
     <div className="bg-[#fdfbf7] min-h-screen text-dark selection:bg-secondary selection:text-white font-sans overflow-x-hidden">
+      <Helmet>
+        <title>Our Services | Karrcholai Construction</title>
+        <meta name="description" content="Karrcholai provides premium residential construction services in Tamil Nadu, including custom home building, renovation, landscape design, and architectural planning." />
+        <link rel="canonical" href="https://karrcholai.com/services" />
+      </Helmet>
       <Navbar />
 
       <main>
@@ -188,6 +195,7 @@ const Services = () => {
                       <img 
                         src={service.image} 
                         alt={service.title} 
+                        loading="lazy"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-dark/10"></div>
@@ -282,12 +290,6 @@ const Services = () => {
 
       <UnifiedFooter />
 
-      <style jsx>{`
-        .stroke-text {
-          -webkit-text-stroke: 1px rgba(255,255,255,0.4);
-          color: transparent;
-        }
-      `}</style>
     </div>
   )
 }

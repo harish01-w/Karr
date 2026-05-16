@@ -11,6 +11,8 @@ import testimonialVid from '../../assets/VID.mp4'
 import constructionVid from '../../assets/Karcholai Construction.mp4'
 import courtyardImg from '../../assets/img1.jpg'
 
+import { Helmet } from 'react-helmet-async'
+
 const AboutUs = () => {
   const containerRef = useRef(null)
   const { scrollYProgress } = useScroll({
@@ -63,6 +65,11 @@ const AboutUs = () => {
 
   return (
     <div ref={containerRef} className="bg-cream min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
+      <Helmet>
+        <title>About Us | Karrcholai Construction</title>
+        <meta name="description" content="Learn about Karrcholai Construction, a premier residential builder in Tamil Nadu. Led by Saravanakumar B., we focus on strength, sustainability, and peaceful living." />
+        <link rel="canonical" href="https://karrcholai.com/about" />
+      </Helmet>
       <Navbar />
 
       <main>

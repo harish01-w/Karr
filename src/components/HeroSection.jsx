@@ -30,13 +30,10 @@ const HeroSection = () => {
           backgroundRepeat: 'no-repeat',
         }}
       />
-
-
-
-
-
-
-
+      {/* ── SEO H1 ── */}
+      <h1 className="sr-only">
+        Building Homes That Tell Your Story | Premium Residential Construction in Tamil Nadu
+      </h1>
       {/* ── Scroll cue ── */}
       <motion.div
         initial={{ opacity: 0 }}

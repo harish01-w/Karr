@@ -5,6 +5,7 @@ import { FiSearch } from 'react-icons/fi';
 import Navbar from '../components/Navbar';
 import UnifiedFooter from '../components/UnifiedFooter';
 import { blogPosts, categories } from '../data/blogData';
+import { Helmet } from 'react-helmet-async';
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState("All Insights");
@@ -19,6 +20,11 @@ const Blog = () => {
 
   return (
     <div className="bg-white min-h-screen text-[#1a1a1a] font-sans selection:bg-[#B85C38] selection:text-white">
+      <Helmet>
+        <title>The Journal | Karrcholai Construction Insights</title>
+        <meta name="description" content="Read the latest architectural insights, construction stories, and sustainability tips from Karrcholai Construction, Tamil Nadu's premium home builder." />
+        <link rel="canonical" href="https://karrcholai.com/blog" />
+      </Helmet>
       <Navbar />
 
       <main className="pt-32 pb-20">

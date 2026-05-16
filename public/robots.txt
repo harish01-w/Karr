@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://karrcholai.com/sitemap.xml

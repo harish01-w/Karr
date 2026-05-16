@@ -15,6 +15,7 @@ import solarImg from '../assets/cholai/solar.png'
 import solar1 from '../assets/cholai/solar_image.jpg'
 import wasteImg from '../assets/cholai/waste.png'
 import cholaiVideo from '../assets/cholai/cholai_video.mp4'
+import { Helmet } from 'react-helmet-async'
 
 const Cholai = () => {
   const containerRef = useRef(null)
@@ -94,6 +95,11 @@ const Cholai = () => {
 
   return (
     <div ref={containerRef} className="bg-[#fcfcf9] min-h-screen text-dark selection:bg-secondary selection:text-white overflow-x-hidden">
+      <Helmet>
+        <title>Cholai | Sustainable Living Solutions & Landscape</title>
+        <meta name="description" content="Cholai division of Karrcholai provides eco-friendly solutions including landscape development, rainwater harvesting, solar energy, and waste management in Tamil Nadu." />
+        <link rel="canonical" href="https://karrcholai.com/cholai" />
+      </Helmet>
       <Navbar />
 
       {/* Scroll Progress Bar */}
@@ -352,12 +358,6 @@ const Cholai = () => {
 
       <UnifiedFooter />
 
-      <style jsx>{`
-        .stroke-text {
-          -webkit-text-stroke: 1px rgba(255,255,255,0.4);
-          color: transparent;
-        }
-      `}</style>
     </div>
   )
 }

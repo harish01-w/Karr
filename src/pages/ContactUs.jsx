@@ -115,6 +115,8 @@ function FAQDark({ q, a, i, inView }) {
   )
 }
 
+import { Helmet } from 'react-helmet-async'
+
 export default function ContactUs() {
   const [sent, setSent] = useState(false)
   const heroRef = useRef(null)
@@ -139,6 +141,11 @@ export default function ContactUs() {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ background: CREAM, color: DARK }}>
+      <Helmet>
+        <title>Contact Us | Karrcholai Construction</title>
+        <meta name="description" content="Get in touch with Karrcholai Construction for premium residential projects in Tamil Nadu. Schedule a free consultation for your dream home." />
+        <link rel="canonical" href="https://karrcholai.com/contact" />
+      </Helmet>
 
       {/* ── Scroll progress bar ── */}
       <motion.div className="fixed top-0 left-0 right-0 h-[3px] z-[200] origin-left"

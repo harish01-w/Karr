@@ -13,13 +13,16 @@ import FootprintMapSection from '../components/FootprintMapSection'
 import HomeProjectsSection from '../components/HomeProjectsSection'
 import HomeContactSection from '../components/HomeContactSection'
 import UnifiedFooter from '../components/UnifiedFooter'
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-
+import { Helmet } from 'react-helmet-async'
 
 const Home = () => {
   return (
     <div className="font-sans text-dark min-h-screen overflow-x-hidden">
+      <Helmet>
+        <title>Karrcholai | Premium Residential Construction in Tamil Nadu</title>
+        <meta name="description" content="Karrcholai is a premier residential construction company in Tamil Nadu. We specialise in custom home building, renovation, interior design, and sustainable building." />
+        <link rel="canonical" href="https://karrcholai.com/" />
+      </Helmet>
       <Navbar />
 
       {/* ── Hero ── */}

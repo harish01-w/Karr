@@ -114,13 +114,6 @@ const HomeProjectsSection = () => {
           </div>
         </motion.div>
 
-        {/* CSS for stroked text */}
-        <style jsx>{`
-          .stroke-text-white {
-            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.6);
-            color: transparent;
-          }
-        `}</style>
 
       </div>
     </section>

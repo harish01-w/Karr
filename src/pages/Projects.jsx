@@ -5,6 +5,7 @@ import { FiMapPin, FiArrowRight, FiArrowUpRight, FiCheckCircle, FiClock, FiZap, 
 import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import FootprintMapSection from '../components/FootprintMapSection'
+import { Helmet } from 'react-helmet-async'
 import img1  from '../../assets/img1.jpg'
 import img2  from '../../assets/img2.jpg'
 import img3  from '../../assets/img3.jpg'
@@ -582,6 +583,11 @@ export default function Projects() {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ background: CREAM, color: DARK }}>
+      <Helmet>
+        <title>Our Projects | Karrcholai Construction</title>
+        <meta name="description" content="Explore Karrcholai Construction's portfolio of completed and ongoing residential projects in Tamil Nadu, from luxury villas to sustainable homes." />
+        <link rel="canonical" href="https://karrcholai.com/projects" />
+      </Helmet>
 
       {/* Scroll progress bar — like Karr page */}
       <motion.div

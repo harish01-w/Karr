@@ -11,6 +11,7 @@ import MeasurementTable from '../components/manaiyadi/MeasurementTable'
 import heroBg from '../assets/manaiyadi_hero.png'
 import vastuDetail from '../assets/vastu_detail.png'
 import staircase from '../assets/minimalist_luxury_staircase.png'
+import { Helmet } from 'react-helmet-async'
 
 const Manaiyadi = () => {
   const fadeInUp = {
@@ -22,6 +23,11 @@ const Manaiyadi = () => {
 
   return (
     <div className="bg-[#fdfbf7] min-h-screen text-dark selection:bg-secondary selection:text-white font-sans overflow-x-hidden">
+      <Helmet>
+        <title>Manaiyadi Sastram Calculator | Karrcholai Construction</title>
+        <meta name="description" content="Use our free Manaiyadi Sastram calculator to find auspicious dimensions for your home. Karrcholai integrates ancient Tamil architectural wisdom with modern construction." />
+        <link rel="canonical" href="https://karrcholai.com/manaiyadi" />
+      </Helmet>
       <Navbar />
 
       <main>
@@ -255,16 +261,6 @@ const Manaiyadi = () => {
 
       <UnifiedFooter />
 
-      <style jsx>{`
-        .stroke-text-white {
-          -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
-          color: transparent;
-        }
-        .stroke-text-dark {
-          -webkit-text-stroke: 1.5px rgba(26, 26, 26, 0.2);
-          color: transparent;
-        }
-      `}</style>
     </div>
   )
 }

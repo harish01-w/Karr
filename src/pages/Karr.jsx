@@ -12,6 +12,7 @@ import UnifiedFooter from '../components/UnifiedFooter';
 import karVideo from '../../assets/kar1.mp4';
 import kar2 from '../../assets/kar2.avif';
 import img1 from '../../assets/img1.jpg'; // Used in Services
+import { Helmet } from 'react-helmet-async';
 
 const Karr = () => {
   const containerRef = useRef(null);
@@ -79,6 +80,11 @@ const Karr = () => {
 
   return (
     <div ref={containerRef} className="bg-[#fdfbf7] min-h-screen text-[#1a1a1a] selection:bg-[#B85C38] selection:text-white overflow-x-hidden font-sans">
+      <Helmet>
+        <title>Karr | Strong Residential Construction & PMC</title>
+        <meta name="description" content="Karr division of Karrcholai focuses on durable residential construction and expert project management consultancy (PMC) in Tamil Nadu." />
+        <link rel="canonical" href="https://karrcholai.com/karr" />
+      </Helmet>
       <Navbar />
 
       {/* Scroll Progress Bar */}

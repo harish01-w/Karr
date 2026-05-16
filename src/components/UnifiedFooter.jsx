@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
 import logoImg from '../../assets/KARRCHOLAI LOGO.png'
 import texGreen from '../assets/tex-green.jpg'
 
@@ -30,20 +31,36 @@ const UnifiedFooter = () => {
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 items-center mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 items-start mb-16">
           {/* Column 1: Branding */}
           <div className="lg:col-span-1 flex flex-col items-start">
             <Link to="/" className="inline-flex items-center justify-center mb-4 group bg-white overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 p-2">
               <img 
                 src={logoImg} 
-                alt="KARRCHOLAI" 
+                alt="Karrcholai Construction logo" 
                 className="h-28 md:h-36 w-auto object-contain transition-all duration-500 group-hover:scale-[1.05]"
               />
             </Link>
-            <div className="mt-1 pl-2">
+            <div className="mt-1 pl-2 mb-6">
               <p className="text-[9px] font-black tracking-[0.4em] uppercase text-secondary/90 leading-relaxed">
                 From Stone to <span className="text-secondary tracking-[0.6em] brightness-125">Oasis</span>
               </p>
+            </div>
+            
+            {/* Social Links */}
+            <div className="flex gap-4 pl-2">
+              <a href="https://facebook.com/karrcholai" target="_blank" rel="noopener noreferrer" aria-label="Karrcholai on Facebook" className="text-white/60 hover:text-white transition-colors">
+                <FaFacebook size={18} />
+              </a>
+              <a href="https://instagram.com/karrcholai" target="_blank" rel="noopener noreferrer" aria-label="Karrcholai on Instagram" className="text-white/60 hover:text-white transition-colors">
+                <FaInstagram size={18} />
+              </a>
+              <a href="https://wa.me/919741416747" target="_blank" rel="noopener noreferrer" aria-label="Chat with Karrcholai on WhatsApp" className="text-white/60 hover:text-white transition-colors">
+                <FaWhatsapp size={18} />
+              </a>
+              <a href="https://linkedin.com/company/karrcholai" target="_blank" rel="noopener noreferrer" aria-label="Karrcholai on LinkedIn" className="text-white/60 hover:text-white transition-colors">
+                <FaLinkedin size={18} />
+              </a>
             </div>
           </div>
 
@@ -77,11 +94,17 @@ const UnifiedFooter = () => {
             <p className="text-white/50 text-[10px] mb-8 font-light leading-relaxed tracking-wide max-w-[240px]">
               Stay updated with our latest architectural projects and traditional building insights.
             </p>
+            <div className="space-y-4 mb-8">
+              <a href="mailto:info@karrcholai.com" className="text-[10px] font-bold text-white/40 hover:text-white transition-colors block uppercase tracking-widest" aria-label="Email Karrcholai Construction">
+                info@karrcholai.com
+              </a>
+            </div>
             <form className="relative max-w-[280px]" onSubmit={(e) => e.preventDefault()}>
               <input 
                 type="email" 
                 placeholder="Email address" 
                 className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-xs text-white focus:outline-none focus:border-secondary/50 transition-all placeholder:text-white/20"
+                aria-label="Email address for newsletter"
               />
               <button 
                 type="submit"
@@ -102,7 +125,7 @@ const UnifiedFooter = () => {
           </div>
           
           <p className="text-white/30 text-[8px] font-black tracking-[0.3em] uppercase text-center md:text-left">
-            © {new Date().getFullYear()} KARRCHOLAI CONSTRUCTION.
+            © 2025 Karrcholai Construction. All rights reserved.
           </p>
 
           <div className="flex items-center justify-center gap-2 text-white/40 text-[8px] font-black tracking-widest uppercase">
