@@ -28,7 +28,7 @@ const Navbar = () => {
 
   /* ── Scroll listener ── */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60)
+    const onScroll = () => setScrolled(window.scrollY > 80)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -81,9 +81,9 @@ const Navbar = () => {
           left: 0,
           width: '100%',
           zIndex: 100,
-          background: '#2D4B37',
-          boxShadow: scrolled ? '0 4px 32px rgba(0,0,0,0.28)' : '0 2px 16px rgba(0,0,0,0.18)',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          background: '#FAF9F6',
+          boxShadow: scrolled ? '0 4px 32px rgba(0,0,0,0.08)' : '0 2px 16px rgba(0,0,0,0.04)',
+          borderBottom: '1px solid rgba(0,0,0,0.06)',
           transition: 'box-shadow 0.4s ease',
         }}
       >
@@ -94,7 +94,7 @@ const Navbar = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: scrolled ? '64px' : '72px',
+          height: scrolled ? '84px' : '100px',
           transition: 'height 0.4s ease',
         }}>
 
@@ -116,11 +116,10 @@ const Navbar = () => {
               src={logoImg}
               alt="KARRCHOLAI"
               style={{
-                height: scrolled ? '44px' : '54px',
+                height: scrolled ? '64px' : '84px',
                 width: 'auto',
                 objectFit: 'contain',
                 transition: 'height 0.4s ease',
-                filter: 'brightness(0) invert(1)',
               }}
             />
           </button>
@@ -155,7 +154,7 @@ const Navbar = () => {
                     fontWeight: '700',
                     letterSpacing: '0.12em',
                     textTransform: 'uppercase',
-                    color: isActive ? '#ffffff' : 'rgba(255,255,255,0.70)',
+                    color: isActive ? '#1A1A1A' : 'rgba(26,26,26,0.65)',
                     transition: 'color 0.3s ease',
                     whiteSpace: 'nowrap',
                   }}
@@ -218,10 +217,10 @@ const Navbar = () => {
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: '50%',
-              border: '1px solid rgba(255,255,255,0.2)',
-              background: 'rgba(255,255,255,0.08)',
+              border: '1px solid rgba(0,0,0,0.1)',
+              background: 'rgba(0,0,0,0.04)',
               backdropFilter: 'blur(8px)',
-              color: '#ffffff',
+              color: '#1A1A1A',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
               flexShrink: 0,

@@ -15,8 +15,8 @@ const HeroSection = () => {
       ref={ref}
       className="relative w-full overflow-hidden bg-dark"
       style={{
-        height: 'calc(100vh - 72px)',
-        marginTop: '72px',
+        height: 'calc(100vh - 100px)',
+        marginTop: '100px',
       }}
     >
 
