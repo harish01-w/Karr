@@ -1,23 +1,12 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FiArrowUpRight, FiMapPin } from 'react-icons/fi'
-import pr1 from '../assets/pr1.jpeg'
-
-const SAMPLE_PROJECTS = [
-  {
-    id: 'modern-villa',
-    title: 'Modern Villa',
-    location: 'Chennai, TN',
-    tag: 'Residential',
-    image: pr1,
-    color: '#3F5F4A'
-  }
-]
+import { FiArrowUpRight, FiLayers } from 'react-icons/fi'
+import pr_1 from '../assets/pr_1.jpeg'
 
 const HomeProjectsSection = () => {
   return (
-    <section className="py-24 md:py-40 bg-white overflow-hidden">
+    <section className="py-24 md:py-40 bg-[#FAF9F6] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Header */}
@@ -29,8 +18,8 @@ const HomeProjectsSection = () => {
               viewport={{ once: true }}
               className="flex items-center gap-3 mb-6"
             >
-              <span className="w-10 h-px bg-[#C9754A]" />
-              <span className="text-[#C9754A] font-black text-[10px] tracking-[0.4em] uppercase">The Portfolio</span>
+              <span className="w-10 h-px bg-[#B85C38]" />
+              <span className="text-[#B85C38] font-black text-[10px] tracking-[0.4em] uppercase">The Portfolio</span>
             </motion.div>
             
             <motion.h2
@@ -53,80 +42,85 @@ const HomeProjectsSection = () => {
             className="hidden md:block text-right"
           >
             <p className="text-dark/40 text-sm font-light max-w-xs mb-8">
-              A selection of our recently delivered masterpieces, defined by structural integrity and aesthetic precision.
+              A comprehensive body of work across residential and commercial sectors, defined by structural integrity.
             </p>
-            <Link to="/projects">
-              <button className="group flex items-center gap-3 text-dark font-black text-[10px] tracking-[0.3em] uppercase ml-auto">
-                Full Portfolio <FiArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </button>
-            </Link>
           </motion.div>
         </div>
 
-        {/* Cinematic Grid */}
-        <div className="grid grid-cols-1 max-w-md mx-auto gap-8 md:gap-12">
-          {SAMPLE_PROJECTS.map((project, i) => (
+        {/* Cinematic Showcase Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="relative h-[500px] md:h-[650px] rounded-[3rem] overflow-hidden group shadow-2xl"
+        >
+          {/* Background Image */}
+          <img 
+            src={pr_1} 
+            alt="Karrcholai Projects" 
+            className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105"
+          />
+          
+          {/* Overlays */}
+          <div className="absolute inset-0 bg-dark/40 group-hover:bg-dark/30 transition-colors duration-700" />
+          <div className="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/20 to-transparent" />
+          
+          {/* Content Overlay */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-12">
             <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: i * 0.2 }}
-              className="group relative"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 1 }}
+              className="max-w-3xl"
             >
-              {/* Image Container */}
-              <Link to={`/projects/${project.id}`} className="block relative aspect-[3/4] overflow-hidden rounded-[2rem] bg-gray-100 mb-8 cursor-pointer group-hover:shadow-2xl transition-all duration-500">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
-                />
-                
-                {/* Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent" />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `${project.color}33` }} />
-                
-                {/* Floating Meta */}
-                <div className="absolute top-6 left-6">
-                  <span className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[9px] font-black tracking-widest uppercase rounded-full">
-                    {project.tag}
-                  </span>
+              <div className="flex justify-center mb-8">
+                <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white text-2xl">
+                  <FiLayers />
                 </div>
-                
-                <div className="absolute bottom-8 left-8 right-8">
-                  <h3 className="text-3xl font-black text-white font-serif mb-2 leading-none">
-                    {project.title}
-                  </h3>
-                  <div className="flex items-center gap-2 text-white/50 text-[10px] font-bold tracking-widest uppercase">
-                    <FiMapPin size={10} /> {project.location}
-                  </div>
-                </div>
-              </Link>
-              
-              {/* Content & Button */}
-              <div className="px-2">
-                <p className="text-dark/40 text-sm font-light leading-relaxed mb-8 line-clamp-2">
-                  Exploring the boundary between structural rigidity and architectural flow in this landmark {project.tag.toLowerCase()} project.
-                </p>
-                <Link to={`/projects/${project.id}`}>
-                  <button className="relative w-full py-4 border border-dark/10 rounded-full text-[10px] font-black tracking-[0.3em] uppercase overflow-hidden group/btn transition-colors hover:text-white">
-                    <span className="relative z-10 transition-colors duration-500 group-hover/btn:text-white">Learn More</span>
-                    <div className="absolute inset-0 bg-dark translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
-                  </button>
-                </Link>
               </div>
+              
+              <h3 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter mb-8 leading-[0.9]">
+                Our <span className="text-transparent stroke-text-white italic font-serif">Portfolio</span> <br /> 
+                Showcase.
+              </h3>
+              
+              <p className="text-white/60 text-sm md:text-xl font-light leading-relaxed mb-12 max-w-xl mx-auto">
+                Discover a legacy of residential excellence. From modern villas to sustainable sanctuaries, explore how we turn blueprints into architectural landmarks.
+              </p>
+              
+              <Link to="/projects">
+                <motion.button
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-10 md:px-16 py-6 bg-white text-dark rounded-full text-[10px] md:text-[11px] font-black tracking-[0.4em] uppercase shadow-2xl hover:bg-[#B85C38] hover:text-white transition-all duration-500"
+                >
+                  View All Projects
+                </motion.button>
+              </Link>
             </motion.div>
-          ))}
-        </div>
-        
-        {/* Mobile Call to Action */}
-        <div className="mt-16 md:hidden text-center">
-          <Link to="/projects">
-            <button className="text-dark/40 font-black text-[10px] tracking-[0.3em] uppercase">
-              View All Projects
-            </button>
-          </Link>
-        </div>
+          </div>
+
+          {/* Floating Accents */}
+          <div className="absolute bottom-12 left-12 right-12 flex justify-between items-center text-white/20">
+            <div className="flex items-center gap-4">
+              <span className="text-[9px] font-black tracking-[0.4em] uppercase">Est. 2024</span>
+              <div className="w-12 h-px bg-white/10" />
+            </div>
+            <div className="hidden md:flex items-center gap-4">
+              <div className="w-12 h-px bg-white/10" />
+              <span className="text-[9px] font-black tracking-[0.4em] uppercase">Built with Integrity</span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* CSS for stroked text */}
+        <style jsx>{`
+          .stroke-text-white {
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.6);
+            color: transparent;
+          }
+        `}</style>
 
       </div>
     </section>

@@ -5,13 +5,13 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import logoImg from '../../assets/KARRCHOLAI LOGO.png'
 
 const navLinks = [
-  { name: 'Home',      path: '/#home' },
-  { name: 'About',     path: '/#about' },
-  { name: 'Karr',      path: '/#divisions' },
-  { name: 'Cholai',    path: '/#divisions' },
-  { name: 'Projects',  path: '/#projects' },
-  { name: 'Manaiyadi', path: '/#manaiyadi' },
-  { name: 'Blog',      path: '/#blog' },
+  { name: 'Home',      path: '/' },
+  { name: 'About',     path: '/about' },
+  { name: 'Karr',      path: '/karr' },
+  { name: 'Cholai',    path: '/cholai' },
+  { name: 'Projects',  path: '/projects' },
+  { name: 'Manaiyadi', path: '/manaiyadi' },
+  { name: 'Blog',      path: '/blog' },
 ]
 
 // Pages where navbar is always solid
@@ -25,6 +25,22 @@ const Navbar = () => {
   const location  = useLocation()
 
   const isSolid = true // Always solid — no transparent state
+
+  /* ── Sync active link with location ── */
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const hash = location.hash;
+    
+    // Check if it's a specific route
+    const link = navLinks.find(l => l.path === currentPath);
+    if (link && !hash) {
+      setActiveLink(link.name);
+    } else if (currentPath === '/contact') {
+      setActiveLink('Contact');
+    } else if (currentPath === '/' && !hash) {
+      setActiveLink('Home');
+    }
+  }, [location.pathname, location.hash]);
 
   /* ── Scroll listener ── */
   useEffect(() => {
@@ -45,6 +61,13 @@ const Navbar = () => {
   const handleNavClick = (path, name) => {
     setMobileOpen(false)
     setActiveLink(name)
+
+    // If clicking Home while already on Home, scroll to top
+    if (path === '/' && location.pathname === '/' && !location.hash) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+
     if (path.startsWith('/#')) {
       const id = path.split('#')[1]
       if (location.pathname !== '/') {
@@ -183,7 +206,7 @@ const Navbar = () => {
 
             {/* ── CTA Button ── */}
             <button
-              onClick={() => handleNavClick('/#contact', 'Contact')}
+              onClick={() => handleNavClick('/contact', 'Contact')}
               style={{
                 marginLeft: '0.75rem',
                 padding: '0.5rem 1.4rem',
@@ -291,7 +314,7 @@ const Navbar = () => {
                 justifyContent: 'center',
                 gap: '0.75rem',
               }}>
-                {[...navLinks, { name: 'Contact', path: '/#contact' }].map((link, i) => (
+                {[...navLinks, { name: 'Contact', path: '/contact' }].map((link, i) => (
                   <motion.button
                     key={link.name}
                     initial={{ opacity: 0, x: 24 }}

@@ -53,13 +53,13 @@ const UnifiedFooter = () => {
             <ul className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4">
               {[
                 { name: 'Home', path: '/' },
-                { name: 'About', path: '/aboutus' },
+                { name: 'About', path: '/about' },
                 { name: 'Karr', path: '/karr' },
                 { name: 'Cholai', path: '/cholai' },
                 { name: 'Projects', path: '/projects' },
                 { name: 'Blog', path: '/blog' },
                 { name: 'Manaiyadi', path: '/manaiyadi' },
-                { name: 'Contact', path: '/contactus' }
+                { name: 'Contact', path: '/contact' }
               ].map((link) => (
                 <li key={link.name}>
                   <Link to={link.path} className="text-white/60 hover:text-white text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-2 group uppercase">
