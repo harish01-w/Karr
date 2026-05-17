@@ -117,7 +117,7 @@ const Navbar = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: scrolled ? '84px' : '100px',
+          height: scrolled ? 'var(--nav-height-scrolled, 84px)' : 'var(--nav-height, 100px)',
           transition: 'height 0.4s ease',
         }}>
 
@@ -139,7 +139,7 @@ const Navbar = () => {
               src={logoImg}
               alt="KARRCHOLAI"
               style={{
-                height: scrolled ? '64px' : '84px',
+                height: scrolled ? 'var(--logo-height-scrolled, 64px)' : 'var(--logo-height, 84px)',
                 width: 'auto',
                 objectFit: 'contain',
                 transition: 'height 0.4s ease',
@@ -234,14 +234,14 @@ const Navbar = () => {
             onClick={() => setMobileOpen(v => !v)}
             className="mobile-hamburger"
             style={{
-              width: '40px',
-              height: '40px',
+              width: '44px',
+              height: '44px',
               display: 'none',
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: '50%',
-              border: '1px solid rgba(0,0,0,0.1)',
-              background: 'rgba(0,0,0,0.04)',
+              border: '1px solid rgba(0,0,0,0.06)',
+              background: 'rgba(0,0,0,0.03)',
               backdropFilter: 'blur(8px)',
               color: '#1A1A1A',
               cursor: 'pointer',
@@ -252,8 +252,8 @@ const Navbar = () => {
           >
             <AnimatePresence mode="wait" initial={false}>
               {mobileOpen
-                ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}><FiX size={19} /></motion.span>
-                : <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}><FiMenu size={19} /></motion.span>
+                ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}><FiX size={20} /></motion.span>
+                : <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}><FiMenu size={20} /></motion.span>
               }
             </AnimatePresence>
           </button>
@@ -278,8 +278,8 @@ const Navbar = () => {
                 position: 'fixed',
                 inset: 0,
                 zIndex: 98,
-                background: 'rgba(0,0,0,0.55)',
-                backdropFilter: 'blur(6px)',
+                background: 'rgba(0,0,0,0.7)',
+                backdropFilter: 'blur(8px)',
               }}
               onClick={() => setMobileOpen(false)}
             />
@@ -290,20 +290,22 @@ const Navbar = () => {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ type: 'tween', duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 position: 'fixed',
                 top: 0,
                 right: 0,
                 bottom: 0,
                 zIndex: 99,
-                width: '80vw',
-                maxWidth: '300px',
-                background: '#FAF9F6',
+                width: '85vw',
+                maxWidth: '320px',
+                background: 'rgba(18, 18, 18, 0.95)',
+                backdropFilter: 'blur(20px)',
                 display: 'flex',
                 flexDirection: 'column',
-                boxShadow: '-20px 0 60px rgba(0,0,0,0.08)',
-                paddingTop: '72px',
+                boxShadow: '-20px 0 60px rgba(0,0,0,0.4)',
+                borderLeft: '1px solid rgba(255,255,255,0.08)',
+                paddingTop: '80px',
               }}
             >
               <nav style={{
@@ -312,7 +314,7 @@ const Navbar = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                gap: '0.75rem',
+                gap: '1rem',
               }}>
                 {[...navLinks, { name: 'Contact', path: '/contact' }].map((link, i) => (
                   <motion.button
@@ -326,31 +328,32 @@ const Navbar = () => {
                       border: 'none',
                       cursor: 'pointer',
                       textAlign: 'left',
-                      padding: '0.65rem 0',
-                      borderBottom: '1px solid rgba(26,26,26,0.05)',
+                      padding: '0.85rem 0',
+                      borderBottom: '1px solid rgba(255,255,255,0.05)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
                     }}
                   >
                     <span style={{
-                      fontSize: '0.7rem',
-                      fontWeight: '700',
-                      letterSpacing: '0.45em',
+                      fontSize: '0.85rem',
+                      fontWeight: '600',
+                      letterSpacing: '0.35em',
                       textTransform: 'uppercase',
-                      color: activeLink === link.name ? '#2D4B37' : 'rgba(26,26,26,0.45)',
+                      color: activeLink === link.name ? '#B85C38' : 'rgba(255,255,255,0.7)',
                       transition: 'color 0.3s',
                     }}>
+                      <span className="text-[0.65rem] opacity-35 mr-3 font-mono">0{i+1}</span>
                       {link.name}
                     </span>
                     {activeLink === link.name && (
                       <motion.div
                         layoutId="mobileActiveLine"
                         style={{
-                          width: '28px',
-                          height: '1.5px',
+                          width: '12px',
+                          height: '12px',
+                          borderRadius: '50%',
                           background: '#B85C38',
-                          borderRadius: '2px',
                         }}
                       />
                     )}
@@ -360,17 +363,26 @@ const Navbar = () => {
 
               {/* Drawer footer */}
               <div style={{
-                padding: '1.5rem 2.5rem',
-                borderTop: '1px solid rgba(26,26,26,0.04)',
-                textAlign: 'center',
+                padding: '2rem 2.5rem',
+                borderTop: '1px solid rgba(255,255,255,0.05)',
+                textAlign: 'left',
               }}>
                 <p style={{
-                  fontSize: '0.6rem',
-                  color: 'rgba(26,26,26,0.22)',
-                  letterSpacing: '0.5em',
+                  fontSize: '0.65rem',
+                  color: 'rgba(255,255,255,0.6)',
+                  letterSpacing: '0.2em',
                   textTransform: 'uppercase',
+                  fontWeight: '600',
+                  marginBottom: '6px',
                 }}>
-                  Karrcholai · Est 2024
+                  Karrcholai Construction
+                </p>
+                <p style={{
+                  fontSize: '0.55rem',
+                  color: 'rgba(255,255,255,0.3)',
+                  letterSpacing: '0.1em',
+                }}>
+                  Premium Residential Builds
                 </p>
               </div>
             </motion.div>
@@ -382,6 +394,22 @@ const Navbar = () => {
       {/* Responsive styles injected via <style>     */}
       {/* ─────────────────────────────────────────── */}
       <style>{`
+        :root {
+          --nav-height: 100px;
+          --nav-height-scrolled: 84px;
+          --logo-height: 84px;
+          --logo-height-scrolled: 64px;
+        }
+
+        @media (max-width: 899px) {
+          :root {
+            --nav-height: 76px;
+            --nav-height-scrolled: 64px;
+            --logo-height: 52px;
+            --logo-height-scrolled: 44px;
+          }
+        }
+
         /* Desktop: show nav links, hide hamburger */
         @media (min-width: 900px) {
           .desktop-nav-links { display: flex !important; }

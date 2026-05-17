@@ -136,7 +136,7 @@ export default function Projects() {
       </section>
 
       {/* ── PROJECT 01: THE MOHANAVALLI RESIDENCE (ERODE) ── */}
-      <section className="py-28 md:py-40 border-b relative" style={{ borderColor: BORDER_COLOR }}>
+      <section className="py-16 sm:py-28 md:py-40 border-b relative" style={{ borderColor: BORDER_COLOR }}>
         
         {/* Decorative Grid coordinate marker */}
         <div className="absolute right-12 top-12 text-[10px] font-black text-dark/15 tracking-widest uppercase hidden md:block" style={{ fontFamily: "'Outfit', sans-serif" }}>
@@ -146,7 +146,7 @@ export default function Projects() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           
           {/* Headline block */}
-          <div className="mb-14">
+          <div className="mb-10 sm:mb-14">
             <span 
               className="text-[10px] font-black tracking-[0.35em] uppercase" 
               style={{ color: TERRA, fontFamily: "'Outfit', sans-serif" }}
@@ -154,7 +154,7 @@ export default function Projects() {
               Case Study 01 // Structural Integration
             </span>
             <h2 
-              className="text-4xl md:text-7xl font-bold tracking-tight mt-2 leading-none" 
+              className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight mt-2 leading-none" 
               style={{ color: BRONZE, fontFamily: "'Oswald', sans-serif" }}
             >
               The Mohanavalli Residence
@@ -163,33 +163,33 @@ export default function Projects() {
           </div>
 
           {/* LUXURY METRICS DASHBOARD */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-3xl border shadow-sm mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl sm:rounded-3xl border shadow-sm mb-10 sm:mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
             {[
               { icon: FiMaximize, label: "Total Built Space", value: "4,500 Sq.Ft", accent: TERRA },
               { icon: FiMapPin, label: "Geographic Site", value: "Erode, TN", accent: TERRA },
               { icon: FiCalendar, label: "Year Completed", value: "2023", accent: TERRA },
               { icon: FiUser, label: "Client Homeowner", value: "Mrs. E. Mohanavalli", accent: TERRA }
             ].map((spec, idx) => (
-              <div key={idx} className="p-6 rounded-2xl border border-dark/[0.02] bg-[#FCFBF9] flex flex-col justify-between hover:border-dark/10 transition-all duration-300">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mb-6" style={{ background: `${spec.accent}08` }}>
-                  <spec.icon className="text-lg" style={{ color: spec.accent }} />
+              <div key={idx} className="p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-dark/[0.02] bg-[#FCFBF9] flex flex-col justify-between hover:border-dark/10 transition-all duration-300">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0 mb-4 sm:mb-6" style={{ background: `${spec.accent}08` }}>
+                  <spec.icon className="text-sm sm:text-lg" style={{ color: spec.accent }} />
                 </div>
                 <div>
-                  <p className="text-[9px] font-bold uppercase tracking-wider text-dark/35 mb-1" style={{ fontFamily: "'Outfit', sans-serif" }}>{spec.label}</p>
-                  <p className="text-base font-black text-dark/95 leading-none" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{spec.value}</p>
+                  <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-dark/35 mb-1" style={{ fontFamily: "'Outfit', sans-serif" }}>{spec.label}</p>
+                  <p className="text-xs sm:text-base font-black text-dark/95 leading-none" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{spec.value}</p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* MAIN ALIGNED 2-COLUMN GRID (Images and Content Perfectly Aligned Side-by-Side) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-stretch">
             
             {/* Left Panel: Cinematic Image Gallery with Dynamic Thumbnail Selection (7/12 Width) */}
-            <div className="lg:col-span-7 flex flex-col justify-between self-stretch gap-6">
+            <div className="lg:col-span-7 flex flex-col justify-between self-stretch gap-5 sm:gap-6">
               
               {/* Primary Active Showcase Frame */}
-              <div className="overflow-hidden rounded-[28px] shadow-lg aspect-[16/10] group relative bg-stone-100 border border-dark/5 flex-1 flex items-stretch">
+              <div className="overflow-hidden rounded-2xl sm:rounded-[28px] shadow-lg aspect-[16/10] group relative bg-stone-100 border border-dark/5 flex-1 flex items-stretch">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activeImgP1}
@@ -204,20 +204,20 @@ export default function Projects() {
                 </AnimatePresence>
                 {/* Active Caption Badge */}
                 <div 
-                  className="absolute bottom-5 left-5 bg-[#fdfbf7]/95 backdrop-blur-md text-dark text-[9px] uppercase tracking-widest px-4 py-2 rounded-md font-black border border-dark/5 shadow-sm"
+                  className="absolute bottom-4 left-4 sm:bottom-5 sm:left-5 bg-[#fdfbf7]/95 backdrop-blur-md text-dark text-[8px] sm:text-[9px] uppercase tracking-widest px-3 sm:px-4 py-1.5 sm:py-2 rounded-md font-black border border-dark/5 shadow-sm"
                   style={{ fontFamily: "'Outfit', sans-serif" }}
                 >
                   {p1Captions[activeImgP1]}
                 </div>
               </div>
 
-              {/* Symmetrical Row of Interactive Thumbnails (Updated to grid-cols-6) */}
-              <div className="grid grid-cols-6 gap-3 flex-shrink-0">
+              {/* Symmetrical Row of Interactive Thumbnails (Updated to grid-cols-6 with responsive touch swiping) */}
+              <div className="flex overflow-x-auto lg:grid lg:grid-cols-6 gap-3 flex-shrink-0 pb-2 lg:pb-0 hide-scrollbar snap-x">
                 {p1Images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setActiveImgP1(idx)}
-                    className={`overflow-hidden rounded-2xl shadow-sm aspect-[4/3] relative bg-stone-100 border transition-all duration-300 ${
+                    className={`overflow-hidden rounded-xl sm:rounded-2xl shadow-sm aspect-[4/3] relative bg-stone-100 border transition-all duration-300 flex-shrink-0 w-16 sm:w-20 lg:w-auto snap-center ${
                       activeImgP1 === idx ? 'border-[#B85C38] scale-103 ring-2 ring-[#B85C38]/20' : 'border-dark/5 opacity-70 hover:opacity-100'
                     }`}
                   >
@@ -231,11 +231,11 @@ export default function Projects() {
             <div className="lg:col-span-5 flex flex-col justify-between self-stretch gap-6">
               
               {/* Architectural Storytelling deck */}
-              <div className="p-6 md:p-8 rounded-3xl bg-white border shadow-sm flex-1 flex flex-col justify-between" style={{ borderColor: BORDER_COLOR }}>
+              <div className="p-5 sm:p-8 rounded-[20px] sm:rounded-3xl bg-white border shadow-sm flex-1 flex flex-col justify-between" style={{ borderColor: BORDER_COLOR }}>
                 <div>
                   
                   {/* Visual Spec Tabs */}
-                  <div className="flex border-b pb-4 mb-6 gap-3 overflow-x-auto" style={{ borderColor: 'rgba(58,58,56,0.06)' }}>
+                  <div className="flex border-b pb-3 sm:pb-4 mb-5 sm:mb-6 gap-3 overflow-x-auto hide-scrollbar" style={{ borderColor: 'rgba(58,58,56,0.06)' }}>
                     {[
                       { id: 'vision', label: '01 / Vision' },
                       { id: 'structural', label: '02 / Structure' },
@@ -263,11 +263,11 @@ export default function Projects() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 10 }}
                       transition={{ duration: 0.3 }}
-                      className="space-y-4 text-xs md:text-sm font-light text-dark/75 leading-relaxed"
+                      className="space-y-4 text-xs sm:text-sm font-light text-dark/75 leading-relaxed"
                     >
                       {activeTabP1 === 'vision' && (
                         <>
-                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept & Philosophy</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept & Philosophy</h4>
                           <p>
                             Commissioned to serve as an enduring ancestral landmark, the Mohanavalli Residence represents a masterclass in modern luxury and uncompromised structural integrity.
                           </p>
@@ -279,7 +279,7 @@ export default function Projects() {
 
                       {activeTabP1 === 'structural' && (
                         <>
-                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Structural & Engineering Excellence</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Structural & Engineering Excellence</h4>
                           <p>
                             By deploying advanced post-tensioned slab technology and pre-stressed steel cables, our engineering team eliminated the need for load-bearing partition walls, resulting in a majestic double-height living room with a continuous 40-foot column-free span.
                           </p>
@@ -291,7 +291,7 @@ export default function Projects() {
 
                       {activeTabP1 === 'material' && (
                         <>
-                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Premium Materials & Finishes</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Premium Materials & Finishes</h4>
                           <p>
                             The entire structure is wrapped in high-density local Erode granite cavity walls, providing an exceptional natural thermal barrier that drops peak summer indoor temperatures by up to 6°C.
                           </p>
@@ -303,7 +303,7 @@ export default function Projects() {
 
                       {activeTabP1 === 'timeline' && (
                         <>
-                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Construction Timeline & Milestones</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Construction Timeline & Milestones</h4>
                           <ul className="space-y-2 text-xs">
                             <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
                               <span><strong>Phase 1:</strong> Blueprints & Excavation</span>
@@ -328,11 +328,11 @@ export default function Projects() {
                   </AnimatePresence>
                 </div>
 
-                <div className="h-[1px] w-full bg-gradient-to-r from-[#B85C38]/20 to-transparent mt-6" />
+                <div className="h-[1px] w-full bg-gradient-to-r from-[#B85C38]/20 to-transparent mt-5 sm:mt-6" />
               </div>
 
               {/* Bright Testimonial Panel */}
-              <div className="p-6 md:p-8 rounded-3xl border shadow-sm flex-shrink-0 flex flex-col justify-between relative overflow-hidden bg-white" style={{ borderColor: BORDER_COLOR }}>
+              <div className="p-5 sm:p-8 rounded-[20px] sm:rounded-3xl border shadow-sm flex-shrink-0 flex flex-col justify-between relative overflow-hidden bg-white" style={{ borderColor: BORDER_COLOR }}>
                 <div className="absolute top-4 right-4 text-dark/[0.02] text-7xl pointer-events-none font-serif leading-none">“</div>
                 
                 <div className="relative z-10">
@@ -341,18 +341,18 @@ export default function Projects() {
                     {[...Array(5)].map((_, i) => <FaStar key={i} />)}
                   </div>
 
-                  <p className="text-xs md:text-sm font-light italic leading-relaxed text-dark/80 mb-6">
+                  <p className="text-xs sm:text-sm font-light italic leading-relaxed text-dark/80 mb-6">
                     "The KARRCHOLAI team impressed with their professionalism and dedication. From the initial planning stages to the ongoing execution, they have demonstrated a keen eye for detail and a commitment to excellence."
                   </p>
                 </div>
 
-                <div className="pt-4 border-t flex items-center justify-between" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
+                <div className="pt-4 border-t flex items-center justify-between gap-4" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
                   <div>
                     <h4 className="font-bold text-xs tracking-wide" style={{ color: BRONZE }}>Mrs. Elumalai Mohanavalli</h4>
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Erode</p>
+                    <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Erode</p>
                   </div>
-                  <div className="flex flex-col items-end">
-                    <span className="text-[9px] font-black px-2.5 py-1 rounded bg-[#B85C38]/08 text-[#B85C38] uppercase tracking-wider" style={{ fontFamily: "'Outfit', sans-serif" }}>Verified Review</span>
+                  <div className="flex flex-col items-end flex-shrink-0">
+                    <span className="text-[8px] sm:text-[9px] font-black px-2.5 py-1 rounded bg-[#B85C38]/08 text-[#B85C38] uppercase tracking-wider" style={{ fontFamily: "'Outfit', sans-serif" }}>Verified Review</span>
                     <span className="text-[8px] text-dark/30 mt-1 uppercase font-bold tracking-widest">12-Mo Evaluation</span>
                   </div>
                 </div>
@@ -366,7 +366,7 @@ export default function Projects() {
       </section>
 
       {/* ── PROJECT 02: THE KARTHIGA DEVI RESIDENCE (COIMBATORE) ── */}
-      <section className="py-28 md:py-40 relative" style={{ background: '#FAF8F5' }}>
+      <section className="py-16 sm:py-28 md:py-40 relative" style={{ background: '#FAF8F5' }}>
         
         {/* Decorative Grid coordinate marker */}
         <div className="absolute right-12 top-12 text-[10px] font-black text-dark/15 tracking-widest uppercase hidden md:block" style={{ fontFamily: "'Outfit', sans-serif" }}>
@@ -376,7 +376,7 @@ export default function Projects() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           
           {/* Section Case Header */}
-          <div className="mb-14">
+          <div className="mb-10 sm:mb-14">
             <span 
               className="text-[9px] font-bold tracking-[0.35em] uppercase" 
               style={{ color: SAGE, fontFamily: "'Outfit', sans-serif" }}
@@ -384,7 +384,7 @@ export default function Projects() {
               Case Study 02 // Ecological Architecture
             </span>
             <h2 
-              className="text-3xl md:text-5xl font-bold tracking-tight mt-1" 
+              className="text-3xl sm:text-5xl font-bold tracking-tight mt-1" 
               style={{ color: BRONZE, fontFamily: "'Oswald', sans-serif" }}
             >
               The Karthiga Devi Residence
@@ -393,20 +393,20 @@ export default function Projects() {
           </div>
 
           {/* BRIGHT LUXURY METRICS ACCORDION */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-3xl border shadow-sm mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl sm:rounded-3xl border shadow-sm mb-10 sm:mb-16 bg-white" style={{ borderColor: BORDER_COLOR }}>
             {[
               { icon: FiMaximize, label: "Total Built Space", value: "5,100 Sq.Ft", accent: SAGE },
               { icon: FiMapPin, label: "Geographic Site", value: "Coimbatore, TN", accent: SAGE },
               { icon: FiCalendar, label: "Year Completed", value: "2024", accent: SAGE },
               { icon: FiUser, label: "Client Homeowner", value: "Mrs. N. Karthiga Devi", accent: SAGE }
             ].map((spec, idx) => (
-              <div key={idx} className="p-5 rounded-xl border border-dark/[0.02] bg-[#FCFBF9] flex items-center gap-4 hover:border-dark/10 transition-all duration-300">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${spec.accent}08` }}>
-                  <spec.icon className="text-base" style={{ color: spec.accent }} />
+              <div key={idx} className="p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-dark/[0.02] bg-[#FCFBF9] flex items-center gap-3 sm:gap-4 hover:border-dark/10 transition-all duration-300">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${spec.accent}08` }}>
+                  <spec.icon className="text-sm sm:text-base" style={{ color: spec.accent }} />
                 </div>
                 <div>
-                  <p className="text-[8px] font-bold uppercase tracking-wider text-dark/35 mb-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>{spec.label}</p>
-                  <p className="text-sm font-black text-dark/95 leading-none" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{spec.value}</p>
+                  <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-dark/35 mb-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>{spec.label}</p>
+                  <p className="text-xs sm:text-sm font-black text-dark/95 leading-none" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{spec.value}</p>
                 </div>
               </div>
             ))}
@@ -416,7 +416,7 @@ export default function Projects() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
             
             {/* Left Panel: Symmetrical Image Gallery with Interactive Thumbnails (7/12 Width) */}
-            <div className="lg:col-span-7 space-y-5">
+            <div className="lg:col-span-7 space-y-4 sm:space-y-5">
               {/* Primary Active Showcase Frame */}
               <div className="overflow-hidden rounded-2xl shadow-sm aspect-[16/10] group relative bg-stone-100 border border-dark/5">
                 <AnimatePresence mode="wait">
@@ -432,20 +432,20 @@ export default function Projects() {
                   />
                 </AnimatePresence>
                 <div 
-                  className="absolute bottom-4 left-4 bg-[#fdfbf7]/95 backdrop-blur-md text-dark text-[9px] uppercase tracking-widest px-3 py-1.5 rounded font-black border border-dark/5 shadow-sm"
+                  className="absolute bottom-4 left-4 bg-[#fdfbf7]/95 backdrop-blur-md text-dark text-[8px] sm:text-[9px] uppercase tracking-widest px-3 py-1.5 rounded font-black border border-dark/5 shadow-sm"
                   style={{ fontFamily: "'Outfit', sans-serif" }}
                 >
                   {p2Captions[activeImgP2]}
                 </div>
               </div>
 
-              {/* Symmetrical Row of 3 Interactive Thumbnails */}
-              <div className="grid grid-cols-3 gap-5">
+              {/* Symmetrical Row of 3 Interactive Thumbnails (with mobile horizontal touch scrolling) */}
+              <div className="flex overflow-x-auto lg:grid lg:grid-cols-3 gap-3 sm:gap-5 pb-2 lg:pb-0 hide-scrollbar snap-x">
                 {p2Images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setActiveImgP2(idx)}
-                    className={`overflow-hidden rounded-xl shadow-sm aspect-[3/2] relative bg-stone-100 border transition-all duration-300 ${
+                    className={`overflow-hidden rounded-xl shadow-sm aspect-[3/2] relative bg-stone-100 border transition-all duration-300 flex-shrink-0 w-24 sm:w-32 lg:w-auto snap-center ${
                       activeImgP2 === idx ? 'border-[#2D4B37] scale-103 ring-2 ring-[#2D4B37]/20' : 'border-dark/5 opacity-70 hover:opacity-100'
                     }`}
                   >
@@ -459,11 +459,11 @@ export default function Projects() {
             <div className="lg:col-span-5 flex flex-col justify-between self-stretch gap-6">
               
               {/* Architectural Storytelling deck */}
-              <div className="p-6 md:p-8 rounded-3xl bg-white border shadow-sm flex-1 flex flex-col justify-between" style={{ borderColor: BORDER_COLOR }}>
+              <div className="p-5 sm:p-8 rounded-[20px] sm:rounded-3xl bg-white border shadow-sm flex-1 flex flex-col justify-between" style={{ borderColor: BORDER_COLOR }}>
                 <div>
                   
                   {/* Visual Spec Tabs */}
-                  <div className="flex border-b pb-4 mb-6 gap-3 overflow-x-auto" style={{ borderColor: 'rgba(58,58,56,0.06)' }}>
+                  <div className="flex border-b pb-3 sm:pb-4 mb-5 sm:mb-6 gap-3 overflow-x-auto hide-scrollbar" style={{ borderColor: 'rgba(58,58,56,0.06)' }}>
                     {[
                       { id: 'vision', label: '01 / Vision' },
                       { id: 'structural', label: '02 / Eco Core' },
@@ -491,11 +491,11 @@ export default function Projects() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 10 }}
                       transition={{ duration: 0.3 }}
-                      className="space-y-4 text-xs md:text-sm font-light text-dark/75 leading-relaxed"
+                      className="space-y-4 text-xs sm:text-sm font-light text-dark/75 leading-relaxed"
                     >
                       {activeTabP2 === 'vision' && (
                         <>
-                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept & Vision</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Design Concept & Vision</h4>
                           <p>
                             The Karthiga Devi Residence is a breakthrough achievement in eco-friendly architecture and self-sustaining engineering. Nestled within Coimbatore's biophilic landscape, the design focuses on building a carbon-neutral sanctuary.
                           </p>
@@ -507,7 +507,7 @@ export default function Projects() {
 
                       {activeTabP2 === 'structural' && (
                         <>
-                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Eco Engineering & Solar Infrastructure</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Eco Engineering & Solar Infrastructure</h4>
                           <p>
                             Built with seamless, roof-integrated monocrystalline solar tiles working in tandem with smart lithium battery banks (12.5 kWp). The system captures clean solar radiation to fuel over 80% of daily domestic loads.
                           </p>
@@ -519,7 +519,7 @@ export default function Projects() {
 
                       {activeTabP2 === 'material' && (
                         <>
-                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Low-Carbon Materiality</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Low-Carbon Materiality</h4>
                           <p>
                             Constructed utilizing high-performance compressed earth blocks (CSEBs) and custom-cast sustainable bamboo columns.
                           </p>
@@ -531,14 +531,14 @@ export default function Projects() {
 
                       {activeTabP2 === 'timeline' && (
                         <>
-                          <h4 className="font-bold text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Engineering Milestones</h4>
+                          <h4 className="font-bold text-sm sm:text-base text-dark/95 mb-2" style={{ fontFamily: "'Oswald', sans-serif" }}>Engineering Milestones</h4>
                           <ul className="space-y-2 text-xs">
                             <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
                               <span><strong>Phase 1:</strong> Biophilic Site Orientation Study</span>
                               <span>Month 1-2</span>
                             </li>
                             <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
-                              <span><strong>Phase 2:</strong> Subterranean Harvester Harvester Aquifer</span>
+                              <span><strong>Phase 2:</strong> Subterranean Harvester Aquifer</span>
                               <span>Month 3-6</span>
                             </li>
                             <li className="flex justify-between border-b pb-1" style={{ borderColor: 'rgba(58,58,56,0.04)' }}>
@@ -556,11 +556,11 @@ export default function Projects() {
                   </AnimatePresence>
                 </div>
 
-                <div className="h-[1px] w-full bg-gradient-to-r from-[#2D4B37]/20 to-transparent mt-6" />
+                <div className="h-[1px] w-full bg-gradient-to-r from-[#2D4B37]/20 to-transparent mt-5 sm:mt-6" />
               </div>
 
               {/* Bright Testimonial Panel */}
-              <div className="p-6 md:p-8 rounded-2xl border shadow-sm flex-shrink-0 flex flex-col justify-between relative overflow-hidden bg-white" style={{ borderColor: BORDER_COLOR }}>
+              <div className="p-5 sm:p-8 rounded-[20px] sm:rounded-3xl border shadow-sm flex-shrink-0 flex flex-col justify-between relative overflow-hidden bg-white" style={{ borderColor: BORDER_COLOR }}>
                 <div className="absolute top-4 right-4 text-dark/[0.02] text-7xl pointer-events-none font-serif leading-none">“</div>
                 
                 <div className="relative z-10">
@@ -569,18 +569,18 @@ export default function Projects() {
                     {[...Array(5)].map((_, i) => <FaStar key={i} />)}
                   </div>
 
-                  <p className="text-xs md:text-sm font-light italic leading-relaxed text-dark/85 mb-6">
+                  <p className="text-xs sm:text-sm font-light italic leading-relaxed text-dark/85 mb-6">
                     "We entrusted KARRCHOLAI with our home. The team's dedication to quality craftsmanship and attention to detail truly shines through in every corner of our home. Thank you for turning our house into a haven!"
                   </p>
                 </div>
 
-                <div className="pt-4 border-t flex items-center justify-between" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
+                <div className="pt-4 border-t flex items-center justify-between gap-4" style={{ borderColor: 'rgba(58,58,56,0.05)' }}>
                   <div>
                     <h4 className="font-bold text-xs tracking-wide" style={{ color: BRONZE }}>Mrs. Naatrayan Karthiga Devi</h4>
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Coimbatore</p>
+                    <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-dark/45 mt-0.5" style={{ fontFamily: "'Outfit', sans-serif" }}>Homeowner Client — Coimbatore</p>
                   </div>
-                  <div className="flex flex-col items-end">
-                    <span className="text-[9px] font-black px-2.5 py-1 rounded bg-[#2D4B37]/08 text-[#2D4B37] uppercase tracking-wider" style={{ fontFamily: "'Outfit', sans-serif" }}>Verified Review</span>
+                  <div className="flex flex-col items-end flex-shrink-0">
+                    <span className="text-[8px] sm:text-[9px] font-black px-2.5 py-1 rounded bg-[#2D4B37]/08 text-[#2D4B37] uppercase tracking-wider" style={{ fontFamily: "'Outfit', sans-serif" }}>Verified Review</span>
                     <span className="text-[8px] text-dark/30 mt-1 uppercase font-bold tracking-widest">12-Mo Evaluation</span>
                   </div>
                 </div>
@@ -589,6 +589,9 @@ export default function Projects() {
             </div>
 
           </div>
+
+        </div>
+      </section>div>
 
         </div>
       </section>
