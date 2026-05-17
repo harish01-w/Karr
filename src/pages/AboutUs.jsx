@@ -605,35 +605,47 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* --- 6. SLEEK CTA --- */}
-        <section className="py-24 md:py-32 bg-dark text-white text-center px-6 border-t border-white/10 relative overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        {/* --- 6. ULTRA PREMIUM CTA --- */}
+        <section className="relative py-40 overflow-hidden bg-[#FAF8F5]">
+          {/* Elegant Light Background */}
+          <div className="absolute inset-0 z-0">
+             <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/dark-matter.png")' }} />
+          </div>
 
-          <div className="container mx-auto max-w-2xl relative z-10">
+          <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
             >
-              <h3 className="text-3xl md:text-5xl font-light mb-6 tracking-tight">
-                Ready to begin your <br />
-                <span className="font-medium italic text-secondary">architectural journey?</span>
-              </h3>
-              <p className="text-sm md:text-base text-white/50 font-light mb-12 max-w-lg mx-auto leading-relaxed">
-                Schedule a consultation with our experts and take the first step towards realizing your vision with precision and elegance.
+              <div className="flex items-center justify-center gap-4 mb-8">
+                <div className="h-[1px] w-12 bg-[#B85C38]/40" />
+                <span className="text-[9px] font-black tracking-[0.5em] uppercase text-[#B85C38]">
+                  Initiate Project
+                </span>
+                <div className="h-[1px] w-12 bg-[#B85C38]/40" />
+              </div>
+
+              <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-[#2A2A28] leading-[0.9] mb-8 tracking-tighter uppercase">
+                Design Your <br />
+                <span className="text-[#B85C38] italic font-serif lowercase tracking-normal">legacy.</span>
+              </h2>
+
+              <p className="text-sm md:text-lg font-medium leading-relaxed mb-14 text-[#2A2A28]/60 max-w-2xl mx-auto">
+                Commission a bespoke architectural masterpiece. Consult with our leadership to define the contours of your future estate.
               </p>
 
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="group relative overflow-hidden inline-flex items-center gap-4 bg-white text-dark px-10 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:text-white transition-colors duration-500 rounded-sm"
+                className="group relative overflow-hidden inline-flex items-center justify-center px-12 py-5 transition-colors duration-500 rounded-full bg-[#B85C38] shadow-xl hover:shadow-2xl"
               >
-                <span className="relative z-10 flex items-center gap-3">
-                  Start the Conversation
-                  <div className="w-4 h-[1px] bg-dark group-hover:bg-white group-hover:w-6 transition-all duration-300" />
+                <div className="absolute inset-0 bg-[#2A2A28] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-700 ease-[0.16,1,0.3,1]" />
+                <span className="relative z-10 flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] text-white transition-colors duration-500">
+                  Request Consultation
+                  <div className="w-6 h-[1px] bg-white transition-colors duration-500" />
                 </span>
-                <div className="absolute inset-0 bg-secondary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
               </motion.button>
             </motion.div>
           </div>
