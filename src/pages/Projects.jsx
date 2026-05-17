@@ -6,28 +6,37 @@ import Navbar from '../components/Navbar'
 import UnifiedFooter from '../components/UnifiedFooter'
 import FootprintMapSection from '../components/FootprintMapSection'
 import { Helmet } from 'react-helmet-async'
-import img1  from '../../assets/img1.jpg'
-import img2  from '../../assets/img2.jpg'
-import img3  from '../../assets/img3.jpg'
-import img4  from '../../assets/img4.jpg'
-import img5  from '../../assets/img5.jpg'
-import img6  from '../../assets/img6.jpg'
-import img7  from '../../assets/img7.jpg'
-import img8  from '../../assets/img8.jpg'
-import img9  from '../../assets/img9.jpg'
-import img10 from '../../assets/img10.jpg'
-import img11 from '../../assets/img11.jpg'
-import img12 from '../../assets/img12.jpg'
-import img13 from '../../assets/img13.jpg'
-import img14 from '../../assets/img14.jpg'
-import img15 from '../../assets/img15.jpg'
-import img16 from '../../assets/img16.jpg'
-import img17 from '../../assets/img17.jpg'
-import img18 from '../../assets/img18.jpg'
-import img19 from '../../assets/img19.jpg'
-import img20 from '../../assets/img20.jpg'
-import img21 from '../../assets/img21.jpg'
+import prj1 from '../../assets/prj1.jpeg'
+import prj2 from '../../assets/prj2.jpeg'
+import prj3 from '../../assets/prj3.jpeg'
+import prj4 from '../../assets/prj4.jpeg'
+import prj5 from '../../assets/prj5.jpeg'
+import prj6 from '../../assets/prj6.jpeg'
+import prj7 from '../../assets/prj7.jpeg'
+import prj8 from '../../assets/prj8.jpeg'
+import prj9 from '../../assets/prj9.jpeg'
+import prj10 from '../../assets/prj10.jpeg'
+import prj11 from '../../assets/prj11.jpeg'
+import prj12 from '../../assets/prj12.jpeg'
+import prj13 from '../../assets/prj13.jpeg'
+import prj14 from '../../assets/prj14.jpeg'
+import prj15 from '../../assets/prj15.jpeg'
+import prj16 from '../../assets/prj16.jpeg'
+import prj17 from '../../assets/prj17.jpeg'
+import prj18 from '../../assets/prj18.jpeg'
+import prj19 from '../../assets/prj19.jpeg'
+import prj20 from '../../assets/prj20.jpeg'
+import prj21 from '../../assets/prj21.jpeg'
+import prj22 from '../../assets/prj22.jpeg'
+import prj23 from '../../assets/prj23.jpeg'
+import prj24 from '../../assets/prj24.jpeg'
+import prj25 from '../../assets/prj25.jpeg'
+import prj26 from '../../assets/prj26.jpeg'
+import pr_2 from '../../assets/pr_2.jpeg'
+import pr_3 from '../../assets/pr_3.jpeg'
+import contact6 from '../../assets/contact6.jpg'
 import heroImg from '../../assets/img1.jpg'
+import projectVid from '../../assets/project.mp4'
 
 // ─── Brand palette from theme image ───────────────────────────────────────────
 const FOREST  = '#3F5F4A'
@@ -39,35 +48,41 @@ const DARK    = '#1C1C1A'
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const PROJECTS = {
   completed: [
-    { id:1,  title:'Modern Villa',        sub:'Stone Grove Residence',   location:'Chennai, TN',     type:'Residential',  image:img1,  year:'2023', size:'4,500 Sq.Ft', desc:'A sleek contemporary villa blending open-plan living with lush landscaping and smart home systems.' },
-    { id:2,  title:'Heritage Duplex',     sub:'Timeless Twin Home',      location:'Coimbatore, TN',  type:'Construction', image:img3,  year:'2022', size:'3,200 Sq.Ft', desc:'Timeless duplex design honoring traditional Tamil architecture with modern comforts.' },
-    { id:3,  title:'Luxury Bungalow',     sub:'Signature Estate',        location:'Trichy, TN',      type:'Residential',  image:img5,  year:'2023', size:'6,200 Sq.Ft', desc:'Premium bungalow with infinity pool, home theatre, and full smart home automation.' },
-    { id:4,  title:'Urban Townhouse',     sub:'Vertical Living',         location:'Chennai, TN',     type:'Construction', image:img7,  year:'2022', size:'3,900 Sq.Ft', desc:'Compact urban townhouse maximizing vertical space with a stunning rooftop terrace.' },
-    { id:5,  title:'Stone Arch Villa',    sub:'Classic Courtyard Home',  location:'Madurai, TN',     type:'Residential',  image:img9,  year:'2021', size:'5,000 Sq.Ft', desc:'Courtyard-style villa with stone arch entrances and traditional Chettinad-inspired interiors.' },
-    { id:6,  title:'Palm Grove House',    sub:'Tropical Modern',         location:'Coimbatore, TN',  type:'Residential',  image:img11, year:'2021', size:'3,600 Sq.Ft', desc:'Tropical modern home surrounded by palm groves with open verandas and natural ventilation.' },
+    { id:1,  title:'Modern Villa',        sub:'Stone Grove Residence',   location:'Chennai, TN',     type:'Residential',  image:prj1,  year:'2023', size:'4,500 Sq.Ft', desc:'A sleek contemporary villa blending open-plan living with lush landscaping and smart home systems.' },
+    { id:2,  title:'Heritage Duplex',     sub:'Timeless Twin Home',      location:'Coimbatore, TN',  type:'Construction', image:prj2,  year:'2022', size:'3,200 Sq.Ft', desc:'Timeless duplex design honoring traditional Tamil architecture with modern comforts.' },
+    { id:3,  title:'Luxury Bungalow',     sub:'Signature Estate',        location:'Trichy, TN',      type:'Residential',  image:prj3,  year:'2023', size:'6,200 Sq.Ft', desc:'Premium bungalow with infinity pool, home theatre, and full smart home automation.' },
+    { id:4,  title:'Urban Townhouse',     sub:'Vertical Living',         location:'Chennai, TN',     type:'Construction', image:prj4,  year:'2022', size:'3,900 Sq.Ft', desc:'Compact urban townhouse maximizing vertical space with a stunning rooftop terrace.' },
+    { id:5,  title:'Stone Arch Villa',    sub:'Classic Courtyard Home',  location:'Madurai, TN',     type:'Residential',  image:prj5,  year:'2021', size:'5,000 Sq.Ft', desc:'Courtyard-style villa with stone arch entrances and traditional Chettinad-inspired interiors.' },
+    { id:6,  title:'Palm Grove House',    sub:'Tropical Modern',         location:'Coimbatore, TN',  type:'Residential',  image:prj6, year:'2021', size:'3,600 Sq.Ft', desc:'Tropical modern home surrounded by palm groves with open verandas and natural ventilation.' },
+    { id:7,  title:'Riverside Mansion',   sub:'Waterfront Estate',       location:'Thanjavur, TN',   type:'Residential',  image:prj7, year:'2023', size:'8,000 Sq.Ft', desc:'A grand waterfront mansion featuring expansive glass walls and sustainable water management.' },
+    { id:8,  title:'Hill Crest Home',     sub:'Elevated Living',         location:'Ooty, TN',        type:'Residential',  image:prj8, year:'2023', size:'4,200 Sq.Ft', desc:'Mountain retreat designed for panoramic views and built with sustainable thermal mass materials.' },
+    { id:9,  title:'Eco Courtyard',       sub:'Green Living',            location:'Salem, TN',       type:'Sustainable',  image:prj9, year:'2022', size:'3,800 Sq.Ft', desc:'A fully solar-powered courtyard home incorporating natural airflow and green roofing.' },
+    { id:10, title:'Zen Estate',          sub:'Minimalist Villa',        location:'Kodaikanal, TN',  type:'Residential',  image:prj10, year:'2022', size:'4,000 Sq.Ft', desc:'Japanese-inspired minimalist estate blending wood, stone, and natural light seamlessly.' },
+    { id:11, title:'Urban Oasis',         sub:'City Retreat',            location:'Chennai, TN',     type:'Construction', image:prj11, year:'2021', size:'3,400 Sq.Ft', desc:'A peaceful urban retreat built to insulate noise while maximizing internal daylight.' },
+    { id:12, title:'Classic Heritage',    sub:'Traditional Revival',     location:'Madurai, TN',     type:'Construction', image:prj12, year:'2021', size:'5,500 Sq.Ft', desc:'Revival of classic Dravidian architectural elements infused into a modern luxury dwelling.' },
+    { id:13, title:'Skyline Penthouse',   sub:'Luxury Living',           location:'Coimbatore, TN',  type:'Residential',  image:prj13, year:'2023', size:'3,000 Sq.Ft', desc:'High-end penthouse finishing and custom structural modification for sweeping city views.' },
+    { id:14, title:'Eco-Living Hub',      sub:'Net-Zero Home',           location:'Madurai, TN',     type:'Sustainable',  image:prj14, year:'2024', size:'5,100 Sq.Ft', desc:'Net-zero energy home with solar integration and rainwater harvesting systems.' },
+    { id:15, title:'Garden Retreat',      sub:'Biophilic Sanctuary',     location:'Salem, TN',       type:'Sustainable',  image:prj15, year:'2024', size:'2,800 Sq.Ft', desc:'Biophilic design retreat surrounded by curated gardens and natural stone finishes.' },
+    { id:16, title:'Terrace Villa',       sub:'Stepped Landscape Home',  location:'Trichy, TN',      type:'Residential',  image:prj16, year:'2024', size:'4,800 Sq.Ft', desc:'Multi-level terrace villa with cascading gardens and infinity-edge pool on each floor.' },
+    { id:17, title:'Solar Farmhouse',     sub:'Off-Grid Living',         location:'Erode, TN',       type:'Sustainable',  image:prj17, year:'2024', size:'3,500 Sq.Ft', progress:30, desc:'Fully off-grid farmhouse powered by solar panels with organic farming integration.' },
+    { id:18, title:'Twin Courtyard',      sub:'Dual-Family Residence',   location:'Coimbatore, TN',  type:'Construction', image:prj18, year:'2024', size:'6,000 Sq.Ft', progress:78, desc:'Dual-family residence sharing a central courtyard garden with independent living wings.' },
+    { id:19, title:'Riverside Cottage',   sub:'Waterfront Living',       location:'Thanjavur, TN',   type:'Residential',  image:prj19, year:'2024', size:'2,200 Sq.Ft', progress:20, desc:'Intimate riverside cottage with wraparound deck and natural timber construction.' },
+    { id:20, title:'Hilltop Residence',   sub:'Valley View Estate',      location:'Ooty, TN',        type:'Residential',  image:prj20, year:'2025', size:'7,000 Sq.Ft', progress:15, desc:'A panoramic hilltop home designed to frame breathtaking valley views year-round.' },
+    { id:21, title:'Riverside Villas',    sub:'Gated Community',         location:'Thanjavur, TN',   type:'Construction', image:prj21, year:'2025', size:'12,000 Sq.Ft',progress:10, desc:'A gated riverside villa community with shared amenities and sustainable infrastructure.' },
+    { id:22, title:'Zen Garden Home',     sub:'Minimalist Retreat',      location:'Kodaikanal, TN',  type:'Residential',  image:prj22, year:'2025', size:'3,800 Sq.Ft', progress:5, desc:'A minimalist retreat inspired by Japanese Zen principles with curated stone gardens.' },
+    { id:23, title:'Heritage Mansion',    sub:'Colonial Revival',        location:'Madurai, TN',     type:'Construction', image:prj23, year:'2025', size:'9,500 Sq.Ft', progress:45, desc:'Grand colonial revival mansion with heritage-style columns, arches, and period detailing.' },
+    { id:24, title:'Cliff Edge Villa',    sub:'Dramatic Landscape Home', location:'Yercaud, TN',     type:'Residential',  image:prj24, year:'2026', size:'5,600 Sq.Ft', progress:8, desc:'Dramatic cliff-edge villa cantilevered over the hillside with 270° panoramic views.' },
   ],
   ongoing: [
-    { id:9,  title:'Eco-Living Hub',      sub:'Net-Zero Home',           location:'Madurai, TN',     type:'Sustainable',  image:img2,  year:'2024', size:'5,100 Sq.Ft', progress:68, desc:'Net-zero energy home with solar integration and rainwater harvesting systems.' },
-    { id:10, title:'Garden Retreat',      sub:'Biophilic Sanctuary',     location:'Salem, TN',       type:'Sustainable',  image:img4,  year:'2024', size:'2,800 Sq.Ft', progress:42, desc:'Biophilic design retreat surrounded by curated gardens and natural stone finishes.' },
-    { id:11, title:'Terrace Villa',       sub:'Stepped Landscape Home',  location:'Trichy, TN',      type:'Residential',  image:img6,  year:'2024', size:'4,800 Sq.Ft', progress:55, desc:'Multi-level terrace villa with cascading gardens and infinity-edge pool on each floor.' },
-    { id:12, title:'Solar Farmhouse',     sub:'Off-Grid Living',         location:'Erode, TN',       type:'Sustainable',  image:img8,  year:'2024', size:'3,500 Sq.Ft', progress:30, desc:'Fully off-grid farmhouse powered by solar panels with organic farming integration.' },
-    { id:13, title:'Twin Courtyard',      sub:'Dual-Family Residence',   location:'Coimbatore, TN',  type:'Construction', image:img10, year:'2024', size:'6,000 Sq.Ft', progress:78, desc:'Dual-family residence sharing a central courtyard garden with independent living wings.' },
-    { id:14, title:'Riverside Cottage',   sub:'Waterfront Living',       location:'Thanjavur, TN',   type:'Residential',  image:img12, year:'2024', size:'2,200 Sq.Ft', progress:20, desc:'Intimate riverside cottage with wraparound deck and natural timber construction.' },
-  ],
-  upcoming: [
-    { id:16, title:'Hilltop Residence',   sub:'Valley View Estate',      location:'Ooty, TN',        type:'Residential',  image:img16, year:'2025', size:'7,000 Sq.Ft', desc:'A panoramic hilltop home designed to frame breathtaking valley views year-round.' },
-    { id:17, title:'Riverside Villas',    sub:'Gated Community',         location:'Thanjavur, TN',   type:'Construction', image:img17, year:'2025', size:'12,000 Sq.Ft',desc:'A gated riverside villa community with shared amenities and sustainable infrastructure.' },
-    { id:18, title:'Zen Garden Home',     sub:'Minimalist Retreat',      location:'Kodaikanal, TN',  type:'Residential',  image:img18, year:'2025', size:'3,800 Sq.Ft', desc:'A minimalist retreat inspired by Japanese Zen principles with curated stone gardens.' },
-    { id:19, title:'Heritage Mansion',    sub:'Colonial Revival',        location:'Madurai, TN',     type:'Construction', image:img19, year:'2025', size:'9,500 Sq.Ft', desc:'Grand colonial revival mansion with heritage-style columns, arches, and period detailing.' },
-    { id:20, title:'Cliff Edge Villa',    sub:'Dramatic Landscape Home', location:'Yercaud, TN',     type:'Residential',  image:img20, year:'2026', size:'5,600 Sq.Ft', desc:'Dramatic cliff-edge villa cantilevered over the hillside with 270° panoramic views.' },
-    { id:21, title:'Bamboo Grove House',  sub:'Eco Architecture',        location:'Coimbatore, TN',  type:'Sustainable',  image:img21, year:'2026', size:'2,900 Sq.Ft', desc:'Eco-architecture home built with bamboo structural elements and natural earth plasters.' },
+    { id: 25, title: 'Bamboo Grove House', sub: 'Eco Architecture', location: 'Coimbatore, TN', type: 'Sustainable', image: prj25, year: '2026', size: '2,900 Sq.Ft', progress: 2, desc: 'Eco-architecture home built with bamboo structural elements and natural earth plasters.' },
+    { id: 26, title: 'Hilltop Sanctuary', sub: 'Elevated Design', location: 'Ooty, TN', type: 'Residential', image: prj26, year: '2026', size: '4,400 Sq.Ft', progress: 10, desc: 'Stunning hilltop sanctuary featuring modern stone and glass architecture.' },
+    { id: 27, title: 'Classic Villa', sub: 'Heritage Styling', location: 'Madurai, TN', type: 'Construction', image: pr_2, year: '2025', size: '5,200 Sq.Ft', progress: 35, desc: 'Timeless architectural styling paired with modern internal layouts.' },
   ],
 }
 
 const CATEGORIES = [
-  { key:'completed', label:'Completed', icon:FiCheckCircle, accent:FOREST,  tagline:'Delivered with Excellence' },
-  { key:'ongoing',   label:'Ongoing',   icon:FiClock,       accent:TERRA,   tagline:'Currently Under Construction' },
-  { key:'upcoming',  label:'Upcoming',  icon:FiZap,         accent:'#8B7355',tagline:'On the Horizon' },
+  { key: 'completed', label: 'Project Series 1', icon: FiCheckCircle, accent: FOREST, tagline: 'Signature Collection' },
+  { key: 'ongoing', label: 'Project Series 2', icon: FiClock, accent: TERRA, tagline: 'Premium Residences' },
 ]
 
 // ─── Cursor follower ──────────────────────────────────────────────────────────
@@ -382,6 +397,7 @@ function CategorySection({ category }) {
 function VirtualTourSection() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
+  const [isPlaying, setIsPlaying] = useState(false)
 
   return (
     <section ref={ref} className="py-24 relative overflow-hidden" style={{ background: DARK }}>
@@ -434,29 +450,47 @@ function VirtualTourSection() {
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
             className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group cursor-pointer border border-white/10"
+            onClick={() => setIsPlaying(true)}
           >
-            {/* Main Image */}
-            <img 
-              src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
-              alt="Virtual Tour Preview" 
-              className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
-            />
-            
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
-            
-            {/* Play Button */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:bg-white group-hover:text-dark text-white transition-all duration-500 shadow-[0_0_0_0_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_0_15px_rgba(255,255,255,0.1)]">
-              <FiPlay className="text-2xl ml-1" />
-            </div>
-            
-            {/* 360 Badge */}
-            <div className="absolute top-6 right-6 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-full border border-white/20">
-              <span className="text-[10px] font-bold tracking-widest text-white uppercase flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                360° View
-              </span>
-            </div>
+            {isPlaying ? (
+              <video 
+                src={projectVid} 
+                autoPlay 
+                controls 
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <>
+                <img 
+                  src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                  alt="Virtual Tour Preview" 
+                  className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                />
+                
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
+                
+                {/* Centered Controls Overlay */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                  {/* 360 Badge above Play Button */}
+                  <motion.div
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-white/20 shadow-lg"
+                  >
+                    <span className="text-[10px] font-bold tracking-widest text-white uppercase flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                      360° View
+                    </span>
+                  </motion.div>
+
+                  {/* Play Button */}
+                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:bg-white group-hover:text-dark text-white transition-all duration-500 shadow-[0_0_0_0_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_0_15px_rgba(255,255,255,0.1)]">
+                    <FiPlay className="text-2xl ml-1" />
+                  </div>
+                </div>
+              </>
+            )}
           </motion.div>
           
           {/* Accent Box Behind */}
@@ -502,7 +536,7 @@ function SustainabilitySection() {
             className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] max-w-md mx-auto lg:mx-0"
           >
             <img 
-              src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+              src={contact6} 
               alt="Sustainable Architecture" 
               className="w-full h-full object-cover"
             />
@@ -600,7 +634,7 @@ export default function Projects() {
       {/* ── HERO ────────────────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative h-screen flex items-center justify-center overflow-hidden bg-black"
+        className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-black"
       >
         {/* Parallax BG — Image */}
         <motion.div className="absolute inset-0 z-0" style={{ y: springY, opacity: heroOpacity }}>
@@ -695,7 +729,7 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* ── THREE CATEGORY SECTIONS ─────────────────────────────────────── */}
+      {/* ── TWO CATEGORY SECTIONS ─────────────────────────────────────── */}
       <div style={{ background: CREAM }}>
         <div className="max-w-7xl mx-auto px-6 md:px-16 pt-6">
           <div className="h-px" style={{ background: `${DARK}10` }} />
@@ -724,20 +758,11 @@ export default function Projects() {
         </div>
 
         <CategorySection category="ongoing" />
-
-        <div className="max-w-7xl mx-auto px-6 md:px-16">
-          <motion.div
-            initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="h-px origin-left"
-            style={{ background: `linear-gradient(90deg, ${TERRA}40, transparent)` }}
-          />
-        </div>
-
-        <CategorySection category="upcoming" />
       </div>
 
       <SustainabilitySection />
+
+      <ThoughtOnConstruction />
 
       <FootprintMapSection />
 
@@ -823,5 +848,78 @@ export default function Projects() {
       </section>
       <UnifiedFooter />
     </div>
+  )
+}
+
+// ─── Thought on Construction ────────────────────────────────────────────────────
+function ThoughtOnConstruction() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-100px' })
+
+  return (
+    <section ref={ref} className="py-24 relative overflow-hidden" style={{ background: CREAM }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-16 flex flex-col lg:flex-row items-center gap-16">
+        
+        {/* Left: Text Content */}
+        <div className="w-full lg:w-1/2">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-8" style={{ color: '#4A3B32' }}>
+              My Thought on Construction
+            </h2>
+
+            <div className="space-y-6 text-[15px] leading-relaxed" style={{ color: '#5A4A42' }}>
+              <p>
+                Construction is not just about building a structure.<br />
+                It is about creating a space where life happens.
+              </p>
+
+              <p>
+                A good house should not depend only on design.<br />
+                It must have a strong foundation, proper planning,<br />
+                correct materials, and disciplined execution.
+              </p>
+
+              <p>
+                Through my experience in residential construction, I have learned<br />
+                that most problems come from poor planning and lack of supervision.<br />
+                Because of that, I always follow a systematic approach in every project.
+              </p>
+
+              <p>
+                I believe in practical buildings rather than decorative buildings.<br />
+                A home should be strong, functional, comfortable,<br />
+                and peaceful for the people who live in it.
+              </p>
+
+              <p className="font-medium pt-2">
+                My goal in every project is simple —<br />
+                to build with responsibility, clarity, and long-term thinking.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right: Image */}
+        <div className="w-full lg:w-1/2">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            className="relative rounded-[2rem] overflow-hidden shadow-md aspect-[4/3] border-[6px] border-white"
+          >
+            <img 
+              src={pr_3} 
+              alt="Courtyard Design" 
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        </div>
+
+      </div>
+    </section>
   )
 }
