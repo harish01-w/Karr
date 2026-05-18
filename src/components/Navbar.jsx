@@ -187,7 +187,6 @@ const Navbar = () => {
                   </span>
                   {/* Active / hover underline */}
                   <motion.span
-                    layoutId="navUnderline"
                     style={{
                       position: 'absolute',
                       bottom: '2px',
