@@ -30,6 +30,17 @@ const BlogDetail = () => {
       <Navbar />
 
       <main className="pt-24 pb-20">
+
+        {/* ── BACK BUTTON ── */}
+        <div className="max-w-6xl mx-auto px-6 mb-6">
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-2 text-[10px] font-black tracking-[0.3em] uppercase text-[#1a1a1a]/40 hover:text-[#1a1a1a] transition-all group"
+          >
+            <FiArrowLeft className="transition-transform group-hover:-translate-x-1" />
+            Back to Journal
+          </Link>
+        </div>
         
         {/* ── HERO SECTION ── */}
         {post.id === 601 && (
@@ -143,9 +154,8 @@ const BlogDetail = () => {
 
         </div>
 
-        {/* ── FOOTER NAVIGATION ── */}
         <div className="mt-32 py-20 border-t border-[#1a1a1a]/5 text-center">
-           <Link to="/blog" className="text-[10px] font-black tracking-[0.6em] uppercase text-[#1a1a1a]/30 hover:text-[#1a1a1a] transition-all">
+           <Link to="/blog" className="inline-block border border-[#1a1a1a] px-8 py-4 text-[10px] font-black tracking-[0.4em] uppercase text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white transition-all">
              Back to the Journal Index
            </Link>
         </div>

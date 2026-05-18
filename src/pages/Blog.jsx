@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FiSearch } from 'react-icons/fi';
+
 import Navbar from '../components/Navbar';
 import UnifiedFooter from '../components/UnifiedFooter';
 import { blogPosts, categories } from '../data/blogData';
@@ -9,13 +9,11 @@ import { Helmet } from 'react-helmet-async';
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState("All Insights");
-  const [searchQuery, setSearchQuery] = useState("");
+
 
   const filteredPosts = blogPosts.filter(post => {
     const matchesCategory = activeCategory === "All Insights" || post.category === activeCategory;
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          post.category.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+    return matchesCategory;
   });
 
   return (
@@ -95,22 +93,7 @@ const Blog = () => {
           </div>
         </div>
 
-        {/* ── SEARCH BAR (FOOTER STYLE) ── */}
-        <div className="mt-32 pt-20 border-t border-[#1a1a1a]/5 px-6">
-          <div className="max-w-md mx-auto flex flex-col items-center gap-8">
-            <h4 className="text-[10px] font-black tracking-[0.4em] uppercase text-[#1a1a1a]/30">Looking for something specific?</h4>
-            <div className="w-full relative">
-              <input 
-                type="text" 
-                placeholder="SEARCH THE JOURNAL" 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-transparent border-b border-[#1a1a1a]/10 py-4 text-[11px] font-bold tracking-[0.2em] uppercase outline-none focus:border-[#1a1a1a] transition-all text-center"
-              />
-              <FiSearch className="absolute right-0 top-1/2 -translate-y-1/2 text-[#1a1a1a]/20" />
-            </div>
-          </div>
-        </div>
+
       </main>
 
       <UnifiedFooter />
